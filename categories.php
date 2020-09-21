@@ -1,5 +1,4 @@
 <?php
-//hallo
 include __DIR__ . "/header.php";
 
 $Query = "
