@@ -23,10 +23,11 @@ In dit overzicht worden alle artikelen gezet die in de winkelmand geplaatst zijn
 		De klant moet quantiteit van items kunnen aanpassen
 			Mocht die naar 0 gaan, automatisch verwijderen
 	
-	Hier moet de klant de bestelling af kunnen maken.
+	Hier moet de klant de bestelling af kunnen maken. (wordt doorgelinkt naar andere pagina)
 		Hiervoor wordt er een pop-up gegeven.
 		Ook wordt een factuur in PDF-formaat geproduceerd
-		De factuur wordt naar de klant gemaild, net zoals de verwachte levertijd.		
+		De factuur wordt naar de klant gemaild, net zoals de verwachte levertijd.
+		
 	Vanaf hier moet de klant ook verder kunnen gaan met winkelen. Dit heeft geen onvloed op de winkelmand.
 	
 	
