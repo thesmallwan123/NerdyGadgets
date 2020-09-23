@@ -1,0 +1,37 @@
+Interview Sales Manager
+
+Er wordt in dit project gerekendt op dat iedere klant een account heeft.
+
+De webshop "Nerdy Gadgets" mogen 2 talen gebruikt worden. Voornamelijk Nederlands, maar als er nog tijd is, mag er ook een vertaling naar het engels komen.
+Op het scherm van het artikel moet een knop komen te staan om het in de winkelmand te zetten. 
+	In eerste instantie zal dit 1 item zijn, hierna kun je dit in het winkelmand overzicht veranderen naar hogere getallen.
+Ook zal er in het scherm van het artikel te zien moeten zijn hoeveel de vooraad nog is. Als de vooraad 0 is, dan mag dit artikel niet besteldt worden.
+Mocht het artikel een gekoeld product zijn, dan moet ook de temperatuur van bewaring te zien zijn.
+Het is ook goed om een video van het artikel te plaatsten.
+
+Rechts in het menu moet een knop (mag zowel tekst als een icon zijn) naar het winkelmand overzicht komen. 
+	
+In dit overzicht worden alle artikelen gezet die in de winkelmand geplaatst zijn.
+	In dit overzicht worden rijen van artikelen weergegeven die in de winkeland staan. 
+		Naam, Korte omschrijving, quantiteit, prijs(quantiteit meegerekend)
+	Onderin wordt het totaal van alle artikelen weergegeven. 
+	De verzendtkosten worden 4,95. Boven de 30,- is verzenden gratis
+	Laat zien hoeveel de BTW is. Zet erbij Prijs is inclusief BTW	
+
+	Hier moet de klant ook wijzigingen kunnen maken in de winkelmand
+		De klant moet items kunnen verwijderen.
+		De klant moet quantiteit van items kunnen aanpassen
+			Mocht die naar 0 gaan, automatisch verwijderen
+	
+	Hier moet de klant de bestelling af kunnen maken.
+		Hiervoor wordt er een pop-up gegeven.
+		Ook wordt een factuur in PDF-formaat geproduceerd
+		De factuur wordt naar de klant gemaild, net zoals de verwachte levertijd.		
+	Vanaf hier moet de klant ook verder kunnen gaan met winkelen. Dit heeft geen onvloed op de winkelmand.
+	
+	
+Als we tijd over hebben kunnen we nog:
+	Alles beschikbaar stellen voor klanten zonder account.
+	Een verlanglijstje maken. Hierbij worden artikelen in een overzicht gezet die klant wilt hebben, maar nog niet in de winkelmand plaatst.
+	Een kortingscode genereren. Hierbij kan de klant een code invoeren om korting te krijgen.
+	Als je met de muis over de winkelmand gaat, komt er een dropdown die laat zien welke items al in de winkeland zitten. Dit is tot een max van 3.
