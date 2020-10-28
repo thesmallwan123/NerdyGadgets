@@ -1,3 +1,15 @@
 https://github.com/thesmallwan123/NerdyGadgets.git
 
 https://balsamiq.cloud/suq2th8/po5q167
+
+commando's:
+Pull: 	git pull https://github.com/thesmallwan123/NerdyGadgets.git
+
+
+Toevoegen van nieuwe bestanden: 	git add --all
+
+Commit:	
+	All:	git commit -a -m "TEXT"
+	1 file:	git commit -f "FILE LOCATION" -m "TEXT"
+
+Push:	git push https://github.com/thesmallwan123/NerdyGadgets.git master
