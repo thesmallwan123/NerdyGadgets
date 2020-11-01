@@ -13,3 +13,7 @@ Commit:
 	1 file:	git commit -f "FILE LOCATION" -m "TEXT"
 
 Push:	git push https://github.com/thesmallwan123/NerdyGadgets.git master
+
+
+Customer Service email:
+customerservice.nerdygadgets@gmail.com	-	AdMiN312
