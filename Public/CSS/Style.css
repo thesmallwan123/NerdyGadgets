@@ -473,3 +473,41 @@ ul#ul-class-price li {
     border: 1px rgb(98, 158, 255) solid;
     color: #fff;
 }
+
+
+/* cart */
+.cartRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    margin-bottom: 50px;
+    margin-left: 5%;
+    border: 1px solid white;
+}
+/* left of cart (ID and IMG) */
+.rowLeft{
+    width: 150px;
+    margin-right:40px;
+    text-align: center;
+}
+.productImage{
+    width: 150px;
+    min-height: 90px;
+    border: 1px solid white;
+}
+
+/* Middle of Cart (name, Description, Supply) */
+.rowMiddle{
+    min-width: 500px;
+    max-width: 50%;
+    text-align: left;
+}
+.productName, .productSearchDetails, .productQuantity {
+    margin-top: 4%;
+}
+
+/* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons */
+.rowRight{
+    min-height: 100%;
+}
