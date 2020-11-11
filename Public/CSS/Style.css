@@ -474,6 +474,10 @@ ul#ul-class-price li {
     color: #fff;
 }
 
+/* Go to cart */
+.goToCart {
+    margin-right: 10px;
+}
 
 /* cart */
 .cartRow{

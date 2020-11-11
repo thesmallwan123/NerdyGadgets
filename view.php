@@ -20,8 +20,12 @@ if(isset($_POST['submit']))
     if(!array_key_exists($ID, $cartItems)) {
         setcookie('cartItem[' . $ID . ']', 1);
         ?>
-        <script>alert("Is er in gezet");</script>
+        <script>alert("Het item is toegevoegd aan de winkelwagen!");</script>
         <?php
+    } else {
+         ?>
+         <script>alert("Het item staat al in de winkelwagen.");</script>
+          <?php 
     }
 }
 
