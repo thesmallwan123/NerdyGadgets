@@ -3,9 +3,6 @@
 
 // Get cookies of items in cart 
 // setcookie("carItem[$ID of item], $amount);
-setcookie("cartItem", "");
-setcookie("cartItem[22]", 1);
-setcookie("cartItem[211]", 1);
 $cartItems = $_COOKIE["cartItem"];
 
 function controllItem($artikelID)
