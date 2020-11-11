@@ -511,3 +511,19 @@ ul#ul-class-price li {
 .rowRight{
     min-height: 100%;
 }
+
+/* Add to cart button */
+.addToCart {
+    position: absolute;
+    right: 14px;
+    top: 140px;
+}
+
+/* Add to button style*/
+input[type=submit] {
+    background-color: rgb(35, 35, 47);
+    border: 2px solid white;
+    cursor: pointer;
+    width: 100%;
+    color: white;
+}

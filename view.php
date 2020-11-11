@@ -1,13 +1,37 @@
 <?php
+
 $Connection = mysqli_connect("localhost", "root", "", "nerdygadgets");
+
 mysqli_set_charset($Connection, 'latin1');
+
+//Add product to cart
+if(isset($_POST['submit']))
+{
+    $ID = $_GET["id"];
+
+    //check if cart exists
+    if (isset($_COOKIE['cartItem'])) {
+        $cartItems = $_COOKIE['cartItem'];
+    } else {
+        $cartItems = array();
+    }
+
+    //If product doesnt exist in cart, add it
+    if(!array_key_exists($ID, $cartItems)) {
+        setcookie('cartItem[' . $ID . ']', 1);
+        ?>
+        <script>alert("Is er in gezet");</script>
+        <?php
+    }
+}
+
 include __DIR__ . "/header.php";
 
 $Query = " 
            SELECT SI.StockItemID, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
-            CONCAT('Voorraad: ',QuantityOnHand)AS QuantityOnHand,
+            CONCAT('Voorraad: ', QuantityOnHand) AS QuantityOnHand,
             SearchDetails, 
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
             (SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = SI.StockItemID LIMIT 1) as BackupImagePath   
@@ -47,8 +71,6 @@ if ($R) {
 <div id="CenteredContent">
     <?php
     if ($Result != null) {
-        ?>
-        <?php
         if (isset($Result['Video'])) {
             ?>
             <div id="VideoFrame">
@@ -56,8 +78,6 @@ if ($R) {
             </div>
         <?php }
         ?>
-
-
         <div id="ArticleHeader">
             <?php
             if (isset($Images)) {
@@ -120,6 +140,12 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
+                        <!--  --> 
+                        <div class="addToCart">
+                            <form method="post">
+                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen">
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
