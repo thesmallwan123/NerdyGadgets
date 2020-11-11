@@ -2,16 +2,15 @@
 
 
 // Get cookies of items in cart 
-setcookie("cartItem[1]", 21);
-setcookie("cartItem[0]", 227);
+// setcookie("carItem[$ID of item], $amount);
+setcookie("cartItem", "");
+setcookie("cartItem[22]", 1);
+setcookie("cartItem[211]", 1);
 $cartItems = $_COOKIE["cartItem"];
 
-// Check if items exist
-$amountCartItems = count($cartItems);
-
-function controllItem($cartItems, $i){
+function controllItem($artikelID)
+{
     include("connect.php");
-    $itemID = intval($cartItems[$i]);
     $Query = "
             SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, RecommendedRetailPrice, ImagePath
             FROM stockitems si
@@ -20,7 +19,7 @@ function controllItem($cartItems, $i){
             WHERE si.StockItemID = ?";
 
     $Statement = mysqli_prepare($Connection, $Query);
-    mysqli_stmt_bind_param($Statement, 'i', $itemID); // i = integer; s = string;
+    mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
     mysqli_stmt_execute($Statement);
 
     $result = mysqli_stmt_get_result($Statement);
@@ -29,15 +28,13 @@ function controllItem($cartItems, $i){
     return $result;
 }
 
-
-
-// Edited out, No visuals of items underneath the header
 include __DIR__ . "/header.php";
+
 ?>
 <div id="Wrap">
     <?php
-    for ($i = 0; $i < $amountCartItems; $i++) {
-        $item = controllItem($cartItems, $i);
+    foreach ($cartItems as $artikelID => $amount) {
+        $item = controllItem($artikelID);
     ?>
         <div class="cartRow">
             <div class="rowLeft">
@@ -54,7 +51,9 @@ include __DIR__ . "/header.php";
             <div class="rowRight">
                 <!-- Price(incl BTW), Amount, Remove and add button -->
                 <div class="productPrice">Price: <?php echo $item[0]["RecommendedRetailPrice"] ?> (including BTW)</div>
-                
+
+
+
                 <!-- vanaf hier Jeremy -->
 
 
