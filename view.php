@@ -150,14 +150,17 @@ if ($R) {
                                 if ($Quantity > 0) {
                             ?>
                             <form method="post">
-                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen">
+                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="addToCartButton">
                             </form>
                             <?php
                                 } else {
                             ?>
                                 
+                            <form method="post">
+                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="disabledAddToCartButton" disabled>
+                            </form>
+
                             <?php 
-                            print("hello world!");
                                 }
                             ?>
                         </div>
