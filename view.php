@@ -1,24 +1,22 @@
 <?php
 
-$Connection = mysqli_connect("localhost", "root", "", "nerdygadgets");
+include __DIR__ . "/header.php";
 
-mysqli_set_charset($Connection, 'latin1');
+//check if cart exists
+if (isset($_SESSION['cart'])) {
+    $cartItems = $_SESSION['cart'];
+} else {
+    $cartItems = array();
+}
 
 //Add product to cart
 if(isset($_POST['submit']))
 {
     $ID = $_GET["id"];
 
-    //check if cart exists
-    if (isset($_COOKIE['cartItem'])) {
-        $cartItems = $_COOKIE['cartItem'];
-    } else {
-        $cartItems = array();
-    }
-
     //If product doesnt exist in cart, add it
     if(!array_key_exists($ID, $cartItems)) {
-        setcookie('cartItem[' . $ID . ']', 1);
+        $cartItems[$ID] = 1;
         ?>
         <script>alert("Het item is toegevoegd aan de winkelwagen!");</script>
         <?php
@@ -27,14 +25,15 @@ if(isset($_POST['submit']))
          <script>alert("Het item staat al in de winkelwagen.");</script>
           <?php 
     }
-}
 
-include __DIR__ . "/header.php";
+    $_SESSION['cart'] = $cartItems;
+}
 
 $Query = " 
            SELECT SI.StockItemID, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
+            QuantityOnHand AS Quantity,
             CONCAT('Voorraad: ', QuantityOnHand) AS QuantityOnHand,
             SearchDetails, 
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
@@ -67,6 +66,7 @@ mysqli_stmt_bind_param($Statement, "i", $_GET['id']);
 mysqli_stmt_execute($Statement);
 $R = mysqli_stmt_get_result($Statement);
 $R = mysqli_fetch_all($R, MYSQLI_ASSOC);
+
 
 if ($R) {
     $Images = $R;
@@ -144,11 +144,25 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
-                        <!--  --> 
                         <div class="addToCart">
+                            <?php 
+                                $Quantity = $Result['Quantity'];
+                                if ($Quantity > 0) {
+                            ?>
                             <form method="post">
-                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen">
+                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="addToCartButton">
                             </form>
+                            <?php
+                                } else {
+                            ?>
+                                
+                            <form method="post">
+                                <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="disabledAddToCartButton" disabled>
+                            </form>
+
+                            <?php 
+                                }
+                            ?>
                         </div>
                     </div>
                 </div>

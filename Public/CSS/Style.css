@@ -73,6 +73,7 @@ ul#ul-class-navigation li {
     font-size: 20px;
     text-decoration: none;
     text-decoration-color: currentcolor;
+    margin: 5px;
 }
 #Header {
     position: fixed;
@@ -196,6 +197,7 @@ ul#ul-class-navigation li {
     top: 40%;
     -ms-transform: translateY(-50%);
     transform: translateY(-50%);
+    right: 14px;
 }
 #StockItemDescription {
     background-color: rgba(35, 40, 47, 0.8);
@@ -527,15 +529,27 @@ ul#ul-class-price li {
 /* Add to cart button */
 .addToCart {
     position: absolute;
-    right: 14px;
+    right: 0px;
     top: 140px;
 }
 
 /* Add to button style*/
-input[type=submit] {
+.addToCartButton {
     background-color: rgb(35, 35, 47);
     border: 2px solid white;
-    cursor: pointer;
     width: 100%;
     color: white;
+}
+
+.addToCartButton:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+/* When Quantity = 0*/
+.disabledAddToCartButton {
+    background-color: rgb(35, 35, 47);
+    border: 2px solid rgb(61, 61, 61);
+    width: 100%;
+    color: rgb(156, 156, 156);
 }
