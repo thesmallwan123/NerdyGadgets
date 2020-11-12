@@ -553,3 +553,119 @@ ul#ul-class-price li {
     width: 100%;
     color: rgb(156, 156, 156);
 }
+
+/* confirmation text header*/
+.confirmationTextHeader{
+    text-align: center;
+    font-size: 60px;
+    margin-top: 200px;
+    color: white;
+    font-family: pt-sans, sans-serif;
+}
+
+/* confirmation text p*/
+.confirmationTextP{
+    text-align: center;
+    font-size: 20px;
+    color: white;
+    font-family: pt-sans, sans-serif;
+}
+
+/* back to shop */
+.backToShop{
+    width: 30%;
+    margin: auto;
+}
+
+/* back to shop button */
+.backToShopButton{
+    background-color: green;
+    border: 2px solid white;
+    width: 100%;
+    color: white;
+}
+
+/* row order page*/
+.orderRow{
+    display: -ms-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+/* col for order */
+.col-25 {
+    -ms-flex: 25%;
+    flex: 25%;
+}
+
+.col-50{
+    -ms-flex: 50%;
+    flex: 50%;
+}
+
+.col-75{
+    -ms-flex: 75%;
+    flex: 75%;
+}
+
+/* container*/
+.container {
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+}
+
+/* input type text*/
+input[type=text]{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid#ccc;
+    border-radius: 100px;
+}
+
+/*label*/
+label{
+    margin-bottom: 10px;
+    display: block;
+}
+
+/*span price*/
+span.price{
+    float: right;
+    color: grey;
+}
+
+/* to payment*/
+.toPayment{
+    width: 30%;
+    color: green;
+    display: inline-block;
+}
+
+/*button to payment button */
+.toPaymentButton {
+    background-color: green;
+    border: 2px solid black;
+    width: 300px;
+    color: white;
+}
+
+/*back to cart*/
+.toCart {
+    width: 30%;
+    color: green;
+    display: inline-block;
+    margin-right: 300px;
+    margin-left: 220px;
+}
+
+/*back to cart button */
+.toCartButton{
+    background-color: red;
+    border: 2px solid black;
+    width: 300px;
+    color: white;
+}
