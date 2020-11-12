@@ -1,15 +1,23 @@
 <?php
+// testdata
+$_SESSION["cart"] = "";
+$_SESSION['cart'] = array(22=>5, 29=>1);
 
 
-// Get cookies of items in cart 
-// setcookie("carItem[$ID of item], $amount);
-$cartItems=NULL;
-if(isset($_COOKIE["cartItem"])){
-    $cartItems = $_COOKIE["cartItem"];
+// Include header
+include __DIR__ . "/header.php";
+
+
+// global $
+$totalPrice = 0;
+$totalPriceRow = 0;
+$priceRow = array();
+
+if(isset($_SESSION["cart"])){
+    $cartItems = $_SESSION["cart"];
 }
 
-function controllItem($artikelID)
-{
+function controllItem($artikelID){
     include("connect.php");
     $Query = "
             SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, RecommendedRetailPrice, ImagePath
@@ -28,15 +36,30 @@ function controllItem($artikelID)
     return $result;
 }
 
-include __DIR__ . "/header.php";
+function calcPriceRow($totalPriceRow, $price, $quantity, $priceRow){
+    $totalPriceRow = $price * $quantity;
+    array_push($priceRow, $totalPriceRow);
+    return $totalPriceRow;
+}
+
+function calcPriceTotal($priceRow, $totalPrice){
+    foreach($priceRow as $id => $price){
+        $totalPrice += $price;
+    }
+    return $totalPrice;
+}
 
 ?>
 <div id="Wrap">
     <?php
+    // var_dump($cartItems);
     if(isset($cartItems)){
+        $priceRow = array();
         foreach ($cartItems as $artikelID => $amount) {
             $item = controllItem($artikelID);
-        ?>
+            $totalPriceRow = calcPriceRow($totalPriceRow, $item[0]["RecommendedRetailPrice"], $amount, $priceRow);
+            array_push($priceRow, $totalPriceRow);
+            ?>
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
@@ -47,22 +70,35 @@ include __DIR__ . "/header.php";
                     <!-- Name, Description and Supply -->
                     <div class="productName">Name: <?php echo $item[0]["StockItemName"] ?></div>
                     <div class="productSearchDetails">Details: <?php echo $item[0]["SearchDetails"] ?></div>
-                    <div class="productQuantity">Quantity: <?php echo $item[0]["QuantityOnHand"] ?></div>
+                    <div class="productQuantity">In Store: <?php echo $item[0]["QuantityOnHand"] ?></div>
                 </div>
                 <div class="rowRight">
                     <!-- Price(incl BTW), Amount, Remove and add button -->
-                    <div class="productPrice">Price: <?php echo $item[0]["RecommendedRetailPrice"] ?> (including BTW)</div>
+                    <div class="productPrice">Totaal: <?php echo $totalPriceRow ?> (including BTW)</div>
 
 
 
-                    <!-- vanaf hier Jeremy -->
 
-
-
+                    <!-- vanaf hier Ana -->
                 </div>
             </div>
-        <?php
+            <?php
         }
+
+        $totalPrice = calcPriceTotal($priceRow, $totalPrice);
+        ?>
+        <div class="totalPrice">
+            Totaal: <?php echo $totalPrice ?><br>
+            <small>Let op!<br>Dit is inclusief BTW en Inclusief verzendkosten!</small>
+        </div>
+        <?php
     }
-    ?>
+    else{
+        // var_dump($cartItems);
+        ?>
+        <div class="wrap">
+            <?php  ?>
+        </div>
+        <?php
+    }?>
 </div>

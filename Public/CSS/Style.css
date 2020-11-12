@@ -511,9 +511,17 @@ ul#ul-class-price li {
     margin-top: 4%;
 }
 
-/* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons */
+/* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons) */
 .rowRight{
     min-height: 100%;
+}
+
+/* Bottom of cart (total) */
+.totalPrice {
+    width: 90%;
+    margin-left: 5%;
+    /* background-color: red; */
+    text-align: right;
 }
 
 /* Add to cart button */
