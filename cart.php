@@ -61,6 +61,11 @@ if (isset($_POST["bestel"])) {
 
 ?>
 <div id="Wrap">
+    <div class="row returnRow">
+        <div class="col-1">
+            <input class="returnButton" type="submit" name="return" onclick="window.history.back();" value=" < Ga terug" />
+        </div>
+    </div>
     <?php
     if (isset($winkelwagenArtikellen)) {
         $prijsRegel = array();
@@ -88,7 +93,18 @@ if (isset($_POST["bestel"])) {
 
 
 
+
                     <!-- vanaf hier Ana -->
+                    <!-- Buttons to change Amount (Prijs moet ook herberekend worden) -->
+                    <div class="row aantalRow">
+                        <div class="col-1">Aantal: </div>
+                    </div>
+                    <div class="row knoppenRow">
+                        <div class="col-3"><?php /* VerwijderKnop */ ?></div>
+                        <div class="col-3"><?php /* MinKnop */ ?></div>
+                        <div class="col-3"><?php print($amount); ?></div>
+                        <div class="col-3"><?php /* PlusKnop */ ?></div>
+                    </div>
                 </div>
             </div>
         <?php
@@ -98,7 +114,13 @@ if (isset($_POST["bestel"])) {
         ?>
         <div class="totalPrice">
             Totaal: <?php echo $totaalPrijs ?><br>
-            <small><br>Dit is inclusief BTW en Inclusief verzendkosten!</small>
+            <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
+        </div>
+        <div class="row datumVerzending">
+            <div class="col-8"></div>
+            <div class="col-4">
+                <?php print("Uw bestelling wordt op " . date("d/m/Y", time() + 86400) . " geleverd."); ?>
+            </div>
         </div>
         <form action="" method="POST">
             <div class="row">

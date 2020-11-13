@@ -516,6 +516,8 @@ ul#ul-class-price li {
 /* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons) */
 .rowRight{
     min-height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 /* Bottom of cart (total) */
@@ -690,4 +692,29 @@ span.price{
     width: 100%;
     color: white;
     align-items: center;
+}
+
+.datumVerzending{
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.aantalRow{
+    margin-bottom: 10px;
+}
+
+.productPrice{
+    margin-bottom: 35px;
+}
+
+.returnRow{
+    margin-top: -50px;
+    margin-bottom: 60px;
+    margin-left: 10px;
+}
+.returnButton {
+    display: inline-block;
+    background-color: red;
+    border: 2px solid black;
+    height: 50px;
+    color: white;
 }
