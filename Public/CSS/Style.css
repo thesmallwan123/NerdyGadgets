@@ -521,10 +521,11 @@ ul#ul-class-price li {
 }
 
 /* Bottom of cart (total) */
-.totalPrice {
+.totalPrice,
+.verzendKosten,
+.BTW {
     width: 90%;
     margin-left: 5%;
-    /* background-color: red; */
     text-align: right;
 }
 

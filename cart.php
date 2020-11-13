@@ -1,25 +1,24 @@
 <?php
 // Include header
 include __DIR__ . "/header.php";
-
-
+// var_dump($_SESSION["cart"]);
 // global $
-$totaalPrijs = 0;
+$totaalPrijsIncVerz = 0;
+$totaalPrijsExVerz = 0;
 $totaalPrijsRow = 0;
 $prijsRegel = array();
-
+$taxArr = array();
+$taxTotaal = 0;
 // Haal sessie op
 if (isset($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
-    // $winkelwagenArtikellen = "";
 }
 
 // Haal items op uit DB
-function controllItem($artikelID)
-{
+function controllItem($artikelID){
     include("connect.php");
     $Query = "
-            SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
+            SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, TaxRate AS taxRate, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
             FROM stockitems si
             LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
             INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
@@ -36,20 +35,41 @@ function controllItem($artikelID)
 }
 
 // Bereken prijs per artikel
-function calcPriceRow($totaalPrijsRow, $prijs, $aantal, $prijsRegel){
-    $totaalPrijsRow = $prijs * $aantal;
-    array_push($prijsRegel, $totaalPrijsRow);
+function calcPriceRow($totaalPrijsRow, $prijs, $aantal){
+    $totaalPrijsRow = $prijs * $aantal;  
     return $totaalPrijsRow;
 }
 
+function calcTaxRow($taxArtikel, $totaalPrijsRow){
+    $taxArtikel = $taxArtikel / 100;
+    $taxRow = $totaalPrijsRow * $taxArtikel;
+    return $taxRow;
+}
+
 // Bereken totaalprijs
-function calcPriceTotal($prijsRegel, $totaalPrijs)
-{
+function calcPriceTotal($prijsRegel, $totaalPrijsExVerz){
     foreach ($prijsRegel as $id => $prijs) {
-        $totaalPrijs += $prijs;
+        $totaalPrijsExVerz += $prijs;
     }
-    $_SESSION["totaalPrijs"] = $totaalPrijs;
-    return $totaalPrijs;
+    return $totaalPrijsExVerz;
+}
+
+function calcIncVerz($totaalPrijsExVerz){
+    if($totaalPrijsExVerz < 30){
+        $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
+        $_SESSION["totaalPrijs"] = $totaalPrijsIncVerz;
+        return $totaalPrijsIncVerz;
+    }
+    else{
+        return $totaalPrijsExVerz;
+    }
+}
+
+function calcTax($taxArr, $taxTotaal){
+    foreach($taxArr as $id => $taxRow){
+        $taxTotaal = $taxTotaal + $taxRow;
+    }
+    return ROUND($taxTotaal,2);
 }
 
 // Als bestelling wordt gedaan
@@ -73,6 +93,8 @@ if (isset($_POST["bestel"])) {
             $artikel = controllItem($artikelID);
             $totaalPrijsRow = calcPriceRow($totaalPrijsRow, $artikel[0]["RecommendedRetailPrice"], $amount, $prijsRegel);
             array_push($prijsRegel, $totaalPrijsRow);
+            $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
+            array_push($taxArr, $taxRow);
         ?>
             <div class="cartRow">
                 <div class="rowLeft">
@@ -110,12 +132,35 @@ if (isset($_POST["bestel"])) {
         <?php
         }
 
-        $totaalPrijs = calcPriceTotal($prijsRegel, $totaalPrijs);
+        $totaalPrijsExVerz = calcPriceTotal($prijsRegel, $totaalPrijsExVerz);
+        $totaalPrijsTax = calcTax($taxArr, $taxTotaal);
         ?>
+        <div class="verzendKosten">
+            Verzenkosten: 
+                <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz); 
+                if($totaalPrijsIncVerz > $totaalPrijsExVerz){
+                    echo "4.95";
+                    }
+                else{
+                 echo "0.00";   
+                }
+                ?>
+            <br>
+        </div>
+        <div class="BTW">
+            BTW (Al bij prijs inbegrepen): 
+                <?php  
+                    echo $totaalPrijsTax;
+                ?>
+                <br>
+        </div>
+
         <div class="totalPrice">
-            Totaal: <?php echo $totaalPrijs ?><br>
+            Eindtotaal: <?php echo $totaalPrijsIncVerz ?><br>
             <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
         </div>
+
+
         <div class="row datumVerzending">
             <div class="col-8"></div>
             <div class="col-4">
@@ -129,13 +174,14 @@ if (isset($_POST["bestel"])) {
             </div>
         </form>
         <?php
-    } else {
-    ?>
-        <div class="row">
-            <h1 class="winkelmandLeeg">De winkelwagen is leeg</h1>
-        </div>
-        <div class="row terugText">Ga terug naar de vorige pagina</div>
-    <?php
+    } 
+    else {
+        ?>
+            <div class="row">
+                <h1 class="winkelmandLeeg">De winkelwagen is leeg</h1>
+            </div>
+            <div class="row terugText">Ga terug naar de vorige pagina</div>
+        <?php
     } ?>
 
 </div>
