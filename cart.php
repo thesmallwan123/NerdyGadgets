@@ -1,7 +1,7 @@
 <?php
 // testdata
-$_SESSION["cart"] = "";
-$_SESSION['cart'] = array(22=>5, 29=>1);
+// $_SESSION["cart"] = "";
+// $_SESSION['cart'] = array(22=>5, 29=>1);
 
 
 // Include header
@@ -20,7 +20,7 @@ if(isset($_SESSION["cart"])){
 function controllItem($artikelID){
     include("connect.php");
     $Query = "
-            SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, RecommendedRetailPrice, ImagePath
+            SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
             FROM stockitems si
             LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
             INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
@@ -89,7 +89,7 @@ function calcPriceTotal($priceRow, $totalPrice){
         ?>
         <div class="totalPrice">
             Totaal: <?php echo $totalPrice ?><br>
-            <small>Let op!<br>Dit is inclusief BTW en Inclusief verzendkosten!</small>
+            <small><br>Dit is inclusief BTW en Inclusief verzendkosten!</small>
         </div>
         <?php
     }
