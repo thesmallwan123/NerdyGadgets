@@ -1,23 +1,21 @@
 <?php
-// testdata
-// $_SESSION["cart"] = "";
-// $_SESSION['cart'] = array(22=>5, 29=>1);
-
-
 // Include header
 include __DIR__ . "/header.php";
 
 
 // global $
-$totalPrice = 0;
-$totalPriceRow = 0;
-$priceRow = array();
+$totaalPrijs = 0;
+$totaalPrijsRow = 0;
+$prijsRegel = array();
 
-if(isset($_SESSION["cart"])){
-    $cartItems = $_SESSION["cart"];
+// Haal sessie op
+if (isset($_SESSION["cart"])) {
+    $winkelwagenArtikellen = $_SESSION["cart"];
 }
 
-function controllItem($artikelID){
+// Haal items op uit DB
+function controllItem($artikelID)
+{
     include("connect.php");
     $Query = "
             SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
@@ -36,45 +34,56 @@ function controllItem($artikelID){
     return $result;
 }
 
-function calcPriceRow($totalPriceRow, $price, $quantity, $priceRow){
-    $totalPriceRow = $price * $quantity;
-    array_push($priceRow, $totalPriceRow);
-    return $totalPriceRow;
+// Bereken prijs per artikel
+function calcPriceRow($totaalPrijsRow, $prijs, $aantal, $prijsRegel)
+{
+    $totaalPrijsRow = $prijs * $aantal;
+    array_push($prijsRegel, $totaalPrijsRow);
+    return $totaalPrijsRow;
 }
 
-function calcPriceTotal($priceRow, $totalPrice){
-    foreach($priceRow as $id => $price){
-        $totalPrice += $price;
+// Bereken totaalprijs
+function calcPriceTotal($prijsRegel, $totaalPrijs)
+{
+    foreach ($prijsRegel as $id => $prijs) {
+        $totaalPrijs += $prijs;
     }
-    return $totalPrice;
+    $_SESSION["totaalPrijs"] = $totaalPrijs;
+    return $totaalPrijs;
+}
+
+// Als bestelling wordt gedaan
+if (isset($_POST["bestel"])) {
+    echo '<script type="text/javascript">';
+    echo 'window.location.href="./order.php";';
+    echo '</script>';
 }
 
 ?>
 <div id="Wrap">
     <?php
-    // var_dump($cartItems);
-    if(isset($cartItems)){
-        $priceRow = array();
-        foreach ($cartItems as $artikelID => $amount) {
-            $item = controllItem($artikelID);
-            $totalPriceRow = calcPriceRow($totalPriceRow, $item[0]["RecommendedRetailPrice"], $amount, $priceRow);
-            array_push($priceRow, $totalPriceRow);
-            ?>
+    if (isset($winkelwagenArtikellen)) {
+        $prijsRegel = array();
+        foreach ($winkelwagenArtikellen as $artikelID => $amount) {
+            $artikel = controllItem($artikelID);
+            $totaalPrijsRow = calcPriceRow($totaalPrijsRow, $artikel[0]["RecommendedRetailPrice"], $amount, $prijsRegel);
+            array_push($prijsRegel, $totaalPrijsRow);
+    ?>
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
-                    <img class="productImage" src="Public/StockItemIMG/<?php echo $item[0]['ImagePath']; ?>">
-                    <div class="productID">ID: <?php echo $item[0]["StockItemID"]; ?></div>
+                    <img class="productImage" src="Public/StockItemIMG/<?php echo $artikel[0]['ImagePath']; ?>">
+                    <div class="productID">ID: <?php echo $artikel[0]["StockItemID"]; ?></div>
                 </div>
                 <div class="rowMiddle">
                     <!-- Name, Description and Supply -->
-                    <div class="productName">Name: <?php echo $item[0]["StockItemName"] ?></div>
-                    <div class="productSearchDetails">Details: <?php echo $item[0]["SearchDetails"] ?></div>
-                    <div class="productQuantity">In Store: <?php echo $item[0]["QuantityOnHand"] ?></div>
+                    <div class="productName">Name: <?php echo $artikel[0]["StockItemName"] ?></div>
+                    <div class="productSearchDetails">Details: <?php echo $artikel[0]["SearchDetails"] ?></div>
+                    <div class="productQuantity">In Store: <?php echo $artikel[0]["QuantityOnHand"] ?></div>
                 </div>
                 <div class="rowRight">
                     <!-- Price(incl BTW), Amount, Remove and add button -->
-                    <div class="productPrice">Totaal: <?php echo $totalPriceRow ?> (including BTW)</div>
+                    <div class="productPrice">Totaal: <?php echo $totaalPrijsRow ?> (including BTW)</div>
 
 
 
@@ -82,23 +91,28 @@ function calcPriceTotal($priceRow, $totalPrice){
                     <!-- vanaf hier Ana -->
                 </div>
             </div>
-            <?php
+        <?php
         }
 
-        $totalPrice = calcPriceTotal($priceRow, $totalPrice);
+        $totaalPrijs = calcPriceTotal($prijsRegel, $totaalPrijs);
         ?>
         <div class="totalPrice">
-            Totaal: <?php echo $totalPrice ?><br>
+            Totaal: <?php echo $totaalPrijs ?><br>
             <small><br>Dit is inclusief BTW en Inclusief verzendkosten!</small>
         </div>
-        <?php
-    }
-    else{
-        // var_dump($cartItems);
-        ?>
+        <form action="" method="POST">
+            <div class="row">
+                <div class="col-10"></div>
+                <input type="submit" class="col-1 bestelButton" name="bestel" value="Bestel">
+            </div>
+        </form>
+    <?php
+    } else {
+    ?>
         <div class="wrap">
             <?php  ?>
         </div>
-        <?php
-    }?>
+    <?php
+    } ?>
+
 </div>

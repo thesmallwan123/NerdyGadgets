@@ -3,7 +3,7 @@ include __DIR__ . "/header.php";
 
 $deliveryDate = date("d/m/Y", time() + 86400);
 $totaalprijs = $_SESSION["totaalPrijs"];
-$totaalprijs = 1;
+// $totaalprijs = 1;
 ?>
 
 <div id="Wrap">

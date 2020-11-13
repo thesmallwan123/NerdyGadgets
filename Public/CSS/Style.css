@@ -647,7 +647,8 @@ span.price{
 
 
 /*button to payment button */
-.toPayment {
+.toPayment,
+.bestelButton{
     display: inline-block;
     background-color: green;
     border: 2px solid black;
@@ -675,7 +676,7 @@ span.price{
 }
 
 /* .row */
-.row{
+.bestelRow{
     margin-top: 30px;
 }
 
@@ -690,6 +691,6 @@ span.price{
 }
 
 .test123{
-    heigt: 100%;
+    height: 100%;
     width: 100%;
 }
