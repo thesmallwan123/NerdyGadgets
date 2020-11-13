@@ -594,37 +594,44 @@ ul#ul-class-price li {
     margin: 0 -16px;
 }
 
-/* col for order */
-.col-25 {
-    -ms-flex: 25%;
-    flex: 25%;
-}
-
-.col-50{
-    -ms-flex: 50%;
-    flex: 50%;
-}
-
-.col-75{
-    -ms-flex: 75%;
-    flex: 75%;
-}
-
 /* container*/
 .container {
     padding: 5px 20px 15px 20px;
     border: 1px solid lightgray;
     border-radius: 3px;
+    margin-top: 50px;
 }
 
 /* input type text*/
-input[type=text]{
+#email{
     width: 100%;
     margin-bottom: 20px;
     padding: 12px;
     border: 1px solid#ccc;
     border-radius: 100px;
 }
+.opmaakOrder{
+    border: 1px solid#ccc;
+    border-radius: 100px;
+}
+
+
+/*#voornaam, #achternaam, #straat, #woonplaats{*/
+/*    width: 40%;*/
+/*    margin-bottom: 20px;*/
+/*    padding: 12px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 100px;*/
+/*}*/
+
+/*#tussenvoegsel, #huisnummer, #postcode{*/
+/*    width: 20%;*/
+/*    margin-bottom: 20px;*/
+/*    padding: 12px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 100px;*/
+/*}*/
+
 
 /*label*/
 label{
@@ -638,34 +645,51 @@ span.price{
     color: grey;
 }
 
-/* to payment*/
-.toPayment{
-    width: 30%;
-    color: green;
-    display: inline-block;
-}
 
 /*button to payment button */
-.toPaymentButton {
+.toPayment {
+    display: inline-block;
     background-color: green;
     border: 2px solid black;
     width: 300px;
+    height: 50px;
     color: white;
 }
 
 /*back to cart*/
 .toCart {
-    width: 30%;
-    color: green;
-    display: inline-block;
-    margin-right: 300px;
-    margin-left: 220px;
+    background-color: red;
+    width: 300px;
+    height: 50px;
+    border: 2px solid black;
 }
 
 /*back to cart button */
-.toCartButton{
-    background-color: red;
-    border: 2px solid black;
-    width: 300px;
+.toCartButton, .toPaymentButton{
+    background-color: inherit;
+    border: 0px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
     color: white;
+}
+
+/* .row */
+.row{
+    margin-top: 30px;
+}
+
+.toCartButton:hover{
+    background-color: inherit;
+    color: white;
+}
+
+.toCartButton{
+    display: flex;
+    align-items: center;
+}
+
+.test123{
+    heigt: 100%;
+    width: 100%;
 }
