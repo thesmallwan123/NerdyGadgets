@@ -1,7 +1,8 @@
 <?php
 // Include header
 include __DIR__ . "/header.php";
-// var_dump($_SESSION["cart"]);
+
+
 // global $
 $totaalPrijsIncVerz = 0;
 $totaalPrijsExVerz = 0;
@@ -9,6 +10,7 @@ $totaalPrijsRow = 0;
 $prijsRegel = array();
 $taxArr = array();
 $taxTotaal = 0;
+
 // Haal sessie op
 if (isset($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
@@ -40,6 +42,7 @@ function calcPriceRow($totaalPrijsRow, $prijs, $aantal){
     return $totaalPrijsRow;
 }
 
+// Bereken BTW per artikel 
 function calcTaxRow($taxArtikel, $totaalPrijsRow){
     $taxArtikel = $taxArtikel / 100;
     $taxRow = $totaalPrijsRow * $taxArtikel;
@@ -54,29 +57,25 @@ function calcPriceTotal($prijsRegel, $totaalPrijsExVerz){
     return $totaalPrijsExVerz;
 }
 
+// Bereken prijs inclusief verzending
 function calcIncVerz($totaalPrijsExVerz){
     if($totaalPrijsExVerz < 30){
         $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
         $_SESSION["totaalPrijs"] = $totaalPrijsIncVerz;
         return $totaalPrijsIncVerz;
     }
-    else{
+    else {
+        $_SESSION["totaalPrijs"] = $totaalPrijsExVerz;
         return $totaalPrijsExVerz;
     }
 }
 
+// Bereken Eindbedrag BTW
 function calcTax($taxArr, $taxTotaal){
     foreach($taxArr as $id => $taxRow){
         $taxTotaal = $taxTotaal + $taxRow;
     }
     return ROUND($taxTotaal,2);
-}
-
-// Als bestelling wordt gedaan
-if (isset($_POST["bestel"])) {
-    echo '<script type="text/javascript">';
-    echo 'window.location.href="./order.php";';
-    echo '</script>';
 }
 
 ?>
@@ -167,7 +166,7 @@ if (isset($_POST["bestel"])) {
                 <?php print("Uw bestelling wordt op " . date("d/m/Y", time() + 86400) . " geleverd."); ?>
             </div>
         </div>
-        <form action="" method="POST">
+        <form action="./order.php" method="POST">
             <div class="row">
                 <div class="col-10"></div>
                 <input type="submit" class="col-1 bestelButton" name="bestel" value="Bestel">
