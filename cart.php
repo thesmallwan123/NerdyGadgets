@@ -11,6 +11,7 @@ $prijsRegel = array();
 // Haal sessie op
 if (isset($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
+    // $winkelwagenArtikellen = "";
 }
 
 // Haal items op uit DB
@@ -35,8 +36,7 @@ function controllItem($artikelID)
 }
 
 // Bereken prijs per artikel
-function calcPriceRow($totaalPrijsRow, $prijs, $aantal, $prijsRegel)
-{
+function calcPriceRow($totaalPrijsRow, $prijs, $aantal, $prijsRegel){
     $totaalPrijsRow = $prijs * $aantal;
     array_push($prijsRegel, $totaalPrijsRow);
     return $totaalPrijsRow;
@@ -62,18 +62,18 @@ if (isset($_POST["bestel"])) {
 ?>
 <div id="Wrap">
     <div class="row returnRow">
-        <div class="col-1">
+        <div class="col-2">
             <input class="returnButton" type="submit" name="return" onclick="window.history.back();" value=" < Ga terug" />
         </div>
     </div>
     <?php
-    if (isset($winkelwagenArtikellen)) {
+    if ($winkelwagenArtikellen != "") {
         $prijsRegel = array();
         foreach ($winkelwagenArtikellen as $artikelID => $amount) {
             $artikel = controllItem($artikelID);
             $totaalPrijsRow = calcPriceRow($totaalPrijsRow, $artikel[0]["RecommendedRetailPrice"], $amount, $prijsRegel);
             array_push($prijsRegel, $totaalPrijsRow);
-    ?>
+        ?>
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
@@ -128,12 +128,13 @@ if (isset($_POST["bestel"])) {
                 <input type="submit" class="col-1 bestelButton" name="bestel" value="Bestel">
             </div>
         </form>
-    <?php
+        <?php
     } else {
     ?>
-        <div class="wrap">
-            <?php  ?>
+        <div class="row">
+            <h1 class="winkelmandLeeg">De winkelwagen is leeg</h1>
         </div>
+        <div class="row terugText">Ga terug naar de vorige pagina</div>
     <?php
     } ?>
 

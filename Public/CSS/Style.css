@@ -718,3 +718,9 @@ span.price{
     height: 50px;
     color: white;
 }
+.winkelmandLeeg{
+    width: 100%;
+}
+.terugText{
+    padding-left: 30px;
+}
