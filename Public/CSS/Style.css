@@ -615,24 +615,6 @@ ul#ul-class-price li {
     border-radius: 100px;
 }
 
-
-/*#voornaam, #achternaam, #straat, #woonplaats{*/
-/*    width: 40%;*/
-/*    margin-bottom: 20px;*/
-/*    padding: 12px;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 100px;*/
-/*}*/
-
-/*#tussenvoegsel, #huisnummer, #postcode{*/
-/*    width: 20%;*/
-/*    margin-bottom: 20px;*/
-/*    padding: 12px;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 100px;*/
-/*}*/
-
-
 /*label*/
 label{
     margin-bottom: 10px;
@@ -692,4 +674,19 @@ span.price{
 .test123{
     heigt: 100%;
     width: 100%;
+}
+
+/*  to payment */
+.toConfirmation{
+    width: 30%;
+    margin: auto;
+}
+
+/* to payemnt button */
+.toConfirmationButton{
+    background-color: green;
+    border: 2px solid white;
+    width: 100%;
+    color: white;
+    align-items: center;
 }
