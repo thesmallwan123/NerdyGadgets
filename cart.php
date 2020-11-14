@@ -2,7 +2,6 @@
 // Include header
 include __DIR__ . "/header.php";
 
-
 // global $
 $totaalPrijsIncVerz = 0;
 $totaalPrijsExVerz = 0;
@@ -15,6 +14,51 @@ $taxTotaal = 0;
 if (isset($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
 }
+
+// Wijzigen winkelmand
+if(isset($_GET["id"])){
+    $ID = $_GET["id"];
+    $cartItems = $_SESSION['cart'];
+        if(isset($_GET["function"])){
+            $function = $_GET["function"];
+            if($function == "deleteItem"){
+                deleteItem($ID, $cartItems);
+            }
+            elseif($function == "decreaseItem"){
+                decreaseItem($ID, $cartItems);
+            }
+            elseif($function == "increaseItem"){
+                increaseItem($ID, $cartItems);
+            }
+        }
+}
+
+// Verwijderen artikel
+function deleteItem($ID, $cartItems){
+    if(array_key_exists($ID, $cartItems)) {
+        unset($cartItems[$ID]);
+        $_SESSION['cart'] = $cartItems;
+    }
+}
+
+// Verminderen artikel
+function decreaseItem($ID, $cartItems){
+    if(array_key_exists($ID, $cartItems)) {
+        $cartItems[$ID] -= 1;
+        $_SESSION['cart'] = $cartItems;
+
+    }
+}
+
+// Vermeerderen artikel
+function increaseItem($ID, $cartItems){
+    if(array_key_exists($ID, $cartItems)) {
+        $cartItems[$ID] += 1;
+        $_SESSION['cart'] = $cartItems;
+
+    }
+}
+
 
 // Haal items op uit DB
 function controllItem($artikelID){
@@ -94,7 +138,7 @@ function calcTax($taxArr, $taxTotaal){
             array_push($prijsRegel, $totaalPrijsRow);
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
-        ?>
+            ?>
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
@@ -121,10 +165,19 @@ function calcTax($taxArr, $taxTotaal){
                         <div class="col-1">Aantal: </div>
                     </div>
                     <div class="row knoppenRow">
-                        <div class="col-3"><?php /* VerwijderKnop */ ?></div>
-                        <div class="col-3"><?php /* MinKnop */ ?></div>
+                        <div class="col-3">
+                                <a href="cart.php?id=<?php echo $artikelID ?>&function=deleteItem">
+                                    <i class="far fa-trash-alt"></i></a>
+                            </div>
+                        <div class="col-3">
+                            <a href="cart.php?id=<?php echo $artikelID ?>&function=decreaseItem">
+                                <i class="fas fa-minus"></i></a>
+                        </div>
                         <div class="col-3"><?php print($amount); ?></div>
-                        <div class="col-3"><?php /* PlusKnop */ ?></div>
+                        <div class="col-3">
+                            <a href="cart.php?id=<?php echo $artikelID ?>&function=increaseItem">
+                                <i class="fas fa-plus"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
