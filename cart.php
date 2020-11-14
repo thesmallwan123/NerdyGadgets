@@ -14,6 +14,9 @@ $taxTotaal = 0;
 if (isset($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
 }
+else{
+    $winkelwagenArtikellen = "";
+}
 
 // Wijzigen winkelmand
 if(isset($_GET["id"])){
