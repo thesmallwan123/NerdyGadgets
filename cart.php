@@ -15,6 +15,9 @@ $taxTotaal = 0;
 if (isset($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
 }
+else{
+    $winkelwagenArtikellen = "";
+}
 
 // Haal items op uit DB
 function controllItem($artikelID){
