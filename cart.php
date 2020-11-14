@@ -41,6 +41,7 @@ function deleteItem($ID, $cartItems){
     if(array_key_exists($ID, $cartItems)) {
         unset($cartItems[$ID]);
         $_SESSION['cart'] = $cartItems;
+        ?> <script>window.location.replace('./cart.php')</script> <?php
     }
 }
 
@@ -49,7 +50,7 @@ function decreaseItem($ID, $cartItems){
     if(array_key_exists($ID, $cartItems)) {
         $cartItems[$ID] -= 1;
         $_SESSION['cart'] = $cartItems;
-
+        ?> <script>window.location.replace('./cart.php')</script> <?php
     }
 }
 
@@ -58,7 +59,7 @@ function increaseItem($ID, $cartItems){
     if(array_key_exists($ID, $cartItems)) {
         $cartItems[$ID] += 1;
         $_SESSION['cart'] = $cartItems;
-
+        ?> <script>window.location.replace('./cart.php')</script> <?php
     }
 }
 
@@ -158,15 +159,11 @@ function calcTax($taxArr, $taxTotaal){
                     <!-- Price(incl BTW), Amount, Remove and add button -->
                     <div class="productPrice">Totaal: <?php echo $totaalPrijsRow ?> (including BTW)</div>
 
-
-
-
-
-                    <!-- vanaf hier Ana -->
-                    <!-- Buttons to change Amount (Prijs moet ook herberekend worden) -->
                     <div class="row aantalRow">
                         <div class="col-1">Aantal: </div>
                     </div>
+
+                    <!-- Edit cart -->
                     <div class="row knoppenRow">
                         <div class="col-3">
                                 <a href="cart.php?id=<?php echo $artikelID ?>&function=deleteItem">
