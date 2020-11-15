@@ -130,7 +130,9 @@ function calcTax($taxArr, $taxTotaal){
 <div id="Wrap">
     <div class="row returnRow">
         <div class="col-2">
-            <input class="returnButton" type="submit" name="return" onclick="window.history.back();" value=" < Ga terug" />
+            <a href="./index.php">
+                <input class="returnButton" type="submit" name="return" value=" < Ga terug" />
+            </a>
         </div>
     </div>
     <?php
