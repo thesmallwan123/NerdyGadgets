@@ -165,15 +165,26 @@ function calcTax($taxArr, $taxTotaal){
 
                     <!-- Edit cart -->
                     <div class="row knoppenRow">
+                        <!-- Delete item -->
                         <div class="col-3">
                                 <a href="cart.php?id=<?php echo $artikelID ?>&function=deleteItem">
                                     <i class="far fa-trash-alt"></i></a>
                             </div>
-                        <div class="col-3">
-                            <a href="cart.php?id=<?php echo $artikelID ?>&function=decreaseItem">
-                                <i class="fas fa-minus"></i></a>
-                        </div>
+
+                        <!-- Disable minus button when amount <= 1 -->
+                        <?php if($amount <= 1){?>
+                            <div class="col-3">
+
+                            </div>
+                        <?php } else { ?>
+                            <div class="col-3">
+                                <a href="cart.php?id=<?php echo $artikelID ?>&function=decreaseItem">
+                                    <i class="fas fa-minus"></i></a>
+                            </div>
+                        <?php } ?>
+
                         <div class="col-3"><?php print($amount); ?></div>
+                        <!-- Increase item -->
                         <div class="col-3">
                             <a href="cart.php?id=<?php echo $artikelID ?>&function=increaseItem">
                                 <i class="fas fa-plus"></i></a>
