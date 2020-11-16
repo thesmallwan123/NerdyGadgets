@@ -12,10 +12,10 @@ $taxTotaal = 0;
 
 // Haal sessie op
 if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
-    $winkelwagenArtikellen = $_SESSION["cart"];
+    $winkelwagenartikelen = $_SESSION["cart"];
 }
 else{
-    $winkelwagenArtikellen = "";
+    $winkelwagenartikelen = "";
 }
 
 // Wijzigen winkelmand
@@ -136,9 +136,9 @@ function calcTax($taxArr, $taxTotaal){
         </div>
     </div>
     <?php
-    if ($winkelwagenArtikellen != "") {
+    if ($winkelwagenartikelen != "") {
         $prijsRegel = array();
-        foreach ($winkelwagenArtikellen as $artikelID => $amount) {
+        foreach ($winkelwagenartikelen as $artikelID => $amount) {
             $artikel = controllItem($artikelID);
             $totaalPrijsRow = calcPriceRow($totaalPrijsRow, $artikel[0]["RecommendedRetailPrice"], $amount, $prijsRegel);
             array_push($prijsRegel, $totaalPrijsRow);
@@ -219,7 +219,7 @@ function calcTax($taxArr, $taxTotaal){
                 ?>
                 <br>
         </div>
-
+        <br>
         <div class="totalPrice">
             Eindtotaal: <?php echo $totaalPrijsIncVerz ?><br>
             <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
@@ -229,7 +229,7 @@ function calcTax($taxArr, $taxTotaal){
         <div class="row datumVerzending">
             <div class="col-8"></div>
             <div class="col-4">
-                <?php print("Uw bestelling wordt op " . date("d/m/Y", time() + 86400) . " geleverd."); ?>
+                <?php print("Uw bestelling zal op " . date("d/m/Y", time() + 86400) . " worden geleverd."); ?>
             </div>
         </div>
         <form action="./order.php" method="POST">
