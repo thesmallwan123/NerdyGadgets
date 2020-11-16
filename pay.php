@@ -15,7 +15,7 @@ $totaalprijs = $_SESSION["totaalPrijs"];
         <p>U moet <?php print($totaalprijs); ?> betalen.</p>
     <p>Dit bedrag is inclusief BTW</p>
     <p>Uw bestelling wordt op <?php print($deliveryDate); ?> geleverd. </p>
-    <p>Op uw ingevoerde adres.</p>
+    <p>Op uw ingevoerde adres:</p>
         <?php
         print($_POST["straat"]. " ");
         print($_POST["huisnummer"]. " ");

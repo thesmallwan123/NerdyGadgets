@@ -20,7 +20,7 @@ $deliveryDate = date("d/m/Y", time() + 86400);
 
 <p> Uw bestelling is succesvol afgerond.</p>
 <p> Op <?php print($deliveryDate); ?> wordt uw bestelling bezorgd.</p>
-<p> Er wordt een factuur naar uw e-mailadres gestuurd.</p>
+<!--<p> Er wordt een factuur naar uw e-mailadres gestuurd.</p>-->
 </div>
 
 <div class="backToShop">
