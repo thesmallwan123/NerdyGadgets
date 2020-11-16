@@ -144,18 +144,21 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
+                        <!-- Add product to the cart -->
                         <div class="addToCart">
                             <?php 
+                                //Look if the Quantity > 0
                                 $Quantity = $Result['Quantity'];
                                 if ($Quantity > 0) {
                             ?>
+                            <!-- If it is enable the add to cart button -->
                             <form method="post">
                                 <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="addToCartButton">
                             </form>
                             <?php
                                 } else {
                             ?>
-                                
+                            <!-- If it isn't disable the add to cart button -->
                             <form method="post">
                                 <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="disabledAddToCartButton" disabled>
                             </form>
