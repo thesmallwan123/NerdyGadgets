@@ -59,6 +59,7 @@ include __DIR__ . "/header.php";
                     <div class="test123">Terug naar de winkelmand. </div>
                 </a>
             </div>
+
             <div class="col-1"></div>
         </div>
     </form>
