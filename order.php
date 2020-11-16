@@ -50,15 +50,16 @@ include __DIR__ . "/header.php";
 
         <div class="row bestelRow">
             <div class="col-1"></div>
-            <div class="col-4 toPayment">
-                <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton">
-            </div>
-            <div class="col-2"></div>
             <div class="col-4 toCart">
                 <a href="cart.php" class="toCartButton">
                     <div class="test123">Terug naar de winkelmand. </div>
                 </a>
             </div>
+            <div class="col-2"></div>
+            <div class="col-4 toPayment">
+                <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton">
+            </div>
+
 
             <div class="col-1"></div>
         </div>
