@@ -11,7 +11,7 @@ $taxArr = array();
 $taxTotaal = 0;
 
 // Haal sessie op
-if (isset($_SESSION["cart"])) {
+if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
     $winkelwagenArtikellen = $_SESSION["cart"];
 }
 else{
