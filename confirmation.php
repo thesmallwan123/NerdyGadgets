@@ -1,6 +1,13 @@
 <?php
 /* calculating delivery date with the date of today + 1 day*/
 $deliveryDate = date("d/m/Y", time() + 86400);
+
+if (isset($_POST["submit"])) {
+    session_destroy();
+    header("Location: ./index.php");
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -24,7 +31,7 @@ $deliveryDate = date("d/m/Y", time() + 86400);
 </div>
 
 <div class="backToShop">
-    <form action="index.php">
+    <form method="POST">
         <input type="submit" name="submit" value="Ga terug naar de website" class="backToShopButton">
     </form>
 </div>
