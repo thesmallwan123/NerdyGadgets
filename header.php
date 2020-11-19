@@ -126,6 +126,9 @@ include "connect.php";
                     <?php
                     }
                     ?>
+                    <li class="nav-item">
+                        <a class="nav-link HrefDecoration" href="categories.php">Alle Categorien</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav mr-sm-2">
                     <li class="nav-item">
