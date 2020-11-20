@@ -132,10 +132,13 @@ include "connect.php";
                 </ul>
                 <ul class="navbar-nav mr-sm-2">
                     <li class="nav-item">
-                        <a href="./cart" class="nav-link HrefDecoration"><img src="Public/Img/cart.png" alt="Winkelwagen" width="44" heigth="44"></a>
+                        <a href="./browse" class="nav-link HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
                     </li>
                     <li class="nav-item">
-                        <a href="./browse" class="nav-link HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                        <a href="./cart" class="nav-link HrefDecoration"><i class="fas fa-shopping-cart" style="color:white;"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="./login" class="nav-link HrefDecoration"><i class="fas fa-user" style="color:white;"></i></a>
                     </li>
                 </ul>
             </div>
