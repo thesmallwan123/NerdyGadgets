@@ -105,39 +105,66 @@
 
 // Einde config
 
-
-// Set variables (needs to be from form)
-$klantVNaam = "Jhonny";
-$klantAnaam = "Bravo";
-$klantMail = "12321.post@gmail.com";
-$klantVraag = "Werkt dit?";
-
-
-$mailOntvanger = "customerservice.nerdygadgets@gmail.com";
-$mailTitle = "Vraag van ".$klantMail.".";
-
-// Message is written in HTML due to headers of Mail. Inline CSS is granted
-$mailMessage = "
-<html>
-    <head>
-    <style>
-        h1{
-            text-align: center;
-        }
-    </style>
-    </head>
-    <body>
-        <h1>Vraag van ".$klantMail."</h1>
-        <p>".$klantVNaam." vraagt het volgende:</p>
-        <p>".$klantVraag."</p>
-        <p> Gelieve op deze mail te reageren: ".$klantMail."</p>
-    </body>
-</html>
-";
+include("phpMailer\PHPMailer-master\src\PHPMailer.php");
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 // Always set content-type when sending HTML email
 $headers = "MIME-Version: 1.0" . "\r\n";
 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-mail($mailOntvanger, $mailTitle, $mailMessage, $headers);
+
+function vraagKlant($klantVNaam, $klantANaam, $klantMail, $klantVraag){
+    // Set variables (needs to be from form)
+    $mailOntvanger = "customerservice.nerdygadgets@gmail.com";
+    // Message is written in HTML due to headers of Mail. Inline CSS is granted
+    $mailMessage = "
+        <html>
+            <head>
+            <style>
+                h1{
+                    text-align: center;
+                }
+            </style>
+            </head>
+            <body>
+                <h1>Vraag van ".$klantMail."</h1>
+                <p>".$klantVNaam." ".$klantANaam." vraagt het volgende:</p>
+                <p>".$klantVraag."</p>
+                <p> Gelieve op deze mail te reageren: ".$klantMail."</p>
+            </body>
+        </html>
+    ";
+
+    
+    $email = new PHPMailer();
+    $email->SetFrom('customerservice.nerdygadgets@gmail.com');
+    $email->Subject = "Klantvraag";
+    $email->Body = $mailMessage;
+    $email->addAddress($mailOntvanger);
+    $email->isHTML(true);
+    $email->addAttachment("./factuur/test.txt");
+
+    if (!$email->send()) {
+        echo 'Message could not be sent.';
+        echo 'Mailer Error: ' . $email->ErrorInfo;
+        exit;
+    }
+    // mail($mailOntvanger, $mailTitle, $mailMessage, $headers);
+}
+
+
+
+
+// function verstuurFactuur($klantVNaam, $klantANaam, $klantMail, $headers){
+    //     $mailOntvanger = $klantMail;
+
+
+
+// }
+
+vraagKlant("Ivar", "Post", "12321.post@gmail.com", "uiahuiwauhdhuihuiawhudhuahuwduhhuiauwdhuihui");
+
+
+
 ?>
