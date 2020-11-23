@@ -11,16 +11,20 @@ body {
     font-family: MmrText;
     src: url(/Public/fonts/mmrtext.ttf);
 }
+
 select {
     margin: 50px;
     width: 100%;
     padding: 5px 35px 5px 5px;
     font-size: 16px;
     border: 1px solid #CCC;
-    height:50px;
+    height: 50px;
+}
+
+#FilterOptions select {
     -webkit-appearance: none;
     -moz-appearance: none;
-    appearance: none;
+    appearance: none; 
     background: url(../Img/mouse-hover-icon-22.jpg) 96% / 30px no-repeat #EEE;
 }
 
@@ -790,10 +794,11 @@ span.price{
     margin: 20px;
 }
 
-.loginSignupRows input {
+.loginSignupRows input, .loginSignupRows select {
     border: 1px solid white;
     border-radius: 100px;
     text-align: center;
+    background-image: none;
 }
 
 .tekstBoven {
