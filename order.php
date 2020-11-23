@@ -38,13 +38,13 @@ include __DIR__ . "/header.php";
             </div>
         </div>
         <div class="row bestelRow">
-            <div class="col-10">
-                <label for="city"> Woonplaats</label>
-                <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" required>
-            </div>
             <div class="col-2">
                 <label for="postalcode">Postcode</label>
                 <input class="opmaakOrder" type="text" id="postcode" name="postcode" required>
+            </div>
+            <div class="col-10">
+                <label for="city"> Woonplaats</label>
+                <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" required>
             </div>
         </div>
 
