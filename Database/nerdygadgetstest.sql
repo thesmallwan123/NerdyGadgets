@@ -24,20 +24,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Tabelstructuur voor tabel `klant`
+-- Tabelstructuur voor tabel `account`
 --
 
-CREATE TABLE `klant` (
-  `klantnr` int(10) NOT NULL,
-  `emailadres` varchar(45) CHARACTER SET latin1 NOT NULL,
-  `voornaam` varchar(15) CHARACTER SET latin1 NOT NULL,
-  `tussenvoegsel` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
-  `achternaam` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `straat` varchar(25) CHARACTER SET latin1 NOT NULL,
-  `huisnummer` varchar(5) CHARACTER SET latin1 NOT NULL,
-  `postcode` varchar(6) CHARACTER SET latin1 NOT NULL,
-  `plaats` varchar(20) CHARACTER SET latin1 NOT NULL,
-  `wachtwoord` varchar(45) CHARACTER SET latin1 NOT NULL
+CREATE TABLE `account` (
+  `accountnr` int(10) NOT NULL,
+  `email` varchar(45) CHARACTER SET latin1 NOT NULL,
+  `firstname` varchar(15) CHARACTER SET latin1 NOT NULL,
+  `infix` varchar(10) CHARACTER SET latin1 DEFAULT NULL,
+  `surname` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `gender` varchar(3) NOT NULL,
+  `street` varchar(25) CHARACTER SET latin1 NOT NULL,
+  `streetnr` varchar(10) CHARACTER SET latin1 NOT NULL,
+  `postalcode` varchar(6) CHARACTER SET latin1 NOT NULL,
+  `city` varchar(20) CHARACTER SET latin1 NOT NULL,
+  `password` varchar(45) CHARACTER SET latin1 NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -45,20 +46,20 @@ CREATE TABLE `klant` (
 --
 
 --
--- Indexen voor tabel `klant`
+-- Indexen voor tabel `account`
 --
-ALTER TABLE `klant`
-  ADD PRIMARY KEY (`klantnr`);
+ALTER TABLE `account`
+  ADD PRIMARY KEY (`accountnr`);
 
 --
 -- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
--- AUTO_INCREMENT voor een tabel `klant`
+-- AUTO_INCREMENT voor een tabel `account`
 --
-ALTER TABLE `klant`
-  MODIFY `klantnr` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+ALTER TABLE `account`
+  MODIFY `accountnr` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=0;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
