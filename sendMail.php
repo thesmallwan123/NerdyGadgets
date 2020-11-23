@@ -32,6 +32,18 @@ function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
     ";
 
     $email = new PHPMailer();
+    
+    $email->isSMTP();
+    $email->Host = 'ssl://smtp.gmail.com';
+    $email->Port = 465;
+    $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $email->SMTPAuth = true;
+    $email->Username = "customerservice.nerdygadgets@gmail.com";
+    $email->Password = "AdMiN312";
+
+
+
+
 
     // Message
     $email->SetFrom('customerservice.nerdygadgets@gmail.com');
@@ -53,16 +65,19 @@ function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
 }
 
 function verstuurFactuur($klantVNaam, $klantANaam, $klantMail){
-    // create date
-        $year = date("Y");
-        $day = date("D");
-        $hour = date("H");
+    // create date 
+    // Example: date = 2020Mon08-1
+    // Explained: date = YYYYdddHH-ID. ID = always 1
+    $year = date("Y");
+    $day = date("D");
+    $hour = date("H");
 
-        $date = $year;
-        $date .= $day;
-        $date .= $hour;
+    $date = $year;
+    $date .= $day;
+    $date .= $hour;
 
-        var_dump($date);
+    $date .= "-1";
+
 
     // Message is written in HTML due to headers of Mail. Inline CSS is granted
     $mailMessage = "
@@ -80,9 +95,19 @@ function verstuurFactuur($klantVNaam, $klantANaam, $klantMail){
             </body>
         </html>
     ";
-    
 
     $email = new PHPMailer();
+
+
+    $email->isSMTP();
+    $email->Host = 'ssl://smtp.gmail.com';
+    $email->Port = 465;
+    $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $email->SMTPAuth = true;
+    $email->Username = "customerservice.nerdygadgets@gmail.com";
+    $email->Password = "AdMiN312";
+
+
     $email->SetFrom('customerservice.nerdygadgets@gmail.com');
     $email->Subject = "NerdyGadgets - Factuur";
     $email->Body = $mailMessage;
@@ -102,7 +127,7 @@ function verstuurFactuur($klantVNaam, $klantANaam, $klantMail){
 
 
 
-berichtKlant("123", "123", "customerservice.nerdygadgets@gmail.com", "123");
+verstuurFactuur("123", "123", "customerservice.nerdygadgets@gmail.com");
 
 
 ?>
