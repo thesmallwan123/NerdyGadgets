@@ -172,7 +172,7 @@ if (isset($amount)) {
 
             <input type="hidden" name="category_id" id="category_id"
                    value="<?php print (isset($_GET['category_id'])) ? $_GET['category_id'] : ""; ?>">
-            <select name="products_on_page" id="products_on_page" onchange="this.form.submit()">>
+            <select name="products_on_page" onchange="this.form.submit()">>
                 <option value="25" <?php if ($_SESSION['products_on_page'] == 25) {
                     print "selected";
                 } ?>>25
@@ -187,7 +187,7 @@ if (isset($amount)) {
                 </option>
             </select>
             <h4 class="FilterTopMargin"><i class="fas fa-sort"></i> Sorteren</h4>
-            <select name="sort" id="sort" onchange="this.form.submit()">>
+            <select name="sort" onchange="this.form.submit()">>
                 <option value="price_low_high" <?php if ($_SESSION['sort'] == "price_low_high") {
                     print "selected";
                 } ?>>Prijs oplopend

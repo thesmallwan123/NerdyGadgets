@@ -89,8 +89,16 @@ if (isset($_POST['aanmelden'])) {
             
             <div class="row loginSignupRows">
                 <div class="col-1"></div>
-                <div class="col-10">
+                <div class="col-8">
                     <input type="email" name="email" placeholder="E-mailadres" required>
+                </div>
+                <div class="col-2">
+                    <select name="gender" required>
+                        <option value="man">Man</option>
+                        <option value="vrouw">Vrouw</option>
+                        <option value="nvt">n.v.t.</option>
+                    </select>
+                    <i class="fas fa-caret-down"></i>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -170,9 +178,9 @@ if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
         // Eerst vraag je aan de database om het ingevulde emailadres
         // Bestaat dit niet geeft hij 0 rows terug en kan je doorgaan.
         $Query = "
-        SELECT emailadres
+        SELECT email
         FROM klant
-        WHERE emailadres = ?";
+        WHERE email = ?";
         $Statement = mysqli_prepare($Connection2, $Query);
         mysqli_stmt_bind_param($Statement, "s", $email);
         mysqli_stmt_execute($Statement);
@@ -188,7 +196,7 @@ if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
                 // Vul alle gegevens in in de database
                 // Is er geen tussenvoegsel ingevuld wordt dit automatisch 'NULL'
                 $Query = "
-                INSERT INTO klant (emailadres, voornaam, tussenvoegsel, achternaam, straat, huisnummer, postcode, plaats, wachtwoord)
+                INSERT INTO klant (email, firstname, infix, surname, gender, street, streetnr, postalcode, city, password)
                 VALUES (\"$email\", \"$voornaam\", \"$tussenvoegsel\", \"$achternaam\", \"$straat\", \"$huisnummer\", \"$postcode\", \"$plaats\", \"$wachtwoord\")";
                 $Statement = mysqli_prepare($Connection2, $Query);
                 mysqli_stmt_execute($Statement);
