@@ -698,7 +698,7 @@ span.price{
 .toConfirmationButton{
     background-color: green;
     border: 2px solid white;
-    width: 100%;
+    width: 30%;
     color: white;
     align-items: center;
 }
@@ -840,4 +840,14 @@ span.price{
 .backToLoginChoice:hover {
     cursor: pointer;
     background-color: rgb(211, 0, 0);
+}
+
+.opmaakPayForm{
+    border: 1px solid#ccc;
+    border-radius: 100px;
+    width: 25%;
+}
+
+p.boldText{
+    font-weight: bold;
 }
