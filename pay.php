@@ -13,7 +13,7 @@ $_SESSION["totaalPrijs"] = $totaalprijs;
 <div id="Wrap">
     <div class="confirmationTextP">
 
-        <p>U moet €<?php print($totaalprijs); ?>,- betalen.</p>
+        <p>U moet €<?php print($totaalprijs); ?> betalen.</p>
         <p>Dit bedrag is inclusief BTW</p>
         <p>Uw bestelling wordt op <?php print($deliveryDate); ?> geleverd. </p>
         <p>Op uw ingevoerde adres:</p>
