@@ -10,23 +10,23 @@
 
 /* calculating delivery date with the date of today + 1 day*/
 $deliveryDate = date("d/m/Y", time() + 86400);
+if(isset($_POST["gaTerug2"])){
+    if (isset($_POST["gaTerug"])) {
+        include "./connect.php";
 
-if (isset($_POST["gaTerug"])) {
-    include "./connect.php";
+        $SQL = "UPDATE stockitemholdings
+                SET QuantityOnHand = 45
+                WHERE stockitemid = 1";
 
-    $SQL = "UPDATE stockitemholdings
-            SET QuantityOnHand = 45
-            WHERE stockitemid = 1";
+        $Statement = mysqli_prepare($Connection, $SQL);
+        mysqli_stmt_execute($Statement);
 
-    $aantal = 20;
-
-    $statement =mysqli_prepare($Connection, $SQL);
-                mysqli_stmt_execute($Statement);
-    session_destroy();
-    header("Location: ./index.php");
+        session_destroy();
+        header("Location: ./index.php");
+    }
 }
 
-if (isset($_POST["terug"])){
+if (isset($_POST["terugNaarOrder"])){
     header("Location: ./order.php");
 }
 
@@ -50,7 +50,7 @@ if(isset($_SESSION["totaalPrijs"])){
 
     <div class="backToShop">
         <form action="index.php">
-            <input type="submit" name="gaTerug" value="Ga terug naar de website" class="backToShopButton">
+            <input type="submit" name="gaTerug2" value="Ga terug naar de website" class="backToShopButton">
         </form>
     </div>
 
