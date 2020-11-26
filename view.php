@@ -137,15 +137,7 @@ if ($R) {
             <h2 class="StockItemNameViewSize StockItemName">
                 <?php print $Result['StockItemName']; ?>
             </h2>
-            <?php if ($Result["Quantity"] < 100) { ?>
-
-                <div class="QuantityText" style="color: red;">Voorraad: <?php print $Result['Quantity']; ?></div>
-
-            <?php } else {?> 
-
-                <div class="QuantityText">Voorraad: <?php print $Result['Quantity']; ?></div>
-
-            <?php } ?>
+            <div class="QuantityText"  <?php if($Result["Quantity"] < 100) {echo 'style="color: red;"';} ?> >Voorraad: <?php print $Result['Quantity']; ?></div>
             <div id="StockItemHeaderLeft">
                 <div class="CenterPriceLeft">
                     <div class="CenterPriceLeftChild">
