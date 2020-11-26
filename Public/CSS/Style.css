@@ -250,7 +250,7 @@ ul#ul-class-price li {
     display: inline;
 }
 .TextPrice {
-    margin-top: 16%;
+    margin-top: 7%;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
     -khtml-user-select: none;
@@ -781,6 +781,11 @@ span.price{
     margin: 100px;
 }
 
+.signupWarningLabel {
+    color: rgb(253, 86, 86);
+    font-weight: bolder;
+}
+
 /* Login Page */
 .loginPageContainer {
     padding: 10px;
@@ -799,6 +804,10 @@ span.price{
     border-radius: 100px;
     text-align: center;
     background-image: none;
+}
+
+.loginSignupRows label {
+    margin: 0px;
 }
 
 .tekstBoven {
@@ -842,6 +851,12 @@ span.price{
     background-color: rgb(211, 0, 0);
 }
 
+/* Index welkomstbericht */
+.welkomstBericht {
+    text-align: center;
+}
+
+/*  */
 .opmaakPayForm{
     border: 1px solid#ccc;
     border-radius: 100px;

@@ -1,5 +1,6 @@
 <?php
 include "connect.php";
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -19,205 +20,62 @@ include "connect.php";
     <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
 </head>
 <body>
-          
-<?php
-// Laat het keuzemenu zien als er nog geen keuze is gegeven
-if (!isset($_POST['aanmelden']) && !isset($_POST['inloggen']) && !isset($_POST['aanmeldenKlaar'])) {
-    ?>
-
-    <div class="container loginMainPageContainer">
-        <div class="row vraag">
-            <div class="col-12">
-                <h1>Wilt u aanmelden of inloggen?</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-2"></div>
-            <div class="col-3">
-                <form method="POST">
-                    <input type="submit" name="aanmelden" value="Aanmelden" class="mainLoginButtons">
-                </form>
-            </div>
-            <div class="col-2"></div>
-            <div class="col-3">
-                <form method="POST">
-                    <input type="submit" name="inloggen" value="Inloggen" class="mainLoginButtons">
-                </form>
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-            <div class="col-4"></div>
-            <div class="col-3">
-                <form method="POST" action=".\">
-                    <input type="submit" name="annuleren" value="Annuleren" class="cancelMainLogin">
-                </form>
-            </div>
-            <div class="col-5"></div>
-        </div>
-    </div>
 
 <?php
-}
-
-// Laat het aanmeldpaginascherm zien als deze optie is gekozen (of als de gegevens niet kloppen)
-if (isset($_POST['aanmelden'])) {
-    ?>
-    <div class="tekstBoven">
-        <h1>Aanmelden</h1>
-    </div>
-    <div class="container signUpPageContainer">
-        <form method="POST">
-            <div class="row tekstInContainer">
-                <div class="col-12">
-                    <h2>Voert u alstublieft deze gegevens in om u aan te melden</h2>
-                </div>
-            </div>
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-4">
-                    <input type="text" name="voornaam" placeholder="Voornaam" required>
-                </div>
-                <div class="col-2">
-                    <input type="text" name="tussenvoegsel" placeholder="Tussenvoegsel">
-                </div>
-                <div class="col-4">
-                    <input type="text" name="achternaam" placeholder="Achternaam" required>
-                </div>
-                <div class="col-1"></div>
-            </div>
-            
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-8">
-                    <input type="email" name="email" placeholder="E-mailadres" required>
-                </div>
-                <div class="col-2">
-                    <select name="gender" required>
-                        <option value="man">Man</option>
-                        <option value="vrouw">Vrouw</option>
-                        <option value="nvt">n.v.t.</option>
-                    </select>
-                    <i class="fas fa-caret-down"></i>
-                </div>
-                <div class="col-1"></div>
-            </div>
-
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-8">
-                    <input type="text" name="straat" placeholder="Straat" required>
-                </div>
-                <div class="col-2">
-                    <input type="text" name="huisnummer" placeholder="Huisnummer" required>
-                </div>
-                <div class="col-1"></div>
-            </div>
-
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-2">
-                    <input type="text" name="postcode" placeholder="Postcode" required>
-                </div>
-                <div class="col-8">
-                    <input type="text" name="plaats" placeholder="Plaats" required>
-                </div>
-                <div class="col-1"></div>
-            </div>
-
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-5">
-                    <input type="password" name="wachtwoord" placeholder="Wachtwoord" required>
-                </div>
-                <div class="col-5">
-                    <input type="password" name="wachtwoordConfirmatie" placeholder="Wachtwoord (herhalen)" required>
-                </div>
-                <div class="col-1"></div>
-            </div>
-            
-            <div class="row">
-                <div class="col-1"></div>
-                <div class="col-4">
-                    <a href="login.php">
-                        <div class="backToLoginChoice">
-                            Terug
-                        </div>
-                    </a>
-                </div>
-                <div class="col-2"></div>
-                <div class="col-4">
-                    <input type="submit" name="aanmeldenKlaar" value="Aanmelden" class="loginSignupDone">
-                </div>
-            <div class="col-1"></div>
-        </form>
-    </div>
-    <?php
-    
-}
+// Definiëer variabelen van inloggegevens
+$mailBestaatNogNiet = false;
+$wachtwoordKloptNiet = false;
 
 // Laat het inlogscherm zien nadat deze optie is gekozen of als het aanmelden is gelukt
-if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
-    
-    // Verwerk de ingegvulde gegevens in de database als het aanmelden is gelukt. Sla dit over als de gebruiker direct wilt inloggen
-    if (isset($_POST['aanmeldenKlaar'])) {
-        
-        // Maak variabelen van de gegevens van het aanmeldformulier (voor het gemak)
-        $voornaam = $_POST['voornaam'];
-        $tussenvoegsel = $_POST['tussenvoegsel'];
-        $achternaam = $_POST['achternaam'];
-        $email = $_POST['email'];
-        $straat = $_POST['straat'];
-        $huisnummer = $_POST['huisnummer'];
-        $postcode = $_POST['postcode'];
-        $plaats = $_POST['plaats'];
-        $wachtwoord = $_POST['wachtwoord'];
-        $wachtwoordConfirmatie = $_POST['wachtwoordConfirmatie'];
+if (isset($_GET['aanmeldenKlaar']) && !isset($_POST['inloggenKlaar'])) {
+    ?>
+        <script>alert("Uw account is succesvol aangemaakt!")</script>
+    <?php
+}
 
-        // Check of het ingevulde e-mailadres niet al in de database staat
-        // Eerst vraag je aan de database om het ingevulde emailadres
-        // Bestaat dit niet geeft hij 0 rows terug en kan je doorgaan.
+// Controleer of de inloggegevens kloppen. Zo ja maak sessie 'account'
+if (isset($_POST['inloggenKlaar'])) {
+    // Definiëer variabelen van inloggegevens
+    $email = $_POST['email'];
+    $wachtwoord = $_POST['wachtwoord'];
+
+    // Kijk of de email bestaat
+    $Query = "
+    SELECT email
+    FROM account
+    WHERE email = ?";
+    $Statement = mysqli_prepare($Connection2, $Query);
+    mysqli_stmt_bind_param($Statement, "s", $email);
+    mysqli_stmt_execute($Statement);
+    $ReturnableResult = mysqli_stmt_get_result($Statement);
+
+    if (mysqli_num_rows($ReturnableResult) == 1) {
+        // Vraag het wachtwoord op uit de database
         $Query = "
-        SELECT email
-        FROM klant
+        SELECT password
+        FROM account
         WHERE email = ?";
         $Statement = mysqli_prepare($Connection2, $Query);
         mysqli_stmt_bind_param($Statement, "s", $email);
         mysqli_stmt_execute($Statement);
         $ReturnableResult = mysqli_stmt_get_result($Statement);
+        $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['password'];
 
-        if (mysqli_num_rows($ReturnableResult) == 0) {
-            
-            // Check of de ingevulde wachtwooden overeenkomen
-            // Zijn ze hetzelfde, dan kan je doorgaan
-            if ($wachtwoord == $wachtwoordConfirmatie) {
-
-                // Alles wat nu niet zou kunnen kloppen is afgehandeld
-                // Vul alle gegevens in in de database
-                // Is er geen tussenvoegsel ingevuld wordt dit automatisch 'NULL'
-                $Query = "
-                INSERT INTO klant (email, firstname, infix, surname, gender, street, streetnr, postalcode, city, password)
-                VALUES (\"$email\", \"$voornaam\", \"$tussenvoegsel\", \"$achternaam\", \"$straat\", \"$huisnummer\", \"$postcode\", \"$plaats\", \"$wachtwoord\")";
-                $Statement = mysqli_prepare($Connection2, $Query);
-                mysqli_stmt_execute($Statement);
-
-            } else { // Klopt het wachtwoord niet geef dan een alert weer en stuur de bezoeker terug naar het aanmeldscherm
-
-                ?>
-                <script>alert("De wachtwoorden komen niet overeen")</script>
-                <?php
-
-            }
-        } else { // Staat het emailadres al in de database geef dan een alert weer maar laat de bezoeker op het inlogscherm
-
-            ?>
-            <script>alert("Dit e-mailadres hoort al bij een account")</script>
-            <?php
-            
+        // Kijk of het wachtwoord uit de database overeenkomt met het ingevulde wachtwoord
+        if ($Result == $wachtwoord) {
+            // Stuur ze terug naar index. Zet ook de e-mail in de sessie. Deze kan je later ophalen
+            $_SESSION['account'] = $email;
+            header("Location:./index?inloggenKlaar");
+        } else {
+            $wachtwoordKloptNiet = true;
         }
+    } else {
+        $mailBestaatNogNiet = true;
     }
+    
+}
 
-    // Als alles van het aanmelden is afgehandeld of de bezoeker direct wilt inloggen ga je hier verder
+// Als alles van het aanmelden is afgehandeld of de bezoeker direct wilt inloggen ga je hier verder
     ?>
     <div class="tekstBoven">
         <h1>Inloggen</h1>
@@ -231,6 +89,28 @@ if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
                 </div>
             </div>
 
+            <?php
+            if ($mailBestaatNogNiet) {
+            ?>
+
+            <div class="row loginSignupRows">
+                <div class="col-1"></div>
+                <div class="col-10">
+                        <?php 
+                    if ($mailBestaatNogNiet) { 
+                        ?> 
+                        <label for="email" class="signupWarningLabel">Dit e-mailadres heeft nog geen account bij ons!</label>
+                        <?php 
+                    } 
+                        ?>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <?php
+            }
+            ?>
+
             <div class="row loginSignupRows">
                 <div class="col-1"></div>
                 <div class="col-10">
@@ -238,6 +118,28 @@ if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
                 </div>
                 <div class="col-1"></div>
             </div>
+
+            <?php
+            if ($wachtwoordKloptNiet) {
+            ?>
+
+            <div class="row loginSignupRows">
+                <div class="col-1"></div>
+                <div class="col-10">
+                        <?php 
+                    if ($wachtwoordKloptNiet) { 
+                        ?> 
+                        <label for="email" class="signupWarningLabel">Het wachtwoord hoort niet bij het opgegeven e-mailadres!</label>
+                        <?php 
+                    } 
+                        ?>
+                </div>
+                <div class="col-1"></div>
+            </div>
+
+            <?php
+            }
+            ?>
 
             <div class="row loginSignupRows">
                 <div class="col-1"></div>
@@ -250,7 +152,7 @@ if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-4">
-                    <a href="login.php">
+                    <a href="./loginMainpage">
                         <div class="backToLoginChoice">
                             Terug
                         </div>
@@ -263,9 +165,6 @@ if (isset($_POST['inloggen']) || isset($_POST['aanmeldenKlaar'])) {
             <div class="col-1"></div>
         </form>
     </div>
-    <?php
-}
-?>
 
 </body>
 </html>
