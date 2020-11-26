@@ -91,7 +91,7 @@ function verstuurFactuur($klantVNaam, $klantANaam, $klantMail){
             </head>
             <body>
                 <h1>Factuur</h1><br>
-                <p>Beste ".$klantVNaam."".$klantANaam."</p>
+                <p>Beste ".$klantVNaam." ".$klantANaam."</p>
             </body>
         </html>
     ";
@@ -127,7 +127,7 @@ function verstuurFactuur($klantVNaam, $klantANaam, $klantMail){
 
 
 
-verstuurFactuur("123", "123", "customerservice.nerdygadgets@gmail.com");
+// verstuurFactuur("123", "123", "customerservice.nerdygadgets@gmail.com");
 
 
 ?>
