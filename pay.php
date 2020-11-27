@@ -1,5 +1,14 @@
+<!DOCTYPE html>
+<head>
+    <style>
+    </style>
+    <link rel="stylesheet" href="Public/CSS/Style.css" type="text/css">
+</head>
+<div>
+
 <?php
-include __DIR__ . "/header.php";
+session_start();
+//include __DIR__ . "/header.php";
 
 /*calculating delivery time*/
 $deliveryDate = date("d/m/Y", time() + 86400);
@@ -8,7 +17,14 @@ $deliveryDate = date("d/m/Y", time() + 86400);
 $totaalprijs = $_SESSION["totaalPrijs"];
 $_SESSION["totaalPrijs"] = $totaalprijs;
 // $totaalprijs = 1;
+
+/*checking if the value from last page is the same as the total price*/
+
+var_dump($_SESSION["cart"]);
+
+
 ?>
+
 
 <div id="Wrap">
     <div class="confirmationTextP">
@@ -25,14 +41,16 @@ $_SESSION["totaalPrijs"] = $totaalprijs;
         print($_POST["woonplaats"] . " ");
         ?>
         <br>
-        <form method="post" action="confirmation.php">
+        <form method="post">
             <div class="bestelRow">
-                <div class="col-12" <label for="bevestiging"> Bevestig de totale prijs om te betalen</label><br>
+                <div class="col-12"> <label for="bevestiging"> Bevestig de totale prijs om te betalen</label><br>
                     <input class="opmaakPayForm" type="text" id="bevestiging" name="bevestiging" required>
                 </div>
             </div>
             <p class="boldText">LET OP! de bedragen moeten overeen komen!</p>
+            <p class="boldText">Als de bedragen niet overeen komen gaat u terug naar de vorige pagina!</p>
             <br>
+
             <div>
             </div>
             <br>
@@ -43,3 +61,13 @@ $_SESSION["totaalPrijs"] = $totaalprijs;
 
     </div>
 </div>
+
+    <?php
+
+if (isset($_POST["bevestiging"])){
+if ($totaalprijs != $_POST["bevestiging"]){
+    header("Location: ./order.php");
+}
+else header("Location: ./confirmation.php");
+}
+?>

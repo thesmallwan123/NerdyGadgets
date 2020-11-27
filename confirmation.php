@@ -7,36 +7,19 @@
 <div>
 
 <?php
+session_start();
 
 /* calculating delivery date with the date of today + 1 day*/
 $deliveryDate = date("d/m/Y", time() + 86400);
 
 if(isset($_POST["gaTerug2"])){
-    if (isset($_POST["gaTerug"])) {
-        include "./connect.php";
-
-
-        $Statement = mysqli_prepare($Connection, $SQL);
-        mysqli_stmt_execute($Statement);
-
-        session_destroy();
-        header("Location: ./index.php");
+    session_destroy();
+    if (!isset($_SESSION["cart"])){
+    header("Location: ./index.php?orderGeslaagd");
     }
 }
 
-if (isset($_POST["terugNaarOrder"])){
-    header("Location: ./order.php");
-}
-
-session_start();
-/*calculating total price*/
-if(isset($_SESSION["totaalPrijs"])){
-    $totaalprijs = $_SESSION["totaalPrijs"];
-    /*checking if the value from last page is the same as the total price*/
-    if ($totaalprijs == $_POST["bevestiging"]){
-
-        var_dump($_SESSION["cart"]);
-        ?>
+?>
     <div class="confirmationTextHeader">
         <h1>Succes!</h1>
 
@@ -49,30 +32,9 @@ if(isset($_SESSION["totaalPrijs"])){
     </div>
 
     <div class="backToShop">
-        <form action="index.php">
+        <form method="post">
             <input type="submit" name="gaTerug2" value="Ga terug naar de website" class="backToShopButton">
         </form>
     </div>
 
-<?php
-    }
-    else {
-        ?>
-    <div class="confirmationTextHeader"
-        <h1>Helaas.</h1>
-    </div>
-    <div class="confirmationTextP">
-        <p>de bedragen komen niet overeen<p>
-        <p>Ga terug naar de gegevens pagina<p>
-    <div class="backToShop">
-        <form action="order.php">
-            <input type="submit" name="terugNaarOrder" value="Terug naar bestellen" class="backToShopButton">
-        </form>
-    </div>
-
-    <?php
-    }
-}
-
-?>
 </body>
