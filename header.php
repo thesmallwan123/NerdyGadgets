@@ -48,7 +48,7 @@ include "connect.php";
 
 <body>
     <div class="Background">
-        <!-- <div class="row" id="Header">
+        <div class="row" id="Header">
             <div class="col-2"><a href="./" id="LogoA">
                     <div id="LogoImage"></div>
                 </a></div>
@@ -82,14 +82,17 @@ include "connect.php";
                 </ul>
             </div>
             <ul id="ul-class-navigation">
-                <li>
-                    <a href="cart.php" class="HrefDecoration"><img src="Public/Img/cart.png" alt="Winkelwagen" width="44" heigth="44"></a>
+                <li class="nav-item">
+                    <a href="./browse" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
                 </li>
-                <li>
-                    <a href="browse.php" class="HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
+                <li class="nav-item">
+                    <a href="./cart" class="HrefDecoration"><i class="fas fa-shopping-cart" style="color:white;"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a href="./loginMainPage" class="HrefDecoration"><i class="fas fa-user" style="color:white;"></i></a>
                 </li>
             </ul>
-        </div> -->
+        </div>
         <div class="navbar navbar-dark navbar-expand-lg white">
 
             <!-- collapse button -->
@@ -130,19 +133,7 @@ include "connect.php";
                         <a class="nav-link HrefDecoration" href="categories.php">Alle Categorien</a>
                     </li>
                 </ul>
-                <ul class="navbar-nav mr-sm-2">
-                    <li class="nav-item">
-                        <a href="./browse" class="nav-link HrefDecoration"><i class="fas fa-search" style="color:#676EFF;"></i> Zoeken</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./cart" class="nav-link HrefDecoration"><i class="fas fa-shopping-cart" style="color:white;"></i></a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="./loginMainPage" class="nav-link HrefDecoration"><i class="fas fa-user" style="color:white;"></i></a>
-                    </li>
-                </ul>
             </div>
-
         </div>
         <div id="Content">
             <div id="SubContent">
