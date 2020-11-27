@@ -138,7 +138,7 @@ include "connect.php";
                         <a href="./cart" class="nav-link HrefDecoration"><i class="fas fa-shopping-cart" style="color:white;"></i></a>
                     </li>
                     <li class="nav-item">
-                        <a href="./login" class="nav-link HrefDecoration"><i class="fas fa-user" style="color:white;"></i></a>
+                        <a href="./loginMainPage" class="nav-link HrefDecoration"><i class="fas fa-user" style="color:white;"></i></a>
                     </li>
                 </ul>
             </div>
