@@ -17,6 +17,11 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
     $winkelwagenartikelen = "";
 }
 
+if (isset($_GET["orderGeslaagd"])){
+    session_destroy();
+    print ("hallo");
+}
+
 // Wijzigen winkelmand
 if (isset($_GET["id"])) {
     $ID = $_GET["id"];
