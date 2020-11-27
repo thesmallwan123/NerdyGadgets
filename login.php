@@ -61,11 +61,11 @@ if (isset($_POST['inloggenKlaar'])) {
         $ReturnableResult = mysqli_stmt_get_result($Statement);
         $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['password'];
 
-        // Kijk of het wachtwoord uit de database overeenkomt met het ingevulde wachtwoord
-        if ($Result == $wachtwoord) {
+        // Controleer of het wachtwoord overeenkomt met de hash in de database
+        if (password_verify($wachtwoord, $Result)) {
             // Stuur ze terug naar index. Zet ook de e-mail in de sessie. Deze kan je later ophalen
             $_SESSION['account'] = $email;
-            header("Location:./index?inloggenKlaar");
+            header("Location:./index");
         } else {
             $wachtwoordKloptNiet = true;
         }

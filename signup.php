@@ -68,14 +68,17 @@ if (isset($_POST['aanmeldenKlaar'])) {
         // Check of de ingevulde wachtwooden overeenkomen
         // Zijn ze hetzelfde, dan kan je doorgaan
         if ($wachtwoord == $wachtwoordConfirmatie) {
+            // Het wachtwoord wordt gehasht dmv md5 hash zodat het niet uit de database kan worden gelezen
+            $wachtwoord = password_hash($wachtwoord, PASSWORD_DEFAULT);
 
             // Alles wat nu niet zou kunnen kloppen is afgehandeld
             // Vul alle gegevens in in de database
             // Is er geen tussenvoegsel ingevuld wordt dit automatisch 'NULL'
             $Query = "
             INSERT INTO account (email, firstname, infix, surname, gender, street, streetnr, postalcode, city, password)
-            VALUES (\"$email\", \"$voornaam\", \"$tussenvoegsel\", \"$achternaam\", \"$gender\", \"$straat\", \"$huisnummer\", \"$postcode\", \"$plaats\", \"$wachtwoord\")";
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $Statement = mysqli_prepare($Connection2, $Query);
+            mysqli_stmt_bind_param($Statement, "ssssssssss", $email, $voornaam, $tussenvoegsel, $achternaam, $gender, $straat, $huisnummer, $postcode, $plaats, $wachtwoord);
             mysqli_stmt_execute($Statement);
             header("Location:./login?aanmeldenKlaar");
         } else { // Klopt het wachtwoord niet geef dan een alert weer en stuur de bezoeker terug naar het aanmeldscherm
