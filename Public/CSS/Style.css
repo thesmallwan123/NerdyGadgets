@@ -517,6 +517,7 @@ ul#ul-class-price li {
 /* Bottom of cart (total) */
 .totalPrice,
 .verzendKosten,
+.korting
 .BTW {
     width: 90%;
     margin-left: 5%;
