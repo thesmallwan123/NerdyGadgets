@@ -42,6 +42,33 @@ CREATE TABLE `account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
+-- Tabelstructuur voor tabel `discount`
+--
+
+CREATE TABLE `discount` (
+  `discounts` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `discount`
+--
+
+INSERT INTO `discount` (`discounts`) VALUES
+('DOEI1'),
+('HALLO');
+
+--
+-- Indexen voor geëxporteerde tabellen
+--
+
+--
+-- Indexen voor tabel `discount`
+--
+ALTER TABLE `discount`
+  ADD PRIMARY KEY (`discounts`);
+COMMIT;
+
+--
 -- Gegevens worden geëxporteerd voor tabel `account`
 --
 

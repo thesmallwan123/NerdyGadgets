@@ -1,6 +1,7 @@
 <?php
 // Include header
 include __DIR__ . "/header.php";
+include "connect.php";
 
 // global $
 $totaalPrijsIncVerz = 0;
@@ -10,7 +11,9 @@ $prijsRegel = array();
 $taxArr = array();
 $taxTotaal = 0;
 
-$kortingGeldig = TRUE;
+$kortingGeldig = FALSE;
+$kortingsCode = NULL;
+$codeComparison = NULL;
 $korting = 0.70;
 $voordeel = 0;
 $totaalPrijsExVerzKorting = 0;
@@ -22,9 +25,28 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
     $winkelwagenartikelen = "";
 }
 
-if (isset($_GET["orderGeslaagd"])){
-    session_destroy();
-    print ("hallo");
+// Check ingevulde kortingscode tegenover de database
+if(isset($_POST['kortingsCode'])) {
+    // print("hallo");
+    $kortingsCode = $_POST['kortingsCode'];
+
+    $Query = "
+        SELECT discounts
+        FROM discount
+        WHERE discounts = ?";
+        $Statement = mysqli_prepare($Connection2, $Query);
+        mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
+        mysqli_stmt_execute($Statement);
+        $ReturnableResult = mysqli_stmt_get_result($Statement);
+
+    if (mysqli_num_rows($ReturnableResult) == 1) {
+        // print(" de code werkt");
+        $kortingGeldig = TRUE;
+    }
+    // else {
+    //     print (" de code werkt niet");
+    // }
+
 }
 
 // Wijzigen winkelmand
@@ -126,28 +148,28 @@ if (isset($_GET["orderGeslaagd"])){
         }
 
 // Bereken prijs inclusief verzending
-function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
-    {
-        if ($kortingGeldig == TRUE) {
-            if ($totaalPrijsExVerzKorting < 30) {
-                $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
-                $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
-                return ROUND($totaalPrijsIncVerz, 2);
-            } else {
-                $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerzKorting, 2);
-                return ROUND($totaalPrijsExVerzKorting, 2);
-            }
-        } elseif ($kortingGeldig == FALSE) {
-            if ($totaalPrijsExVerz < 30) {
-                $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
-                $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
-                return ROUND($totaalPrijsIncVerz, 2);
-            } else {
-                $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerz, 2);
-                return ROUND($totaalPrijsExVerz, 2);
+    function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
+        {
+            if ($kortingGeldig == TRUE) {
+                if ($totaalPrijsExVerzKorting < 30) {
+                    $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
+                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
+                    return ROUND($totaalPrijsIncVerz, 2);
+                } else {
+                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerzKorting, 2);
+                    return ROUND($totaalPrijsExVerzKorting, 2);
+                }
+            } elseif ($kortingGeldig == FALSE) {
+                if ($totaalPrijsExVerz < 30) {
+                    $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
+                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
+                    return ROUND($totaalPrijsIncVerz, 2);
+                } else {
+                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerz, 2);
+                    return ROUND($totaalPrijsExVerz, 2);
+                }
             }
         }
-    }
 
 // Bereken Eindbedrag BTW
     function calcTax($taxArr, $taxTotaal)
@@ -168,6 +190,16 @@ function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorti
                 <input class="returnButton" type="submit" name="return" value=" < Ga terug" />
             </a>
         </div>
+        <div class="col-3">
+            <form method="POST">
+                <input type="text" name="kortingsCode" placeholder="Kortingscode">
+            </form>
+        </div>
+        <!-- <div class="col-5">
+            <form method="POST">
+                <input type="submit" name="kortingsCodeIngevuld" value="Stuur">
+            </form>
+        </div> -->
     </div>
 
     <?php
@@ -180,6 +212,8 @@ function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorti
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
     ?>
+
+        <!-- Producten -->
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
@@ -248,9 +282,7 @@ function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorti
         <div class="verzendKosten">
             Verzendkosten:
             <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting);
-            if ($totaalPrijsIncVerz > $totaalPrijsExVerz) {
-                echo "4.95";
-            } elseif ($totaalPrijsIncVerz > $totaalPrijsExVerzKorting){
+            if ($totaalPrijsIncVerz < 30) {
                 echo "4.95";
             } else {
                 echo "0.00";
@@ -264,9 +296,7 @@ function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorti
             <?php
             echo $totaalPrijsTax;
             ?>
-            <br>
         </div>
-        <br>
 
         <!-- Korting weergeven -->
         <?php

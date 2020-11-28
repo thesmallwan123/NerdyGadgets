@@ -15,7 +15,7 @@ $deliveryDate = date("d/m/Y", time() + 86400);
 if(isset($_POST["gaTerug2"])){
     session_destroy();
     if (!isset($_SESSION["cart"])){
-    header("Location: ./index.php?orderGeslaagd");
+    header("Location: ./index.php");
     }
 }
 
