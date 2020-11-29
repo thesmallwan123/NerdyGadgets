@@ -26,28 +26,43 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
 }
 
 // Check ingevulde kortingscode tegenover de database
-if(isset($_POST['kortingsCode'])) {
-    // print("hallo");
-    $kortingsCode = $_POST['kortingsCode'];
+    if (isset($_POST['kortingsCode'])) {
+        $kortingsCode = $_POST['kortingsCode'];
 
-    $Query = "
-        SELECT discounts
-        FROM discount
-        WHERE discounts = ?";
-        $Statement = mysqli_prepare($Connection2, $Query);
-        mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
-        mysqli_stmt_execute($Statement);
-        $ReturnableResult = mysqli_stmt_get_result($Statement);
+        $Query = "
+            SELECT discounts
+            FROM discount
+            WHERE discounts = ?";
+            $Statement = mysqli_prepare($Connection2, $Query);
+            mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
+            mysqli_stmt_execute($Statement);
+            $ReturnableResult = mysqli_stmt_get_result($Statement);
 
-    if (mysqli_num_rows($ReturnableResult) == 1) {
-        // print(" de code werkt");
-        $kortingGeldig = TRUE;
+        if (mysqli_num_rows($ReturnableResult) == 1) {
+            $kortingGeldig = TRUE;
+            $_SESSION['korting'] = $kortingsCode;
+            // var_dump($_SESSION['korting']);
+        }
+
+// Anders check op bestaande sessie korting, check tegenover database
+    } elseif (isset($_SESSION['korting'])) {
+        $kortingsCode = $_SESSION['korting'];
+
+        $Query = "
+            SELECT discounts
+            FROM discount
+            WHERE discounts = ?";
+            $Statement = mysqli_prepare($Connection2, $Query);
+            mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
+            mysqli_stmt_execute($Statement);
+            $ReturnableResult = mysqli_stmt_get_result($Statement);
+
+        if (mysqli_num_rows($ReturnableResult) == 1) {
+            $kortingGeldig = TRUE;
+            $_SESSION['korting'] = $kortingsCode;
+            // var_dump($_SESSION['korting']);
+        }
     }
-    // else {
-    //     print (" de code werkt niet");
-    // }
-
-}
 
 // Wijzigen winkelmand
     if (isset($_GET["id"])) {
