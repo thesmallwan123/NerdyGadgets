@@ -12,8 +12,8 @@ session_start();
 /* calculating delivery date with the date of today + 1 day*/
 $deliveryDate = date("d/m/Y", time() + 86400);
 
-if(isset($_POST["gaTerug2"])){
-    session_destroy();
+if(isset($_POST["terugNaarIndex"])) {
+    unset($_SESSION['cart']);
     if (!isset($_SESSION["cart"])){
     header("Location: ./index.php");
     }
@@ -33,7 +33,7 @@ if(isset($_POST["gaTerug2"])){
 
     <div class="backToShop">
         <form method="post">
-            <input type="submit" name="gaTerug2" value="Ga terug naar de website" class="backToShopButton">
+            <input type="submit" name="terugNaarIndex" value="Ga terug naar de website" class="backToShopButton">
         </form>
     </div>
 

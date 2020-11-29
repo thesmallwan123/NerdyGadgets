@@ -1,5 +1,27 @@
 <?php
-include __DIR__ . "/header.php";
+include "connect.php";
+session_start();
+?>
+
+<!DOCTYPE html>
+
+<html lang="en" style="background-color: rgb(35, 35, 47);">
+<head>
+    <style>
+        @font-face {
+            font-family: MmrText;
+            src: url(/Public/fonts/mmrtext.ttf);
+        }
+    </style>
+    <meta charset="ISO-8859-1">
+    <title>NerdyGadgets</title>
+    <link rel="stylesheet" href="Public/CSS/Style.css" type="text/css">
+    <link rel="stylesheet" href="Public/CSS/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="Public/CSS/nha3fuq.css">
+</head>
+<body>
+
+<?php
 
 $voornaam = "";
 $tussenvoegsel = "";
@@ -32,14 +54,32 @@ if (isset($_SESSION['account'])) {
     $postcode = $Result['postalcode'];
     $woonplaats = $Result['city'];
 }
+
+if(isset($_POST['submit'])) {
+    $straat = $_POST['straat'];
+    $huisnummer = $_POST['huisnummer'];
+    $postcode = $_POST['postcode'];
+    $woonplaats = $_POST['woonplaats'];
+
+    $paymentInfo = array();
+    $paymentInfo[0] = $straat;
+    $paymentInfo[1] = $huisnummer;
+    $paymentInfo[2] = $postcode;
+    $paymentInfo[3] = $woonplaats;
+
+    $_SESSION['paymentInfo'] = $paymentInfo;
+    header("Location: ./pay.php");
+}
 ?>
+
 <!--    <div class="orderRow">-->
 <!--        <div class="col-75">-->
 <!--        <div class="orderRow">-->
 
-<div class="container">
+<div class="container orderPageContainer">
     <h3>Bestel gegevens</h3>
-    <form method="post" action="pay.php">
+    <!-- <form method="post" action="pay.php"> -->
+    <form method="post">
         <div class="row bestelRow">
             <div class="col-5">
                 <label for="voornaam"> Voornaam</label><br>

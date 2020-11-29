@@ -41,7 +41,6 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
         if (mysqli_num_rows($ReturnableResult) == 1) {
             $kortingGeldig = TRUE;
             $_SESSION['korting'] = $kortingsCode;
-            // var_dump($_SESSION['korting']);
         }
 
 // Anders check op bestaande sessie korting, check tegenover database
@@ -60,7 +59,6 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
         if (mysqli_num_rows($ReturnableResult) == 1) {
             $kortingGeldig = TRUE;
             $_SESSION['korting'] = $kortingsCode;
-            // var_dump($_SESSION['korting']);
         }
     }
 

@@ -600,6 +600,13 @@ ul#ul-class-price li {
     margin-top: 50px;
 }
 
+.orderPagecontainer {
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin-top: 70px;
+}
+
 /* input type text*/
 #email{
     width: 100%;
@@ -661,7 +668,7 @@ span.price{
 }
 
 /* .row */
-.bestelRow{
+.bestelRow {
     margin-top: 30px;
 }
 
