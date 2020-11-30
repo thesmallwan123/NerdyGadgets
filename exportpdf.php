@@ -33,50 +33,46 @@ $output = "
 <html>
 <body>
 <div class='invoice-box'>
-    <table>
-        <tr class='top'>
-            <td>
-                <table>
-                    <tr>
-                        <td class='title'>
+    
+        <div class='top'>
+                        <div class='title'>
                             <img src='Public/ProductIMGHighRes/NerdyGadgetsLogo.png' style='width:250px;'>
-                        </td>
+                        </div>
                         
-                        <td>
+
+        </div>
+
+        <div class='information'>
+                                   <div class ='factuurgegevens'>
                             ";
-                        $output .='Factuur #: 123'; $output .="<br>";
-                        $output .='Created: ' . $date; $output .= "<br>";
+$output .='Factuur #: 123'; $output .="<br>";
+$output .='Created: ' . $date; $output .= "<br>";
 
-                        $output .="
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-
-        <tr class='information'>
-            <td>
-                <table>
-                    <tr>
-                        <td>
+$output .="
+                        </div>
+                        
+                        <div>
                             Hogeschool Windesheim<br>
                             Campus 2<br>
                             Zwolle, 8017 CA
-                        </td>
+                        </div>
 
-                        <td>
+                        <div class='information2'>
+                        
                             NerdyGadgets B.V.<br>
                             Klantenservice<br>
-                            customerservice.nerdygadgets@windesheim.nl
-                        </td>
-                    </tr>
-                </table>
-                </td>
-            </tr>
-
+                            customerservice.nerdygadgets@gmail.com
+                        </div>
+            
+        </div>
+<table>
             <tr class='heading'>
                 <td>
                 Payment Method
+                </td>
+
+                <td>
+                
                 </td>
 
                 <td>
@@ -88,7 +84,9 @@ $output = "
                 <td>
                 IDEAL
                 </td>
-
+                
+                <td></td>
+                
                 <td>
                 ";
                 $output .=$totalprice;
@@ -97,8 +95,13 @@ $output = "
             </tr>
 
             <tr class='heading'>
+                
                 <td>
                 Item
+                </td>
+
+                <td>
+                Amount
                 </td>
 
                 <td>
@@ -127,6 +130,11 @@ $output = "
                     $output .= "
                 </td>
 
+                <td>
+                "; $output .=$amount;
+                    $output .= "
+                </td>
+
                 <td>";
                     $output .=$result[0]['RecommendedRetailPrice'];
                     $output .= "
@@ -135,6 +143,7 @@ $output = "
         "; }
         $output .= "
         <tr class='total'>
+             <td></td>
              <td></td>
              <td>
                 Total: "; $output.= $totalprice;
@@ -159,6 +168,6 @@ $output .= "<link type = 'text/css' href = './Public/CSS/dompdf.css'>";
     //Get output of generated pdf in Browser
     //1 = Download
     //0 = Preview
-    $Dompdf->stream("12-2020", array("Attachment"=>1));
+    $Dompdf->stream("12-2020", array("Attachment"=>0));
 
 ?>
