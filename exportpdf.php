@@ -22,7 +22,7 @@ $Dompdf = new Dompdf();
 // Session veranderen in variables
 
 $date = date("Y-m-d");
-$fileLocation = "../nerdygadgets/factuur/" . $date . "-1.pdf";
+$fileLocation = "./factuur/" . $date . "-1.pdf";
 $totalprice = $_SESSION["totaalPrijs"];
 $cart = $_SESSION["cart"];
 
@@ -149,7 +149,8 @@ fwrite($myFile, $pdf);
 
 // Verstuur mail
 include("./sendMail.php");
-if (verstuurFactuur($voornaam, $achternaam, $email, $fileLocation) == TRUE) {// Verwijder file
+if (verstuurFactuur($voornaam, $achternaam, $email, $fileLocation) == TRUE) {
+    // Verwijder file
     fclose($myFile);
     unlink($fileLocation);
     header("Location: ./confirmation.php");
