@@ -38,7 +38,7 @@ if (isset($_POST["bevestiging"])) {
     if ($totaalprijs != $_POST["bevestiging"]) {
         $prijsKloptNiet = TRUE;
     }
-    else header("Location: ./confirmation.php");
+    else header("Location: ./exportpdf.php");
     }
 
 // Betalingsinfo ophalen uit de sessie

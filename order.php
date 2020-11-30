@@ -61,11 +61,19 @@ if(isset($_POST['submit'])) {
     $postcode = $_POST['postcode'];
     $woonplaats = $_POST['woonplaats'];
 
+    $voornaam = $_POST["voornaam"];
+    $achternaam = $_POST["achternaam"];
+    $email = $_POST["email"];
+
+    
     $paymentInfo = array();
     $paymentInfo[0] = $straat;
     $paymentInfo[1] = $huisnummer;
     $paymentInfo[2] = $postcode;
     $paymentInfo[3] = $woonplaats;
+    $paymentInfo[4] = $voornaam;
+    $paymentInfo[5] = $achternaam;
+    $paymentInfo[6] = $email;
 
     $_SESSION['paymentInfo'] = $paymentInfo;
     header("Location: ./pay.php");
