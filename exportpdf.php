@@ -14,8 +14,10 @@ use Dompdf\Dompdf;
 
 // Klantgegevens
 $voornaam = $_SESSION["paymentInfo"][4];
-$achternaam = $_SESSION["paymentInfo"][5];
-$email = $_SESSION["paymentInfo"][6];
+$tussenvoegsel = $_SESSION["tussenvoegsel"][5];
+$achternaam = $_SESSION["paymentInfo"][6];
+$geslacht = $_SESSION["paymentInfo"][7];
+$email = $_SESSION["paymentInfo"][8];
 
 $Dompdf = new Dompdf();
 

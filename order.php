@@ -25,11 +25,13 @@ session_start();
 
 // gender
 // aantal moet uit de database
+
 // annuleringsknop moet naast de bestellingsknop zitten
 // meer duidelijkheid over toevoegen korting (knop/melding)
 // kortingsveld moet tussen product boven kosten zitten
 // kosten/knoppen rechterkant van de pagina moeten goed uitgelijnd zijn
 // misschien grootte knoppen evenredig maken
+
 // korting moet uit de database gehaald worden
 
 $voornaam = "";
@@ -71,7 +73,9 @@ if(isset($_POST['submit'])) {
     $woonplaats = $_POST['woonplaats'];
 
     $voornaam = $_POST["voornaam"];
+    $tussenvoegsel = $_POST["tussenvoegsel"];
     $achternaam = $_POST["achternaam"];
+    $gender = $_POST["gender"];
     $email = $_POST["email"];
 
     
@@ -80,9 +84,12 @@ if(isset($_POST['submit'])) {
     $paymentInfo[1] = $huisnummer;
     $paymentInfo[2] = $postcode;
     $paymentInfo[3] = $woonplaats;
+
     $paymentInfo[4] = $voornaam;
-    $paymentInfo[5] = $achternaam;
-    $paymentInfo[6] = $email;
+    $paymentInfo[5] = $tussenvoegsel;
+    $paymentInfo[6] = $achternaam;
+    $paymentInfo[7] = $gender;
+    $paymentInfo[8] = $email;
 
     $_SESSION['paymentInfo'] = $paymentInfo;
     header("Location: ./pay.php");
@@ -112,9 +119,18 @@ if(isset($_POST['submit'])) {
             </div>
         </div>
         <div class="row bestelRow">
-            <div class="col-12">
-                <label for="email">Email</label>
-                <input class="opmaakOrder" type="email" id="email" name="email" value="<?php print($email); ?>" required>
+            <div class="col-10">
+                <label for="email"> E-mail</label>
+                <input class="opmaakOrder" type="email" name="email" value="<?php print("$email"); ?>" placeholder="E-mailadres" required>
+            </div>
+            <div class="col-2">
+                <label for="gender"> Geslacht</label>
+                <select name="gender" class="opmaakOrder" required>
+                    <option value="">--Selecteer--</option>
+                    <option value="man">Man</option>
+                    <option value="vrouw">Vrouw</option>
+                    <option value="nvt">n.v.t.</option>
+                </select>
             </div>
         </div>
         <div class="row bestelRow">
