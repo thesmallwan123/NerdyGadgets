@@ -23,6 +23,15 @@ session_start();
 
 <?php
 
+// gender
+// aantal moet uit de database
+// annuleringsknop moet naast de bestellingsknop zitten
+// meer duidelijkheid over toevoegen korting (knop/melding)
+// kortingsveld moet tussen product boven kosten zitten
+// kosten/knoppen rechterkant van de pagina moeten goed uitgelijnd zijn
+// misschien grootte knoppen evenredig maken
+// korting moet uit de database gehaald worden
+
 $voornaam = "";
 $tussenvoegsel = "";
 $achternaam = "";
