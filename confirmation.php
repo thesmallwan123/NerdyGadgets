@@ -14,6 +14,7 @@ $deliveryDate = date("d/m/Y", time() + 86400);
 
 if(isset($_POST["terugNaarIndex"])) {
     unset($_SESSION['cart']);
+    unset($_SESSION['korting']);
     if (!isset($_SESSION["cart"])){
     header("Location: ./index.php");
     }
