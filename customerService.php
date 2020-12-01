@@ -1,49 +1,30 @@
 <?php
-session_start();
 include __DIR__ . "/header.php";
-include "connect.php";
 
 $voornaam = "";
 $tussenvoegsel = "";
 $achternaam = "";
 $email = "";
-$bericht = "";
 
-//if (isset($_SESSION['account'])) {
-//    $account = $_SESSION["account"];
-//
-//    $Query = "
-//    SELECT firstname, infix, surname, email,
-//    FROM account
-//    WHERE email = ?";
-//    $Statement = mysqli_prepare($Connection2, $Query);
-//    mysqli_stmt_bind_param($Statement, "s", $account);
-//    mysqli_stmt_execute($Statement);
-//    $ReturnableResult = mysqli_stmt_get_result($Statement);
-//    $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
-//
-//    $voornaam = $Result['firstname'];
-//    $tussenvoegsel = $Result['infix'];
-//    $achternaam = $Result['surname'];
-//    $email = $Result['email'];
-//}
-//
-//
-//if(isset($_POST['submit'])) {
-//    $voornaam = $_POST["voornaam"];
-//    $tussenvoegsel = $_POST["tussenvoegsel"];
-//    $achternaam = $_POST["achternaam"];
-//    $email = $_POST["email"];
-//
-//
-//    $customerService = array();
-//    $customerService[0] = $voornaam;
-//    $customerService[1] = $tussenvoegsel;
-//    $customerService[2] = $achternaam;
-//    $customerService[3] = $email;
-//
-//    $_SESSION['customerService'] = $customerService;
-//}
+if (isset($_SESSION['account'])) {
+    $account = $_SESSION["account"];
+
+    $Query = "
+    SELECT firstname, infix, surname, email
+    FROM account
+    WHERE email = ?";
+    $Statement = mysqli_prepare($Connection2, $Query);
+    mysqli_stmt_bind_param($Statement, "s", $account);
+    mysqli_stmt_execute($Statement);
+    $ReturnableResult = mysqli_stmt_get_result($Statement);
+    $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
+
+    $voornaam = $Result['firstname'];
+    $tussenvoegsel = $Result['infix'];
+    $achternaam = $Result['surname'];
+    $email = $Result['email'];
+}
+
 ?>
 
 <div class="container orderPageContainer">
