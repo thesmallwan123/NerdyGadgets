@@ -151,7 +151,7 @@ fwrite($myFile, $pdf);
 
 // Verstuur mail
 include("./sendMail.php");
-if (verstuurFactuur($voornaam, $achternaam, $email, $fileLocation) == TRUE) {
+if (verstuurFactuur($voornaam, $tussenvoegsel, $achternaam, $email, $fileLocation) == TRUE) {
     // Verwijder file
     fclose($myFile);
     unlink($fileLocation);
