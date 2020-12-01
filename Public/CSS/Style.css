@@ -290,10 +290,10 @@ ul#ul-class-price li {
     margin-left: 55%;
     margin-top: -13%;
 }
-#Wrap {
+#wrap {
     width: 100%;
     height: 600px;
-    margin-top: 3%;
+    margin-top: 0%;
     position: relative;
     text-align: center;
     text-decoration: none;
@@ -364,11 +364,11 @@ ul#ul-class-price li {
 #StockGroup6 h1 {
     bottom: 0;
 }
-#Wrap a {
+#wrap a {
     text-decoration: none;
     color: white;
 }
-#Wrap a:hover {
+#wrap a:hover {
     color: #ccc;
     opacity: 0.9;
 }
@@ -481,7 +481,8 @@ ul#ul-class-price li {
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
-    margin-bottom: 50px;
+    /* margin-top: 0px; */
+    margin-bottom: 20px;
     margin-left: 5%;
     border: 1px solid white;
 }
@@ -510,19 +511,27 @@ ul#ul-class-price li {
 /* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons) */
 .rowRight{
     min-height: 100%;
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
 }
 
 /* Bottom of cart (total) */
-.totalPrice,
+.costBreakdown,
 .verzendKosten,
-.korting,
 .BTW,
 .datumVerzending {
     width: 90%;
     margin-left: 5%;
     text-align: right;
+}
+
+.korting {
+    color: greenyellow;
+}
+
+.totalPrice {
+    font-weight: bold;
 }
 
 /* Add to cart button */
@@ -677,9 +686,21 @@ span.price{
 /* kortingscoupon */
 .kortingsCoupon {
     display: inline-block;
-    margin-left: 20px;
-    width: 150px;
+    margin-left: 45px;
+    width: 125px;
     height: 50px;
+}
+
+.validateCoupon {
+    display: inline-block;
+    margin-left: 45px;
+    width: 125px;
+    height: 50px;
+}
+
+.validCoupon {
+    background-color: green;
+    color: white;
 }
 
 /*button to Order*/
@@ -707,6 +728,7 @@ span.price{
 /* .row */
 .bestelRow {
     margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 .kortingRow {

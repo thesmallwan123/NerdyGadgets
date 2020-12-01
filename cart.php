@@ -196,20 +196,7 @@ $totaalPrijsExVerzKorting = 0;
 ?>
 
 <!-- Body cart -->
-<div id="Wrap">
-    <!-- <div class="row returnRow">
-        <div class="col-2">
-            <a href="./index.php">
-                <input class="returnButton" type="submit" name="return" value=" < Ga terug" />
-            </a>
-        </div>
-            <div class="col-3">
-                <form method="POST">
-                    <input type="text" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
-                </form>
-            </div>
-    </div> -->
-
+<div id="wrap">
     <?php
     if ($winkelwagenartikelen != "") {
         $prijsRegel = array();
@@ -220,7 +207,6 @@ $totaalPrijsExVerzKorting = 0;
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
     ?>
-
         <!-- Producten -->
             <div class="cartRow">
                 <div class="rowLeft">
@@ -287,14 +273,17 @@ $totaalPrijsExVerzKorting = 0;
         ?>
 
         <!-- Kortingscoupon -->
-        <div class="row kortingRow">
-            <div class="col-10"></div>
-            <div class="col-1">
-                <form method="POST">
-                    <input type="text" class="kortingsCoupon" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
-                </form>
+        <form method="POST">
+            <div class="row kortingRow">
+                <div class="col-9"></div>
+                <div class="col-1">
+                        <input type="submit" class="validateCoupon" name="acceptCoupon" value="Valideer">
+                </div>
+                <div class="col-1">
+                        <input type="text" class="kortingsCoupon" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
+                </div>
             </div>
-        </div>
+        </form>
 
         <!-- Kosten weergeven -->
             <div class="verzendKosten">
@@ -320,7 +309,7 @@ $totaalPrijsExVerzKorting = 0;
             <?php
             if($kortingGeldig == TRUE) {
             ?>
-            <div class="korting">
+            <div class="costBreakdown korting">
                 Korting:
                 <?php
                 echo ROUND($voordeel, 2);
@@ -333,7 +322,7 @@ $totaalPrijsExVerzKorting = 0;
 
             <br>
             <!-- Totaalprijs-->
-            <div class="totalPrice">
+            <div class="costBreakdown totalPrice">
                 Eindtotaal: <?php echo ROUND($totaalPrijsIncVerz, 2) ?><br>
                 <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
             </div>
