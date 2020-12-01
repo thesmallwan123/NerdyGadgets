@@ -73,5 +73,5 @@ $bericht = "";
         <div class="row bestelRow">
             <div class="col-12"?
                  <label for="bericht">Uw bericht</label>
-                 <input class="opmaakOrder" type="bericht" id="bericht" name="bericht" value="<?php print ($bericht);?>" required>
+                    <textarea id="bericht" name="bericht" rows="10" class="opmaakOrder" required ></textarea>
         </div>
