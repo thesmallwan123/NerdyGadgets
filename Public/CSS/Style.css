@@ -291,10 +291,10 @@ ul#ul-class-price li {
     margin-left: 55%;
     margin-top: -13%;
 }
-#Wrap {
+#wrap {
     width: 100%;
     height: 600px;
-    margin-top: 3%;
+    margin-top: 0%;
     position: relative;
     text-align: center;
     text-decoration: none;
@@ -365,11 +365,11 @@ ul#ul-class-price li {
 #StockGroup6 h1 {
     bottom: 0;
 }
-#Wrap a {
+#wrap a {
     text-decoration: none;
     color: white;
 }
-#Wrap a:hover {
+#wrap a:hover {
     color: #ccc;
     opacity: 0.9;
 }
@@ -483,7 +483,8 @@ ul#ul-class-price li {
     flex-direction: row;
     justify-content: space-between;
     width: 90%;
-    margin-bottom: 50px;
+    /* margin-top: 0px; */
+    margin-bottom: 20px;
     margin-left: 5%;
     border: 1px solid white;
 }
@@ -512,18 +513,27 @@ ul#ul-class-price li {
 /* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons) */
 .rowRight{
     min-height: 100%;
+    margin-right: 10px;
     display: flex;
     flex-direction: column;
 }
 
 /* Bottom of cart (total) */
-.totalPrice,
+.costBreakdown,
 .verzendKosten,
-.korting,
-.BTW {
+.BTW,
+.datumVerzending {
     width: 90%;
     margin-left: 5%;
     text-align: right;
+}
+
+.korting {
+    color: greenyellow;
+}
+
+.totalPrice {
+    font-weight: bold;
 }
 
 /* Add to cart button */
@@ -603,7 +613,7 @@ ul#ul-class-price li {
 }
 
 .orderPageContainer {
-    margin-top: 70px;
+    margin-top: 100px;
 }
 
 /* input type text*/
@@ -642,15 +652,13 @@ span.price{
 
 
 /*button to payment button */
-.toPayment,
-.bestelButton{
+.toPayment {
     display: inline-block;
     background-color: green;
     border: 2px solid black;
     width: 300px;
     height: 50px;
     color: white;
-
 }
 
 /*back to cart*/
@@ -675,9 +683,58 @@ span.price{
     align-items: center;
 }
 
+
+/*CART*/
+/* kortingscoupon */
+.kortingsCoupon {
+    display: inline-block;
+    margin-left: 45px;
+    width: 125px;
+    height: 50px;
+}
+
+.validateCoupon {
+    display: inline-block;
+    margin-left: 45px;
+    width: 125px;
+    height: 50px;
+}
+
+.validCoupon {
+    background-color: green;
+    color: white;
+}
+
+/*button to Order*/
+.toOrder {
+    display: inline-block;
+    background-color: green;
+    border: 2px solid black;
+    margin-left: 20px;
+    width: 150px;
+    height: 50px;
+    color: white;
+}
+/*button to Store*/
+.toStore {
+    background-color: red;
+    width: 150px;
+    height: 50px;
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    color: white;
+}
+
+
 /* .row */
 .bestelRow {
     margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.kortingRow {
+    margin-bottom: 20px;
 }
 
 .toCartButton:hover{
@@ -710,7 +767,7 @@ span.price{
     margin: auto;
 }
 
-/* to payemnt button */
+/* to payment button */
 .toConfirmationButton{
     background-color: green;
     border: 2px solid white;
@@ -719,10 +776,6 @@ span.price{
     align-items: center;
 }
 
-.datumVerzending{
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
 .aantalRow{
     margin-bottom: 10px;
 }

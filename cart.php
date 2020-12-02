@@ -19,11 +19,11 @@ $voordeel = 0;
 $totaalPrijsExVerzKorting = 0;
 
 // Haal sessie op
-if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
-    $winkelwagenartikelen = $_SESSION["cart"];
-} else {
-    $winkelwagenartikelen = "";
-}
+    if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+        $winkelwagenartikelen = $_SESSION["cart"];
+    } else {
+        $winkelwagenartikelen = "";
+    }
 
 // Check ingevulde kortingscode tegenover de database
     if (isset($_POST['kortingsCode'])) {
@@ -196,25 +196,7 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
 ?>
 
 <!-- Body cart -->
-<div id="Wrap">
-    <div class="row returnRow">
-        <div class="col-2">
-            <a href="./index.php">
-                <input class="returnButton" type="submit" name="return" value=" < Ga terug" />
-            </a>
-        </div>
-        <div class="col-3">
-            <form method="POST">
-                <input type="text" name="kortingsCode" placeholder="Kortingscode">
-            </form>
-        </div>
-        <!-- <div class="col-5">
-            <form method="POST">
-                <input type="submit" name="kortingsCodeIngevuld" value="Stuur">
-            </form>
-        </div> -->
-    </div>
-
+<div id="wrap">
     <?php
     if ($winkelwagenartikelen != "") {
         $prijsRegel = array();
@@ -225,7 +207,6 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
     ?>
-
         <!-- Producten -->
             <div class="cartRow">
                 <div class="rowLeft">
@@ -291,61 +272,83 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
 
         ?>
 
-        <!-- Kosten weergeven -->
-        <div class="verzendKosten">
-            Verzendkosten:
-            <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting);
-            if ($totaalPrijsIncVerz < 30) {
-                echo "4.95";
-            } else {
-                echo "0.00";
-            }
-            ?>
-            <br>
-        </div>
-
-        <div class="BTW">
-            BTW (al bij de prijs inbegrepen):
-            <?php
-            echo $totaalPrijsTax;
-            ?>
-        </div>
-
-        <!-- Korting weergeven -->
-        <?php
-        if($kortingGeldig == TRUE) {
-        ?>
-        <div class="korting">
-            Korting:
-            <?php
-            echo ROUND($voordeel, 2);
-            ?>
-            <br>
-        </div>
-        <?php
-        }
-        ?>
-
-        <br>
-        <!-- Totaalprijs-->
-        <div class="totalPrice">
-            Eindtotaal: <?php echo ROUND($totaalPrijsIncVerz, 2) ?><br>
-            <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
-        </div>
-
-        <!-- Verzending & bestelknop -->
-        <div class="row datumVerzending">
-            <div class="col-8"></div>
-            <div class="col-4">
-                <?php print("Uw bestelling zal op " . date("d/m/Y", time() + 86400) . " worden geleverd."); ?>
-            </div>
-        </div>
-        <form action="./order.php" method="POST">
-            <div class="row">
-                <div class="col-10"></div>
-                <input type="submit" class="col-1 bestelButton" name="bestel" value="Bestel">
+        <!-- Kortingscoupon -->
+        <form method="POST">
+            <div class="row kortingRow">
+                <div class="col-9"></div>
+                <div class="col-1">
+                        <input type="submit" class="validateCoupon" name="acceptCoupon" value="Valideer">
+                </div>
+                <div class="col-1">
+                        <input type="text" class="kortingsCoupon" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
+                </div>
             </div>
         </form>
+
+        <!-- Kosten weergeven -->
+            <div class="verzendKosten">
+                Verzendkosten:
+                <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting);
+                if ($totaalPrijsIncVerz < 30) {
+                    echo "4.95";
+                } else {
+                    echo "0.00";
+                }
+                ?>
+                <br>
+            </div>
+
+            <div class="BTW">
+                BTW (al bij de prijs inbegrepen):
+                <?php
+                echo $totaalPrijsTax;
+                ?>
+            </div>
+
+            <!-- Korting weergeven -->
+            <?php
+            if($kortingGeldig == TRUE) {
+            ?>
+            <div class="costBreakdown korting">
+                Korting:
+                <?php
+                echo ROUND($voordeel, 2);
+                ?>
+                <br>
+            </div>
+            <?php
+            }
+            ?>
+
+            <br>
+            <!-- Totaalprijs-->
+            <div class="costBreakdown totalPrice">
+                Eindtotaal: <?php echo ROUND($totaalPrijsIncVerz, 2) ?><br>
+                <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
+            </div>
+
+        <!-- Verzending -->
+        <div class="datumVerzending">
+            <?php print("Uw bestelling zal op " . date("d/m/Y", time() + 86400) . " worden geleverd."); ?>
+        </div>
+
+        <!-- Bestel & terugknop -->
+        <div class="row bestelRow">
+            <div class="col-9"></div>
+            <div class="col-1">
+                <form action="./index.php" method="POST"> 
+                    <input type="submit" class="toStore" name="return" value=" < Ga terug">
+                </form>
+            </div>
+            <div class="col-1">
+                <form action="./order.php" method="POST">   
+                    <input type="submit" class="toOrder" name="bestel" value="Bestel">
+                </form>
+            </div>
+            <div class="col-1"></div>
+        </div>
+        
+
     <?php
     } else {
     ?>

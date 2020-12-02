@@ -68,7 +68,7 @@ function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
 }
 
 // Verstuur factuur naar de klant
-function verstuurFactuur($klantVNaam, $klantANaam, $klantMail, $fileLocation){
+function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fileLocation){
     // Check if file exists
     $file = fopen($fileLocation, "r");
     if($file){
@@ -80,13 +80,19 @@ function verstuurFactuur($klantVNaam, $klantANaam, $klantMail, $fileLocation){
             <html>
                 <head>
                 <style>
-                    h1{
-                        text-align: center;
+                    .intro{
+                        textalign: left;
+                        fint-size: 15px;
                     }
                 </style>
                 </head>
                 <body>
-                    <p>Beste ".$klantVNaam." ".$klantANaam."</p>
+                    <p class='intro'>Beste ".$klantVNaam." " .$klantTussen. " ".$klantANaam. "</p>
+                    <p>Uw bestelling is bij ons doorgekomen!</p>
+                    <p>Wij willen u bij deze het factuur van uw bestelling meegeven.</p>
+                    <p>Nogmaals dank voor uw bestelling</p>
+                    <p>Met vriendelijke groet,</p>
+                    <p>customerservice.nerdygadgets@gmail.com</p>
                 </body>
             </html>
         ";

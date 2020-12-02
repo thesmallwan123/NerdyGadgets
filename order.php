@@ -23,6 +23,17 @@ session_start();
 
 <?php
 
+// V gender
+// aantal moet uit de database
+
+// annuleringsknop moet naast de bestellingsknop zitten
+// meer duidelijkheid over toevoegen korting (knop/melding)
+// kortingsveld moet tussen product boven kosten zitten
+// kosten/knoppen rechterkant van de pagina moeten goed uitgelijnd zijn
+// misschien grootte knoppen evenredig maken
+
+// korting moet uit de database gehaald worden
+
 $voornaam = "";
 $tussenvoegsel = "";
 $achternaam = "";
@@ -32,52 +43,58 @@ $huisnummer = "";
 $postcode = "";
 $woonplaats = "";
 
-if (isset($_SESSION['account'])) {
-    $account = $_SESSION["account"];
+// checken session account & variabelen definiëren wanneer aanwezig.
+    if (isset($_SESSION['account'])) {
+        $account = $_SESSION["account"];
 
-    $Query = "
-    SELECT firstname, infix, surname, email, street, streetnr, postalcode, city
-    FROM account
-    WHERE email = ?";
-    $Statement = mysqli_prepare($Connection2, $Query);
-    mysqli_stmt_bind_param($Statement, "s", $account);
-    mysqli_stmt_execute($Statement);
-    $ReturnableResult = mysqli_stmt_get_result($Statement);
-    $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
-    
-    $voornaam = $Result['firstname'];
-    $tussenvoegsel = $Result['infix'];
-    $achternaam = $Result['surname'];
-    $email = $Result['email'];
-    $straat = $Result['street'];
-    $huisnummer = $Result['streetnr'];
-    $postcode = $Result['postalcode'];
-    $woonplaats = $Result['city'];
-}
+        $Query = "
+        SELECT firstname, infix, surname, email, street, streetnr, postalcode, city
+        FROM account
+        WHERE email = ?";
+        $Statement = mysqli_prepare($Connection2, $Query);
+        mysqli_stmt_bind_param($Statement, "s", $account);
+        mysqli_stmt_execute($Statement);
+        $ReturnableResult = mysqli_stmt_get_result($Statement);
+        $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
+        
+        $voornaam = $Result['firstname'];
+        $tussenvoegsel = $Result['infix'];
+        $achternaam = $Result['surname'];
+        $email = $Result['email'];
+        $straat = $Result['street'];
+        $huisnummer = $Result['streetnr'];
+        $postcode = $Result['postalcode'];
+        $woonplaats = $Result['city'];
+    }
+// checken POST en variabelen definiëren gebaseerd op ingevuld formulier. Sessie paymentInfo aanmaken.
+    if(isset($_POST['submit'])) {
+        $straat = $_POST['straat'];
+        $huisnummer = $_POST['huisnummer'];
+        $postcode = $_POST['postcode'];
+        $woonplaats = $_POST['woonplaats'];
 
-if(isset($_POST['submit'])) {
-    $straat = $_POST['straat'];
-    $huisnummer = $_POST['huisnummer'];
-    $postcode = $_POST['postcode'];
-    $woonplaats = $_POST['woonplaats'];
+        $voornaam = $_POST["voornaam"];
+        $tussenvoegsel = $_POST["tussenvoegsel"];
+        $achternaam = $_POST["achternaam"];
+        $gender = $_POST["gender"];
+        $email = $_POST["email"];
 
-    $voornaam = $_POST["voornaam"];
-    $achternaam = $_POST["achternaam"];
-    $email = $_POST["email"];
+        
+        $paymentInfo = array();
+        $paymentInfo[0] = $straat;
+        $paymentInfo[1] = $huisnummer;
+        $paymentInfo[2] = $postcode;
+        $paymentInfo[3] = $woonplaats;
 
-    
-    $paymentInfo = array();
-    $paymentInfo[0] = $straat;
-    $paymentInfo[1] = $huisnummer;
-    $paymentInfo[2] = $postcode;
-    $paymentInfo[3] = $woonplaats;
-    $paymentInfo[4] = $voornaam;
-    $paymentInfo[5] = $achternaam;
-    $paymentInfo[6] = $email;
+        $paymentInfo[4] = $voornaam;
+        $paymentInfo[5] = $tussenvoegsel;
+        $paymentInfo[6] = $achternaam;
+        $paymentInfo[7] = $gender;
+        $paymentInfo[8] = $email;
 
-    $_SESSION['paymentInfo'] = $paymentInfo;
-    header("Location: ./pay.php");
-}
+        $_SESSION['paymentInfo'] = $paymentInfo;
+        header("Location: ./pay.php");
+    }
 ?>
 
 <!--    <div class="orderRow">-->
@@ -103,9 +120,18 @@ if(isset($_POST['submit'])) {
             </div>
         </div>
         <div class="row bestelRow">
-            <div class="col-12">
-                <label for="email">Email</label>
-                <input class="opmaakOrder" type="email" id="email" name="email" value="<?php print($email); ?>" required>
+            <div class="col-10">
+                <label for="email"> E-mail</label>
+                <input class="opmaakOrder" type="email" name="email" value="<?php print("$email"); ?>" placeholder="E-mailadres" required>
+            </div>
+            <div class="col-2">
+                <label for="gender"> Geslacht</label>
+                <select name="gender" class="opmaakOrder" required>
+                    <option value="">--Selecteer--</option>
+                    <option value="man">Man</option>
+                    <option value="vrouw">Vrouw</option>
+                    <option value="nvt">n.v.t.</option>
+                </select>
             </div>
         </div>
         <div class="row bestelRow">
@@ -140,8 +166,6 @@ if(isset($_POST['submit'])) {
             <div class="col-4 toPayment">
                 <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton">
             </div>
-
-
             <div class="col-1"></div>
         </div>
     </form>
