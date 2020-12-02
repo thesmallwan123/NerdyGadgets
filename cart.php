@@ -359,3 +359,7 @@ if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
     } ?>
 
 </div>
+
+<?php
+include __DIR__ . "/footer.php";
+?>

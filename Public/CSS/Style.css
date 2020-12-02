@@ -104,6 +104,7 @@ ul#ul-class-navigation li {
     margin-left: 21%;
     float: left;
     position: sticky;
+    margin-bottom: 50px;
 }
 #ProductFrame {
     width: 100%;
@@ -408,6 +409,7 @@ ul#ul-class-price li {
     margin: 0 auto;
     width: 70%;
     padding-top: 10px;
+    margin-bottom: 400px;
 }
 .carousel-inner img {
     width: 100%;

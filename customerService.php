@@ -56,3 +56,7 @@ if (isset($_SESSION['account'])) {
                  <label for="bericht">Uw bericht</label>
                     <textarea id="bericht" name="bericht" rows="10" class="opmaakOrder" required ></textarea>
         </div>
+
+        // Verstuur mail
+        include("./sendMail.php");
+        if (verstuurFactuur($voornaam, $achternaam, $email, $fileLocation) == TRUE) {

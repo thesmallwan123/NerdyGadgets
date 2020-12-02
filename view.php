@@ -217,3 +217,7 @@ if ($R) {
         ?><h2 id="ProductNotFound">Het opgevraagde product is niet gevonden.</h2><?php
     } ?>
 </div>
+
+<?php
+include __DIR__ . "/footer.php";
+?>
