@@ -14,7 +14,7 @@ use Dompdf\Dompdf;
 
 // Klantgegevens
 $voornaam = $_SESSION["paymentInfo"][4];
-$tussenvoegsel = $_SESSION["tussenvoegsel"][5];
+$tussenvoegsel = $_SESSION["paymentInfo"][5];
 $achternaam = $_SESSION["paymentInfo"][6];
 $geslacht = $_SESSION["paymentInfo"][7];
 $email = $_SESSION["paymentInfo"][8];
@@ -35,96 +35,89 @@ $output = "
     <html>
         <body>
             <div class='invoice-box'>
-            
                 <div class='top'>
-                    <div class='title'>
+                    <div class='logo'>
                         <img src='Public/ProductIMGHighRes/NerdyGadgetsLogo.png' style='width:250px;'>
-                    </div>
-                </div>
-
-                <div class='information'>
-                    <div class ='factuurgegevens'>";
-                        $output .='Factuur #: 123'; $output .="<br>";
-                        $output .='Created: ' . $date; $output .= "<br>";
-
-                        $output .="
-                    </div>
-                                
-                    <div>
-                        Hogeschool Windesheim<br>
-                        Campus 2<br>
-                        Zwolle, 8017 CA
-                    </div>
-
-                    <div class='information2'>
+                    </div>                   
                     
-                        NerdyGadgets B.V.<br>
-                        Klantenservice<br>
-                        customerservice.nerdygadgets@gmail.com
+                    <div class='infoTop information box'>
+                        <div class='nerdyGadgetsGegevens'>
+                            <b>Informatie Nerdygadgets</b> <br>
+                            NerdyGadgets B.V.<br>
+                            customerservice.nerdygadgets@gmail.com <br>
+                            
+                            <br>
+                            <b>Adresgegevens Nerdygadgets:</b> <br>
+                            Hogeschool Windesheim<br>
+                            Campus 2<br>
+                            Zwolle, 8017 CA
+                            </div>
+                        </div>
                     </div>
+                    <div class='infoBottom information box'>
+                        <b>Klantgegevens:</b><br>
+                        Naam: " . $voornaam." ";
+                        if(isset($tussenvoegsel)) {
+                            $output.= $tussenvoegsel." ";
+                        }
+                        $output .= $achternaam . "
+                        
+                        <br>
+                        Email: " . $email . "
+                        </div>
+                    </div>    
                 </div>
-                <table>
+
+                <table class='betalingTable'>
                     <tr class='heading'>
                         <td>Payment Method</td>
-                        <td></td>
                         <td>Check #</td>
                     </tr>
 
                     <tr class='details'>
                         <td>IDEAL</td>
-                        <td></td>
-                        <td>";
-                            $output .=$totalprice;
-                            $output .= "
-                        </td>
+                        <td>" . $totalprice . "</td>
                     </tr>
-
+                </table>
+                <table class='factuurTable'>
                     <tr class='heading'>
                         <td>Item</td>
                         <td>Amount</td>
                         <td>Price</td>
                     </tr>";
+                        foreach ($cart as $artikelID => $amount) {
+                            $Query = '
+                                SELECT si.StockItemID, StockItemName, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice
+                                FROM stockitems si
+                                LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
+                                INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
+                                WHERE si.StockItemID = ?';
 
-                    foreach($cart as $artikelID => $amount) {
-                        $Query = '
-                        SELECT si.StockItemID, StockItemName, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice
-                        FROM stockitems si
-                        LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
-                        INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
-                        WHERE si.StockItemID = ?';
+                            $Statement = mysqli_prepare($Connection, $Query);
+                            mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
+                            mysqli_stmt_execute($Statement);
 
-                        $Statement = mysqli_prepare($Connection, $Query);
-                        mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
-                        mysqli_stmt_execute($Statement);
-
-                        $result = mysqli_stmt_get_result($Statement);
-                        $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
-                        $output .= "
-                        <tr class='item'>
-                            <td>";
-                                $output .=$result[0]['StockItemName'];
-                                $output .= "
-                            </td>
-
-                            <td>"; 
-                                $output .=$amount;
-                                $output .= "
-                            </td>
-
-                            <td>";
-                                $output .=$result[0]['RecommendedRetailPrice'];
-                                $output .= "
-                            </td>
-                        </tr>";
-                    }
-
+                            $result = mysqli_stmt_get_result($Statement);
+                            $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                            $output .= "
+                    <tr class='item'>
+                        <td>
+                            " . $result[0]['StockItemName'] . "
+                        </td>
+                        <td>
+                            " . $amount . "
+                        </td>
+                        <td>
+                            " . $result[0]['RecommendedRetailPrice'] . "
+                        </td>
+                    </tr>";
+                        }
                     $output .= "
                     <tr class='total'>
                         <td></td>
                         <td></td>
-                        <td>
-                            Total: "; $output.= $totalprice;
-                            $output .= "
+                        <td class='totalTD'>
+                            Total: " . $totalprice . "
                         </td>
                     </tr>
                 </table>
