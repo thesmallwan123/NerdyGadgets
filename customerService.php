@@ -1,5 +1,6 @@
 <?php
 include __DIR__ . "/header.php";
+include("./sendMail.php");
 
 $voornaam = "";
 $tussenvoegsel = "";
@@ -25,8 +26,15 @@ if (isset($_SESSION['account'])) {
     $email = $Result['email'];
 }
 
-?>
+if (isset($_POST["sendMailCustomerService"])){
+    include("./sendMail.php");
+    if (berichtKlant($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) == TRUE) {
+    print ("hallo");
+    }
+}
 
+?>
+    <form method="post">
 <div class="container orderPageContainer">
     <h3>Neem contact met ons op door het volgende formulier in te vullen.</h3>
     <!-- <form method="post" action="pay.php"> -->
@@ -52,11 +60,19 @@ if (isset($_SESSION['account'])) {
             </div>
         </div>
         <div class="row bestelRow">
-            <div class="col-12"?
+            <div class="col-12">
                  <label for="bericht">Uw bericht</label>
                     <textarea id="bericht" name="bericht" rows="10" class="opmaakOrder" required ></textarea>
         </div>
 
-        // Verstuur mail
-        include("./sendMail.php");
-        if (verstuurFactuur($voornaam, $achternaam, $email, $fileLocation) == TRUE) {
+        <div class="backToShop">
+
+                <input type="submit" name="sendMailCustomerService" value="Verstuur" class="backToShopButton">
+             </div>
+        </form>
+
+
+
+<?php
+
+?>
