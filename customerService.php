@@ -1,6 +1,6 @@
 <?php
 include __DIR__ . "/header.php";
-include("./sendMail.php");
+//include("./sendMail.php");
 
 $voornaam = "";
 $tussenvoegsel = "";
@@ -28,8 +28,7 @@ if (isset($_SESSION['account'])) {
 
 if (isset($_POST["sendMailCustomerService"])){
     include("./sendMail.php");
-    if (berichtKlant($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) == TRUE) {
-    print ("hallo");
+    if (berichtKlant($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) === TRUE) {
     }
 }
 
@@ -70,9 +69,3 @@ if (isset($_POST["sendMailCustomerService"])){
                 <input type="submit" name="sendMailCustomerService" value="Verstuur" class="backToShopButton">
              </div>
         </form>
-
-
-
-<?php
-
-?>

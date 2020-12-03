@@ -49,10 +49,10 @@ function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
 
 
     // Message
-    $email->SetFrom('customerservice.nerdygadgets@gmail.com');
+    $email->SetFrom($klantMail);
     $email->Subject = "NerdyGadgets - Bericht van klant";
     $email->Body = $mailMessage;
-    $email->addAddress($klantMail);
+    $email->addAddress('customerservice.nerdygadgets@gmail.com');
     $email->isHTML(true);
     
 
@@ -61,7 +61,7 @@ function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
         echo "Mailer Error: " . $email->ErrorInfo;
     }
     else{
-        print("Success");
+        return TRUE;
     }
 
 

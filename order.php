@@ -126,7 +126,7 @@ $woonplaats = "";
             </div>
             <div class="col-2">
                 <label for="gender"> Geslacht</label>
-                <select name="gender" class="opmaakOrder" required>
+                <select name="gender" class="opmaakOrder" value=""<?php print("$gender"); ?>required>
                     <option value="">--Selecteer--</option>
                     <option value="man">Man</option>
                     <option value="vrouw">Vrouw</option>
