@@ -719,12 +719,10 @@ span.price{
 
 
 /* .row */
-.bestelRow {
-    margin-top: 30px;
-    margin-bottom: 30px;
+.bestelRow{
+    margin-top: 10px;
 }
-
-.kortingRow {
+.kortingRow, .bestelRow {
     width: 90%;
     margin-left: 5%;
     margin-bottom: 20px;

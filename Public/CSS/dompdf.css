@@ -3,110 +3,96 @@
     width: 100%;
 }
 
+.top {
+    width: 100%;
+}
 
 /* Informatie blokjes */
-.invoice-box .information .i1a {
-    position: absolute;
-    right: 40px;
-    width: 100%;
-    text-align: right;
-    top: 50px;
+.information {
+    width: 20%;
 }
 
-.invoice-box .information .i1b {
+.infoTop {
     position: absolute;
-    right: 40px;
-    width: 100%;
+    top: 10px;
+    float: right;
     text-align: right;
-    top: 68px;
+    width: 50%;
 }
 
-.invoice-box .information .i2 {
+.infoBottom {
     position: absolute;
-    left: 40px;
-    width: 100%;
+    margin-top: 20px;
+    float: left;
     text-align: left;
-    top: 150px;
+    width: 50%;
 }
 
-.invoice-box .information .i3 {
-    position: absolute;
-    right: 40px;
-    width: 100%;
-    text-align: right;
-    top: 150px;
+.box {
+    margin-bottom: 10px;
 }
+
+.betalingTable {
+    margin-top: 150px;
+}
+
+.factuurTable {
+    margin-top: 10px;
+}
+
+.betalingTable,
+.factuurTable {
+    text-align: left;
+    width: 100%;
+}
+
 
 
 /* Layout gehele tabel */
-.invoice-box table {
-    position: absolute;
-    top: 225px;
+.betalingTable, .factuurTable {
     width: 100%;
+    text-align: left;
 }
 
-.invoice-box table td {
+.factuurTable{
+    margin-top: 30px;
+}
+
+.betalingTable td {
     padding: 10px;
     vertical-align: top;
     text-align: left;
 }
 
-.invoice-box table  {
-    text-align: right;
-}
-
-.invoice-box table .heading {
+.betalingTable .heading,
+.factuurTable .heading {
     background: #eee;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
 }
 
-.invoice-box table tr.details td {
-    padding-bottom: 5px;
+.betalingTable tr.details td,
+.factuurTable tr.details td{
+    padding-bottom: 2px;
 }
 
-.invoice-box table tr.item td{
-    border-bottom: 2px solid #eee;
+.betalingTable tr.item td
+.factuurTable tr.item td {
+    border-bottom: 1px solid #eee;
 }
 
 
-.invoice-box table .heading2 {
+.betalingTable .heading2 {
     background: #eee;
     border-bottom: 1px solid #ddd;
     font-weight: bold;
 }
 
-.invoice-box table tr.total {
+.betalingTable tr.total {
     border-top: 2px solid #eee;
     font-weight: bold;
 }
 
-
-
-@media only screen and (max-width: 600px) {
-    .invoice-box table tr.top table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-    }
-
-    .invoice-box table tr.information table td {
-        width: 100%;
-        display: block;
-        text-align: center;
-    }
-}
-
-/** RTL **/
-.rtl {
-    direction: rtl;
-    font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
-}
-
-.rtl table {
-    text-align: right;
-}
-
-.rtl table tr td:nth-child(2) {
-    text-align: left;
+.totalTD{
+    border-top: 1px solid black;
 }

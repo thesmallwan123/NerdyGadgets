@@ -330,19 +330,17 @@ function deleteItem($ID, $cartItems)
         </div>
 
         <!-- Bestel & terugknop -->
-        <div class="row bestelRow">
-            <div class="col-9"></div>
-            <div class="col-1">
+        <div class="bestelRow">
+            <div class="order">
                 <form action="./index.php" method="POST">
                     <input type="submit" class="toStore" name="return" value=" < Ga terug">
                 </form>
             </div>
-            <div class="col-1">
+            <div class="order">
                 <form action="./order.php" method="POST">
                     <input type="submit" class="toOrder" name="bestel" value="Bestel">
                 </form>
             </div>
-            <div class="col-1"></div>
         </div>
 
 

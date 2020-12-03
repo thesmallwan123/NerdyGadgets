@@ -97,6 +97,8 @@ function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fi
             </html>
         ";
 
+        $customerServiceMail = "customerservice.nerdygadgets@gmail.com";
+
         $email = new PHPMailer();
 
 
@@ -105,7 +107,7 @@ function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fi
         $email->Port = 465;
         $email->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $email->SMTPAuth = true;
-        $email->Username = "customerservice.nerdygadgets@gmail.com";
+        $email->Username = $customerServiceMail;
         $email->Password = "AdMiN312";
 
 
@@ -122,6 +124,7 @@ function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fi
             return FALSE;
             exit;
         } else {
+            
             return TRUE;
         }
     }
