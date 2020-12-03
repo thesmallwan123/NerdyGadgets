@@ -21,26 +21,58 @@ session_start();
 </head>
 <body>
 
+<?php
+if (isset($_POST['uitloggen'])) {
+    unset($_SESSION['account']);
+}
+?>
+
 <div class="container loginMainPageContainer">
     <div class="row vraag">
         <div class="col-12">
-            <h1>Wilt u aanmelden of inloggen?</h1>
+            <?php 
+            if (!isset($_SESSION['account'])) { 
+                ?>
+                <h1>Wilt u aanmelden of inloggen?</h1>
+                <?php
+            } else {
+                ?>
+                <h1>U bent al ingelogd, wilt u uitloggen?</h1>
+                <?php
+            }
+            ?>
         </div>
     </div>
     <div class="row">
-        <div class="col-2"></div>
-        <div class="col-3">
-            <form method="POST" action="./signup">
-                <input type="submit" name="aanmelden" value="Aanmelden" class="mainLoginButtons">
-            </form>
-        </div>
-        <div class="col-2"></div>
-        <div class="col-3">
-            <form method="POST" action="./login">
-                <input type="submit" name="inloggen" value="Inloggen" class="mainLoginButtons">
-            </form>
-        </div>
-        <div class="col-2"></div>
+        <?php 
+        if (!isset($_SESSION['account'])) { 
+            ?>
+            <div class="col-2"></div>
+            <div class="col-3">
+                <form method="POST" action="./signup">
+                    <input type="submit" name="aanmelden" value="Aanmelden" class="mainLoginButtons">
+                </form>
+            </div>
+            <div class="col-2"></div>
+            <div class="col-3">
+                <form method="POST" action="./login">
+                    <input type="submit" name="inloggen" value="Inloggen" class="mainLoginButtons">
+                </form>
+            </div>
+            <div class="col-2"></div>
+        <?php
+        } else {
+            ?>
+            <div class="col-4"></div>
+            <div class="col-3">
+                <form method="POST">
+                    <input type="submit" name="uitloggen" value="Uitloggen" class="logoutButton">
+                </form>
+            </div>
+            <div class="col-4"></div>
+            <?php
+        }
+        ?>
     </div>
     <div class="row">
         <div class="col-4"></div>
