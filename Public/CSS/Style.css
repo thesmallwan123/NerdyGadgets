@@ -685,17 +685,8 @@ span.price{
 
 
 /*CART*/
-/* kortingscoupon */
-.kortingsCoupon {
-    display: inline-block;
-    margin-left: 45px;
-    width: 125px;
-    height: 50px;
-}
 
-.validateCoupon {
-    display: inline-block;
-    margin-left: 45px;
+.coupon {
     width: 125px;
     height: 50px;
 }
@@ -734,7 +725,12 @@ span.price{
 }
 
 .kortingRow {
+    width: 90%;
+    margin-left: 5%;
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
 }
 
 .toCartButton:hover{

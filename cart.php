@@ -1,7 +1,7 @@
 <?php
 // Include header
 include __DIR__ . "/header.php";
-include "connect.php";
+include("connect.php");
 
 // global $
 $totaalPrijsIncVerz = 0;
@@ -19,181 +19,181 @@ $voordeel = 0;
 $totaalPrijsExVerzKorting = 0;
 
 // Haal sessie op
-    if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
-        $winkelwagenartikelen = $_SESSION["cart"];
-    } else {
-        $winkelwagenartikelen = "";
-    }
+if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
+    $winkelwagenartikelen = $_SESSION["cart"];
+} else {
+    $winkelwagenartikelen = "";
+}
 
 // Check ingevulde kortingscode tegenover de database
-    if (isset($_POST['kortingsCode'])) {
-        $kortingsCode = $_POST['kortingsCode'];
+if (isset($_POST['kortingsCode'])) {
+    $kortingsCode = $_POST['kortingsCode'];
 
-        $Query = "
+    $Query = "
             SELECT discounts
             FROM discount
             WHERE discounts = ?";
-            $Statement = mysqli_prepare($Connection2, $Query);
-            mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
-            mysqli_stmt_execute($Statement);
-            $ReturnableResult = mysqli_stmt_get_result($Statement);
+    $Statement = mysqli_prepare($Connection2, $Query);
+    mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
+    mysqli_stmt_execute($Statement);
+    $ReturnableResult = mysqli_stmt_get_result($Statement);
 
-        if (mysqli_num_rows($ReturnableResult) == 1) {
-            $kortingGeldig = TRUE;
-            $_SESSION['korting'] = $kortingsCode;
-        }
-
-// Anders check op bestaande sessie korting, check tegenover database
-    } elseif (isset($_SESSION['korting'])) {
-        $kortingsCode = $_SESSION['korting'];
-
-        $Query = "
-            SELECT discounts
-            FROM discount
-            WHERE discounts = ?";
-            $Statement = mysqli_prepare($Connection2, $Query);
-            mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
-            mysqli_stmt_execute($Statement);
-            $ReturnableResult = mysqli_stmt_get_result($Statement);
-
-        if (mysqli_num_rows($ReturnableResult) == 1) {
-            $kortingGeldig = TRUE;
-            $_SESSION['korting'] = $kortingsCode;
-        }
+    if (mysqli_num_rows($ReturnableResult) == 1) {
+        $kortingGeldig = TRUE;
+        $_SESSION['korting'] = $kortingsCode;
     }
+
+    // Anders check op bestaande sessie korting, check tegenover database
+} elseif (isset($_SESSION['korting'])) {
+    $kortingsCode = $_SESSION['korting'];
+
+    $Query = "
+            SELECT discounts
+            FROM discount
+            WHERE discounts = ?";
+    $Statement = mysqli_prepare($Connection2, $Query);
+    mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
+    mysqli_stmt_execute($Statement);
+    $ReturnableResult = mysqli_stmt_get_result($Statement);
+
+    if (mysqli_num_rows($ReturnableResult) == 1) {
+        $kortingGeldig = TRUE;
+        $_SESSION['korting'] = $kortingsCode;
+    }
+}
 
 // Wijzigen winkelmand
-    if (isset($_GET["id"])) {
-        $ID = $_GET["id"];
-        $cartItems = $_SESSION['cart'];
-        if (isset($_GET["function"])) {
-            $function = $_GET["function"];
-            if ($function == "deleteItem") {
-                deleteItem($ID, $cartItems);
-            } elseif ($function == "decreaseItem") {
-                decreaseItem($ID, $cartItems);
-            } elseif ($function == "increaseItem") {
-                increaseItem($ID, $cartItems);
-            }
+if (isset($_GET["id"])) {
+    $ID = $_GET["id"];
+    $cartItems = $_SESSION['cart'];
+    if (isset($_GET["function"])) {
+        $function = $_GET["function"];
+        if ($function == "deleteItem") {
+            deleteItem($ID, $cartItems);
+        } elseif ($function == "decreaseItem") {
+            decreaseItem($ID, $cartItems);
+        } elseif ($function == "increaseItem") {
+            increaseItem($ID, $cartItems);
         }
     }
+}
 
 // Verwijderen artikel
-    function deleteItem($ID, $cartItems)
-    {
-        if (array_key_exists($ID, $cartItems)) {
-            unset($cartItems[$ID]);
-            $_SESSION['cart'] = $cartItems;
-                ?> <script>
-                window.location.replace('./cart.php')
-                </script> <?php
-        }
-    }
+function deleteItem($ID, $cartItems)
+{
+    if (array_key_exists($ID, $cartItems)) {
+        unset($cartItems[$ID]);
+        $_SESSION['cart'] = $cartItems;
+?> <script>
+            window.location.replace('./cart.php')
+        </script> <?php
+                }
+            }
 
-// Verminderen artikel
-    function decreaseItem($ID, $cartItems)
-    {
-        if (array_key_exists($ID, $cartItems)) {
-            $cartItems[$ID] -= 1;
-            $_SESSION['cart'] = $cartItems;
-                ?> <script>
-                window.location.replace('./cart.php')
-                </script> <?php
-        }
-    }
+            // Verminderen artikel
+            function decreaseItem($ID, $cartItems)
+            {
+                if (array_key_exists($ID, $cartItems)) {
+                    $cartItems[$ID] -= 1;
+                    $_SESSION['cart'] = $cartItems;
+                    ?> <script>
+            window.location.replace('./cart.php')
+        </script> <?php
+                }
+            }
 
-// Vermeerderen artikel
-    function increaseItem($ID, $cartItems)
-    {
-        if (array_key_exists($ID, $cartItems)) {
-            $cartItems[$ID] += 1;
-            $_SESSION['cart'] = $cartItems;
-                ?> <script>
-                window.location.replace('./cart.php')
-                </script> <?php
-        }
-    }
+            // Vermeerderen artikel
+            function increaseItem($ID, $cartItems)
+            {
+                if (array_key_exists($ID, $cartItems)) {
+                    $cartItems[$ID] += 1;
+                    $_SESSION['cart'] = $cartItems;
+                    ?> <script>
+            window.location.replace('./cart.php')
+        </script> <?php
+                }
+            }
 
 
-// Haal items op uit DB
-    function controllItem($artikelID)
-        {
-            include("connect.php");
-            $Query = "
+            // Haal items op uit DB
+            function controllItem($artikelID)
+            {
+                include("connect.php");
+                $Query = "
             SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, TaxRate AS taxRate, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
             FROM stockitems si
             LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
             INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
             WHERE si.StockItemID = ?";
 
-            $Statement = mysqli_prepare($Connection, $Query);
-            mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
-            mysqli_stmt_execute($Statement);
+                $Statement = mysqli_prepare($Connection, $Query);
+                mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
+                mysqli_stmt_execute($Statement);
 
-            $result = mysqli_stmt_get_result($Statement);
-            $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
+                $result = mysqli_stmt_get_result($Statement);
+                $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-            return $result;
-        }
-
-// Bereken prijs per artikel
-    function calcPriceRow($totaalPrijsRow, $prijs, $aantal)
-        {
-            $totaalPrijsRow = $prijs * $aantal;
-            return $totaalPrijsRow;
-        }
-
-// Bereken BTW per artikel 
-    function calcTaxRow($taxArtikel, $totaalPrijsRow)
-        {
-            $taxArtikel = $taxArtikel / 100;
-            $taxRow = $totaalPrijsRow * $taxArtikel;
-            return $taxRow;
-        }
-
-// Bereken totaalprijs exclusief verzending
-    function calcPriceTotal($prijsRegel, $totaalPrijsExVerz)
-        {
-            foreach ($prijsRegel as $id => $prijs) {
-                $totaalPrijsExVerz += $prijs;
+                return $result;
             }
-            return $totaalPrijsExVerz;
-        }
 
-// Bereken prijs inclusief verzending
-    function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
-        {
-            if ($kortingGeldig == TRUE) {
-                if ($totaalPrijsExVerzKorting < 30) {
-                    $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
-                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
-                    return ROUND($totaalPrijsIncVerz, 2);
-                } else {
-                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerzKorting, 2);
-                    return ROUND($totaalPrijsExVerzKorting, 2);
+            // Bereken prijs per artikel
+            function calcPriceRow($totaalPrijsRow, $prijs, $aantal)
+            {
+                $totaalPrijsRow = $prijs * $aantal;
+                return $totaalPrijsRow;
+            }
+
+            // Bereken BTW per artikel 
+            function calcTaxRow($taxArtikel, $totaalPrijsRow)
+            {
+                $taxArtikel = $taxArtikel / 100;
+                $taxRow = $totaalPrijsRow * $taxArtikel;
+                return $taxRow;
+            }
+
+            // Bereken totaalprijs exclusief verzending
+            function calcPriceTotal($prijsRegel, $totaalPrijsExVerz)
+            {
+                foreach ($prijsRegel as $id => $prijs) {
+                    $totaalPrijsExVerz += $prijs;
                 }
-            } elseif ($kortingGeldig == FALSE) {
-                if ($totaalPrijsExVerz < 30) {
-                    $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
-                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
-                    return ROUND($totaalPrijsIncVerz, 2);
-                } else {
-                    $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerz, 2);
-                    return ROUND($totaalPrijsExVerz, 2);
+                return $totaalPrijsExVerz;
+            }
+
+            // Bereken prijs inclusief verzending
+            function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
+            {
+                if ($kortingGeldig == TRUE) {
+                    if ($totaalPrijsExVerzKorting < 30) {
+                        $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
+                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
+                        return ROUND($totaalPrijsIncVerz, 2);
+                    } else {
+                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerzKorting, 2);
+                        return ROUND($totaalPrijsExVerzKorting, 2);
+                    }
+                } elseif ($kortingGeldig == FALSE) {
+                    if ($totaalPrijsExVerz < 30) {
+                        $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
+                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
+                        return ROUND($totaalPrijsIncVerz, 2);
+                    } else {
+                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerz, 2);
+                        return ROUND($totaalPrijsExVerz, 2);
+                    }
                 }
             }
-        }
 
-// Bereken Eindbedrag BTW
-    function calcTax($taxArr, $taxTotaal)
-        {
-            foreach ($taxArr as $id => $taxRow) {
-                $taxTotaal = $taxTotaal + $taxRow;
+            // Bereken Eindbedrag BTW
+            function calcTax($taxArr, $taxTotaal)
+            {
+                foreach ($taxArr as $id => $taxRow) {
+                    $taxTotaal = $taxTotaal + $taxRow;
+                }
+                return ROUND($taxTotaal, 2);
             }
-            return ROUND($taxTotaal, 2);
-        }
 
-?>
+                    ?>
 
 <!-- Body cart -->
 <div id="wrap">
@@ -207,7 +207,7 @@ $totaalPrijsExVerzKorting = 0;
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
     ?>
-        <!-- Producten -->
+            <!-- Producten -->
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
@@ -268,47 +268,44 @@ $totaalPrijsExVerzKorting = 0;
         if ($kortingGeldig) {
             $voordeel = $totaalPrijsExVerz * (1 - $korting);
             $totaalPrijsExVerzKorting = ($totaalPrijsExVerz * $korting);
-            }
+        }
 
         ?>
 
         <!-- Kortingscoupon -->
-        <form method="POST">
-            <div class="row kortingRow">
-                <div class="col-9"></div>
-                <div class="col-1">
-                        <input type="submit" class="validateCoupon" name="acceptCoupon" value="Valideer">
-                </div>
-                <div class="col-1">
-                        <input type="text" class="kortingsCoupon" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
-                </div>
+        <form method="POST" class="kortingRow">
+            <div class="coupon">
+                <input type="submit" class="validateCoupon" name="acceptCoupon" value="Valideer">
+            </div>
+            <div class="coupon">
+                <input type="text" class="kortingsCoupon" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
             </div>
         </form>
 
         <!-- Kosten weergeven -->
-            <div class="verzendKosten">
-                Verzendkosten:
-                <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting);
-                if ($totaalPrijsIncVerz < 30) {
-                    echo "4.95";
-                } else {
-                    echo "0.00";
-                }
-                ?>
-                <br>
-            </div>
-
-            <div class="BTW">
-                BTW (al bij de prijs inbegrepen):
-                <?php
-                echo $totaalPrijsTax;
-                ?>
-            </div>
-
-            <!-- Korting weergeven -->
-            <?php
-            if($kortingGeldig == TRUE) {
+        <div class="verzendKosten">
+            Verzendkosten:
+            <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting);
+            if ($totaalPrijsIncVerz < 30) {
+                echo "4.95";
+            } else {
+                echo "0.00";
+            }
             ?>
+            <br>
+        </div>
+
+        <div class="BTW">
+            BTW (al bij de prijs inbegrepen):
+            <?php
+            echo $totaalPrijsTax;
+            ?>
+        </div>
+
+        <!-- Korting weergeven -->
+        <?php
+        if ($kortingGeldig == TRUE) {
+        ?>
             <div class="costBreakdown korting">
                 Korting:
                 <?php
@@ -316,16 +313,16 @@ $totaalPrijsExVerzKorting = 0;
                 ?>
                 <br>
             </div>
-            <?php
-            }
-            ?>
+        <?php
+        }
+        ?>
 
-            <br>
-            <!-- Totaalprijs-->
-            <div class="costBreakdown totalPrice">
-                Eindtotaal: <?php echo ROUND($totaalPrijsIncVerz, 2) ?><br>
-                <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
-            </div>
+        <br>
+        <!-- Totaalprijs-->
+        <div class="costBreakdown totalPrice">
+            Eindtotaal: <?php echo ROUND($totaalPrijsIncVerz, 2) ?><br>
+            <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
+        </div>
 
         <!-- Verzending -->
         <div class="datumVerzending">
@@ -336,18 +333,18 @@ $totaalPrijsExVerzKorting = 0;
         <div class="row bestelRow">
             <div class="col-9"></div>
             <div class="col-1">
-                <form action="./index.php" method="POST"> 
+                <form action="./index.php" method="POST">
                     <input type="submit" class="toStore" name="return" value=" < Ga terug">
                 </form>
             </div>
             <div class="col-1">
-                <form action="./order.php" method="POST">   
+                <form action="./order.php" method="POST">
                     <input type="submit" class="toOrder" name="bestel" value="Bestel">
                 </form>
             </div>
             <div class="col-1"></div>
         </div>
-        
+
 
     <?php
     } else {
@@ -356,9 +353,9 @@ $totaalPrijsExVerzKorting = 0;
             <h1 class="winkelmandLeeg">De winkelwagen is leeg</h1>
         </div>
         <div class="row" style="width: 100%;">
-                <div class="terugText" style="width: 100%; text-align: center;">Ga terug naar de vorige pagina</div>
+            <div class="terugText" style="width: 100%; text-align: center;">Ga terug naar de vorige pagina</div>
         </div>
-<?php
+    <?php
     } ?>
 
 </div>
