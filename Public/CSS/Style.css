@@ -730,7 +730,7 @@ span.price{
     margin-bottom: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 .toCartButton:hover{
