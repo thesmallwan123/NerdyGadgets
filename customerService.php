@@ -38,7 +38,7 @@ if (isset($_POST["sendMailCustomerService"])){
     <h3>Neem contact met ons op door het volgende formulier in te vullen.</h3>
     <!-- <form method="post" action="pay.php"> -->
     <form method="post">
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-5">
                 <label for="voornaam"> Voornaam</label><br>
                 <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" required>
@@ -52,13 +52,13 @@ if (isset($_POST["sendMailCustomerService"])){
                 <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" required>
             </div>
         </div>
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-12">
                 <label for="email">Email</label>
                 <input class="opmaakOrder" type="email" id="email" name="email" value="<?php print($email); ?>" required>
             </div>
         </div>
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-12">
                  <label for="bericht">Uw bericht</label>
                     <textarea id="bericht" name="bericht" rows="10" class="opmaakOrder" required ></textarea>
