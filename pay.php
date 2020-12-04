@@ -94,6 +94,7 @@ if(isset($_SESSION['paymentInfo'])) {
                 </div>
             </div>
             <p class="boldText">LET OP! de bedragen moeten overeen komen!</p>
+            <p class="boldText">Als de bedragen niet overeen komen gaat u terug naar de vorige pagina!</p>
             <br>
 
             <div>
