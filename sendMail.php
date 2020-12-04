@@ -15,7 +15,7 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 
 // Verstuur een bericht naar de klantenservice
-function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
+function berichtKlant($klantVNaam, $klantTussen, $klantANaam, $klantMail, $klantBericht){
     $mailMessage = "
         <html>
             <head>
@@ -28,7 +28,7 @@ function berichtKlant($klantVNaam, $klantANaam, $klantMail, $klantBericht){
             <body>
                 <h1>Vraag van klant</h1><br>
                 <p>Beste Servicedeskmedewerker,</p>
-                <p>".$klantVNaam." ".$klantANaam." bericht het volgende</p>
+                <p>".$klantVNaam." ".$klantTussen." ".$klantANaam." bericht het volgende</p>
                 <p>".$klantBericht."</p>
             </body>
         </html>

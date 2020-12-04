@@ -28,7 +28,7 @@ if (isset($_SESSION['account'])) {
 
 if (isset($_POST["sendMailCustomerService"])){
     include("./sendMail.php");
-    if (berichtKlant($_POST["voornaam"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) === TRUE) {
+    if (berichtKlant($_POST["voornaam"],$_POST["tussenvoegsel"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) === TRUE) {
     }
 }
 
