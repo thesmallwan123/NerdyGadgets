@@ -108,15 +108,15 @@ $woonplaats = "";
         <div class="row bestelRow">
             <div class="col-5">
                 <label for="voornaam"> Voornaam</label><br>
-                <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" required>
+                <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" placeholder="Voornaam" required>
             </div>
             <div class="col-2">
                 <label for="tussenvoegsel"> Tussenvoegsel</label>
-                <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($tussenvoegsel); ?>">
+                <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($tussenvoegsel); ?>" placeholder="Tussenvoegsel">
             </div>
             <div class="col-5">
                 <label for="achternaam"> Achternaam </label>
-                <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" required>
+                <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" placeholder="Achternaam" required>
             </div>
         </div>
         <div class="row bestelRow">
@@ -137,21 +137,21 @@ $woonplaats = "";
         <div class="row bestelRow">
             <div class="col-10">
                 <label for="address">Straat</label>
-                <input class="opmaakOrder" type="text" id="straat" name="straat" value="<?php print($straat); ?>" required>
+                <input class="opmaakOrder" type="text" id="straat" name="straat" value="<?php print($straat); ?>" placeholder="Straat" required>
             </div>
             <div class="col-2">
                 <label for="address">Huisnummer</label>
-                <input class="opmaakOrder" type="number" id="huisnummer" name="huisnummer" value="<?php print($huisnummer); ?>" required>
+                <input class="opmaakOrder" type="text" id="huisnummer" name="huisnummer" value="<?php print($huisnummer); ?>" placeholder="Huisnummer" required>
             </div>
         </div>
         <div class="row bestelRow">
             <div class="col-2">
                 <label for="postalcode">Postcode</label>
-                <input class="opmaakOrder" type="text" id="postcode" name="postcode" value="<?php print($postcode); ?>" required>
+                <input class="opmaakOrder" type="text" id="postcode" name="postcode" value="<?php print($postcode); ?>" placeholder="Postcode" required>
             </div>
             <div class="col-10">
                 <label for="city"> Woonplaats</label>
-                <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" value="<?php print($woonplaats); ?>" required>
+                <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" value="<?php print($woonplaats); ?>" placeholder="Woonplaats" required>
             </div>
         </div>
 
