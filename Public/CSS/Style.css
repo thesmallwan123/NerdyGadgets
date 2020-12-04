@@ -664,11 +664,12 @@ span.price{
 /*back to cart*/
 .toCart {
     background-color: red;
-    width: 300px;
+    width: 100%;
     height: 50px;
     border: 2px solid black;
     text-align: center;
     margin: auto;
+    padding-top: 14px;
 }
 
 /*back to cart button */
@@ -731,28 +732,32 @@ span.price{
     justify-content: flex-end;
 }
 
+.orderRow {
+    margin-top: 10px;
+}
+
 .toCartButton:hover{
     background-color: inherit;
     color: white;
 }
 
 .toCartButton{
-    display: flex;
-    align-items: center;
     text-align: center;
     background-color: inherit;
     border: 0px;
-    text-align: center;
     height: 100%;
     width: 100%;
     color: white;
     margin: auto;
+    line-height: 100%;
 }
 
 .test123{
     /*height: 100%;*/
     width: 100%;
     margin: auto;
+    text-align: center;
+    display: flex;
 }
 
 /*  to payment */

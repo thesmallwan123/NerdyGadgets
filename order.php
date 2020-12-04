@@ -105,7 +105,7 @@ $woonplaats = "";
     <h3>Bestel gegevens</h3>
     <!-- <form method="post" action="pay.php"> -->
     <form method="post">
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-5">
                 <label for="voornaam"> Voornaam</label><br>
                 <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" placeholder="Voornaam" required>
@@ -119,7 +119,7 @@ $woonplaats = "";
                 <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" placeholder="Achternaam" required>
             </div>
         </div>
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-10">
                 <label for="email"> E-mail</label>
                 <input class="opmaakOrder" type="email" name="email" value="<?php print("$email"); ?>" placeholder="E-mailadres" required>
@@ -134,7 +134,7 @@ $woonplaats = "";
                 </select>
             </div>
         </div>
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-10">
                 <label for="address">Straat</label>
                 <input class="opmaakOrder" type="text" id="straat" name="straat" value="<?php print($straat); ?>" placeholder="Straat" required>
@@ -144,7 +144,7 @@ $woonplaats = "";
                 <input class="opmaakOrder" type="text" id="huisnummer" name="huisnummer" value="<?php print($huisnummer); ?>" placeholder="Huisnummer" required>
             </div>
         </div>
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-2">
                 <label for="postalcode">Postcode</label>
                 <input class="opmaakOrder" type="text" id="postcode" name="postcode" value="<?php print($postcode); ?>" placeholder="Postcode" required>
@@ -155,13 +155,13 @@ $woonplaats = "";
             </div>
         </div>
 
-        <div class="row bestelRow">
+        <div class="row orderRow">
             <div class="col-1"></div>
-            <div class="col-4 toCart">
-                <a href="cart.php" class="toCartButton">
-                    <div class="test123">Terug naar de winkelmand. </div>
-                </a>
-            </div>
+            <a href="cart.php" class="col-4 toCart">
+                <div class="toCartButton">
+                    Terug naar de winkelmand
+                </div>
+            </a>
             <div class="col-2"></div>
             <div class="col-4 toPayment">
                 <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton">
