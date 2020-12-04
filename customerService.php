@@ -26,14 +26,13 @@ if (isset($_SESSION['account'])) {
     $email = $Result['email'];
 }
 
-if (isset($_POST["sendMailCustomerService"])){
+if (isset($_POST["sendMailCustomerService"])) {
     include("./sendMail.php");
-    if (berichtKlant($_POST["voornaam"],$_POST["tussenvoegsel"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) === TRUE) {
+    if (berichtKlant($_POST["voornaam"], $_POST["tussenvoegsel"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) === TRUE) {
     }
 }
 
 ?>
-    <form method="post">
 <div class="container orderPageContainer">
     <h3>Neem contact met ons op door het volgende formulier in te vullen.</h3>
     <!-- <form method="post" action="pay.php"> -->
@@ -60,12 +59,12 @@ if (isset($_POST["sendMailCustomerService"])){
         </div>
         <div class="row orderRow">
             <div class="col-12">
-                 <label for="bericht">Uw bericht</label>
-                    <textarea id="bericht" name="bericht" rows="10" class="opmaakOrder" required ></textarea>
+                <label for="bericht">Uw bericht</label>
+                <textarea id="bericht" name="bericht" rows="10" class="opmaakOrder" required></textarea>
+            </div>
         </div>
-
         <div class="backToShop">
-
-                <input type="submit" name="sendMailCustomerService" value="Verstuur" class="backToShopButton">
-             </div>
-        </form>
+            <input type="submit" name="sendMailCustomerService" value="Verstuur" class="backToShopButton">
+        </div>
+    </form>
+</div>
