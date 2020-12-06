@@ -120,11 +120,11 @@ function deleteItem($ID, $cartItems)
             {
                 include("connect.php");
                 $Query = "
-            SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, TaxRate AS taxRate, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
-            FROM stockitems si
-            LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
-            INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
-            WHERE si.StockItemID = ?";
+                SELECT si.StockItemID, StockItemName, QuantityOnHand, SearchDetails, colorID, TaxRate AS taxRate, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice, ImagePath
+                FROM stockitems si
+                LEFT JOIN stockitemimages sii ON si.StockItemID = sii.StockItemID
+                INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
+                WHERE si.StockItemID = ?";
 
                 $Statement = mysqli_prepare($Connection, $Query);
                 mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
@@ -238,9 +238,7 @@ function deleteItem($ID, $cartItems)
 
                         <!-- Disable minus button when amount <= 1 -->
                         <?php if ($amount <= 1) { ?>
-                            <div class="col-3">
-
-                            </div>
+                            <div class="col-3"></div>
                         <?php } else { ?>
                             <div class="col-3">
                                 <a href="cart.php?id=<?php echo $artikelID ?>&function=decreaseItem">
@@ -273,14 +271,30 @@ function deleteItem($ID, $cartItems)
         ?>
 
         <!-- Kortingscoupon -->
-        <form method="POST" class="kortingRow">
-            <div class="coupon">
-                <input type="submit" class="validateCoupon" name="acceptCoupon" value="Valideer">
-            </div>
-            <div class="coupon">
-                <input type="text" class="kortingsCoupon" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
-            </div>
-        </form>
+        <div class="row">
+            <form method="POST" class="kortingRow">
+                
+                <div class="">
+                    <?php if ($kortingGeldig) { ?>
+                    <div>
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <?php } else { ?>
+                    <div>
+                        <i class="fas fa-times"></i>
+                    </div>
+                    <?php } ?>
+                </div>
+                <!-- Checkmark korting -->
+                <div class="coupon kortingsCoupon">
+                    <input type="text" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
+                </div>
+                <div class="coupon validateCoupon">
+                    <input type="submit" name="acceptCoupon" value="Valideer">
+                </div>
+
+            </form>   
+        </div>
 
         <!-- Kosten weergeven -->
         <div class="verzendKosten">
@@ -357,7 +371,3 @@ function deleteItem($ID, $cartItems)
     } ?>
 
 </div>
-
-<?php
-include __DIR__ . "/footer.php";
-?>

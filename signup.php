@@ -149,9 +149,9 @@ if (isset($_POST['aanmeldenKlaar'])) {
                 <div class="col-2">
                     <select name="gender" required>
                         <option value="">--Selecteer--</option>
-                        <option value="man">Man</option>
-                        <option value="vrouw">Vrouw</option>
-                        <option value="nvt">n.v.t.</option>
+                        <option value="1">Man</option>
+                        <option value="2">Vrouw</option>
+                        <option value="3">n.v.t.</option>
                     </select>
                 </div>
                 <div class="col-1"></div>

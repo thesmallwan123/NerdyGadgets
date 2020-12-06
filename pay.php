@@ -37,9 +37,17 @@ $_SESSION["totaalPrijs"] = $totaalprijs;
 if (isset($_POST["bevestiging"])) {
     if ($totaalprijs != $_POST["bevestiging"]) {
         $prijsKloptNiet = TRUE;
+    } else {
+        // $Query = "
+        //         SELECT discounts
+        //         FROM discount
+        //         WHERE discounts = ?";
+        // $Statement = mysqli_prepare($Connection, $Query);
+        // mysqli_stmt_bind_param($Statement, "i", [[artikelID]]);
+
+        header("Location: ./exportpdf.php");
     }
-    else header("Location: ./exportpdf.php");
-    }
+}
 
 // Betalingsinfo ophalen uit de sessie
 if(isset($_SESSION['paymentInfo'])) {

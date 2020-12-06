@@ -693,6 +693,15 @@ span.price{
     height: 50px;
 }
 
+.kortingsCoupon {
+    margin-left: 13px;
+}
+
+.validateCoupon {
+    margin-left: 5px;
+    margin-right: 13px;
+}
+
 .validCoupon {
     background-color: green;
     color: white;

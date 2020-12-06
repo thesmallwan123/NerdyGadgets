@@ -23,20 +23,10 @@ session_start();
 
 <?php
 
-// V gender
-// aantal moet uit de database
-
-// annuleringsknop moet naast de bestellingsknop zitten
-// meer duidelijkheid over toevoegen korting (knop/melding)
-// kortingsveld moet tussen product boven kosten zitten
-// kosten/knoppen rechterkant van de pagina moeten goed uitgelijnd zijn
-// misschien grootte knoppen evenredig maken
-
-// korting moet uit de database gehaald worden
-
 $voornaam = "";
 $tussenvoegsel = "";
 $achternaam = "";
+$gender = "";
 $email = "";
 $straat = "";
 $huisnummer = "";
@@ -48,7 +38,7 @@ $woonplaats = "";
         $account = $_SESSION["account"];
 
         $Query = "
-        SELECT firstname, infix, surname, email, street, streetnr, postalcode, city
+        SELECT firstname, infix, surname, email, street, streetnr, postalcode, city, gender
         FROM account
         WHERE email = ?";
         $Statement = mysqli_prepare($Connection2, $Query);
@@ -65,6 +55,7 @@ $woonplaats = "";
         $huisnummer = $Result['streetnr'];
         $postcode = $Result['postalcode'];
         $woonplaats = $Result['city'];
+        $gender = $Result['gender'];
     }
 // checken POST en variabelen definiëren gebaseerd op ingevuld formulier. Sessie paymentInfo aanmaken.
     if(isset($_POST['submit'])) {
@@ -126,11 +117,11 @@ $woonplaats = "";
             </div>
             <div class="col-2">
                 <label for="gender"> Geslacht</label>
-                <select name="gender" class="opmaakOrder" value=""<?php print("$gender"); ?>required>
+                <select name="gender" class="opmaakOrder" required>
                     <option value="">--Selecteer--</option>
-                    <option value="man">Man</option>
-                    <option value="vrouw">Vrouw</option>
-                    <option value="nvt">n.v.t.</option>
+                    <option value="1" <?php if($gender == 1){ ?> selected <?php } ?> >Man</option>
+                    <option value="2" <?php if($gender == 2){ ?> selected <?php } ?> >Vrouw</option>
+                    <option value="3" <?php if($gender == 3){ ?> selected <?php } ?> >n.v.t.</option>
                 </select>
             </div>
         </div>
