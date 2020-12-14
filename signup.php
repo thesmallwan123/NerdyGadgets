@@ -10,8 +10,7 @@ session_start();
     <style>
         @font-face {
             font-family: MmrText;
-            src: url(/Public/fonts/mmrtext.ttf);
-        }
+            src: url(/Public/fonts/mmrtext.ttf); }
     </style>
     <meta charset="ISO-8859-1">
     <title>NerdyGadgets</title>
@@ -68,6 +67,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
 
     if (mysqli_num_rows($ReturnableResult) == 0) {
 
+        // Check of het wachtwoord minimaal 8 tekens bevat
         if (strlen($_POST['wachtwoord']) >= 8) {
             $wachtwoordIsSterk = true;
         } else {
@@ -102,8 +102,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
         // Staat het emailadres al in de database geef dan een alert weer en stuur de bezoeker terug naar het aanmeldscherm
         $mailBestaatAl = true;
     }
-}
-?>
+} ?>
 
 <!-- Laat het aanmeldpaginascherm zien als deze optie is gekozen -->
 <div class="tekstBoven">
@@ -136,19 +135,13 @@ if (isset($_POST['aanmeldenKlaar'])) {
             <div class="row loginSignupRows">
                 <div class="col-1"></div>
                 <div class="col-10">
-                    <?php
-                    if ($mailBestaatAl) {
-                        ?>
+                    <?php if ($mailBestaatAl) { ?>
                         <label for="email" class="signupWarningLabel">Dit e-mailadres hoort al bij een account!</label>
-                        <?php
-                    }
-                    ?>
+                        <?php } ?>
                 </div>
                 <div class="col-1"></div>
             </div>
-            <?php
-        }
-        ?>
+            <?php } ?>
 
         <div class="row loginSignupRows">
             <div class="col-1"></div>
@@ -188,33 +181,25 @@ if (isset($_POST['aanmeldenKlaar'])) {
             <div class="col-1"></div>
         </div>
 
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-10">
-                    <?php
-                    if ($wachtwoordKloptNiet) {
-                        ?>
-                        <label for="wachtwoord" class="signupWarningLabel">De wachtwoorden komen niet overeen!</label>
-                </div>
-                <div class="col-1"></div>
+        <div class="row loginSignupRows">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <?php if ($wachtwoordKloptNiet) { ?>
+                <label for="wachtwoord" class="signupWarningLabel">De wachtwoorden komen niet overeen!</label>
             </div>
-            <?php
-        }
-        ?>
+            <div class="col-1"></div>
+        </div>
+    <?php } ?>
 
-            <div class="row loginSignupRows">
-                <div class="col-1"></div>
-                <div class="col-10">
-                    <?php
-                    if ($wachtwoordIsNietSterk) {
-                        ?>
-                        <label for="wachtwoord" class="signupWarningLabel">Het gekozen wachtwoord voldoet niet aan de eisen!</label>
-                </div>
-                <div class="col-1"></div>
+        <div class="row loginSignupRows">
+            <div class="col-1"></div>
+            <div class="col-10">
+                <?php if ($wachtwoordIsNietSterk) { ?>
+                <label for="wachtwoord" class="signupWarningLabel">Het gekozen wachtwoord voldoet niet aan de eisen!</label>
             </div>
-            <?php
-        }
-        ?>
+            <div class="col-1"></div>
+        </div>
+    <?php } ?>
 
         <div class="row loginSignupRows">
             <div class="col-1"></div>
