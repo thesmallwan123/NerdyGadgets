@@ -148,7 +148,7 @@ if (verstuurFactuur($voornaam, $tussenvoegsel, $achternaam, $email, $fileLocatio
     // Verwijder file
     fclose($myFile);
     unlink($fileLocation);
-    header("Location: ./confirmation.php");
+    header("Location: ./processingOrder.php");
 }
 
 ?>

@@ -206,6 +206,20 @@ function deleteItem($ID, $cartItems)
             array_push($prijsRegel, $totaalPrijsRow);
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
+            // Meegeven aantal per artikelid voor database
+//            if (!$_SESSION['orderInfo']){
+//                $orderInfo = array();
+//            }
+//            else{
+//                $orderInfo = $_SESSION['orderInfo'];
+//            }
+//            if (!array_key_exists($artikelID, $winkelwagenartikelen)){
+//                unset($orderInfo[$artikelID]);
+//            }
+//            else{
+//            $orderInfo[$artikelID] = $amount;
+//            $_SESSION['orderInfo'] = $orderInfo;
+//            }
     ?>
             <!-- Producten -->
             <div class="cartRow">
@@ -268,6 +282,7 @@ function deleteItem($ID, $cartItems)
             $totaalPrijsExVerzKorting = ($totaalPrijsExVerz * $korting);
         }
 
+//        var_dump($_SESSION['cart']);
         ?>
 
         <!-- Kortingscoupon -->
@@ -368,6 +383,7 @@ function deleteItem($ID, $cartItems)
             <div class="terugText" style="width: 100%; text-align: center;">Ga terug naar de vorige pagina</div>
         </div>
     <?php
-    } ?>
+    }
+    ?>
 
 </div>
