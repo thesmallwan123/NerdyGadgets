@@ -172,7 +172,7 @@ ul#ul-class-navigation li {
     margin-right: 10px;
 }
 .QuantityText {
-    position: absolute;
+    /* position: absolute; */
     left: 310px;
     bottom: 0;
 }

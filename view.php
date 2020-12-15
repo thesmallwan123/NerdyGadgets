@@ -32,12 +32,18 @@ if (isset($_POST['submit'])) {
     $_SESSION['cart'] = $cartItems;
 }
 
+// Globals
+$chilledStockTemperature = 1.0;
+$ColdRoomSensorNumber = 5;
+
+// Informatie product
 $Query = " 
            SELECT SI.StockItemID, 
             (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, 
             StockItemName,
             QuantityOnHand AS Quantity,
             SearchDetails, 
+            IsChillerStock AS IsChilledStock,
             (CASE WHEN (RecommendedRetailPrice*(1+(TaxRate/100))) > 50 THEN 0 ELSE 6.95 END) AS SendCosts, MarketingComments, CustomFields, SI.Video,
             (SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = SI.StockItemID LIMIT 1) as BackupImagePath   
             FROM stockitems SI 
@@ -57,6 +63,20 @@ if ($ReturnableResult && mysqli_num_rows($ReturnableResult) == 1) {
 } else {
     $Result = null;
 }
+
+// Temperatuur product
+$Query = "
+SELECT Temperature
+FROM coldroomtemperatures
+WHERE ColdRoomSensorNumber = ?";
+$Statement = mysqli_prepare($Connection, $Query);
+mysqli_stmt_bind_param($Statement, "s", $ColdRoomSensorNumber);
+mysqli_stmt_execute($Statement);
+$returnedTemperature = mysqli_stmt_get_result($Statement);
+$returnedTemperature = mysqli_fetch_all($returnedTemperature, MYSQLI_ASSOC);
+
+$chilledStockTemperature = $returnedTemperature[0]['Temperature'];
+
 //Get Images
 $Query = "
                 SELECT ImagePath
@@ -137,6 +157,12 @@ if ($R) {
             <h2 class="StockItemNameViewSize StockItemName">
                 <?php print $Result['StockItemName']; ?>
             </h2>
+
+            <?php if($Result['IsChilledStock'] == 1){ ?>
+            <div class="QuantityText">Huidige temperatuur: <?php echo $chilledStockTemperature?></div>
+            <?php } else { ?>
+            <div class="QuantityText"></div>
+            <?php } ?>
 
             <?php if ($Result["Quantity"] < 1000) { ?>
             <div class="QuantityText"  <?php if($Result["Quantity"] < 100) {echo 'style="color: red;"';} ?> >Voorraad: <?php print $Result['Quantity']; ?></div>
