@@ -20,6 +20,7 @@ if(isset($_POST["terugNaarIndex"])) {
     }
 }
 
+
 ?>
     <div class="confirmationTextHeader">
         <h1>Succes!</h1>
