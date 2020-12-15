@@ -159,7 +159,7 @@ if ($R) {
             </h2>
 
             <?php if($Result['IsChilledStock'] == 1){ ?>
-            <div class="QuantityText">Huidige temperatuur: <?php echo $chilledStockTemperature?></div>
+            <div class="QuantityText">Huidige temperatuur: <?php echo ROUND($chilledStockTemperature, 1)?> °C</div>
             <?php } else { ?>
             <div class="QuantityText"></div>
             <?php } ?>
