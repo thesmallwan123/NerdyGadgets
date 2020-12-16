@@ -35,3 +35,5 @@ GRANT USAGE ON *.* TO 'pi'@'%' IDENTIFIED BY PASSWORD '*D5B47A9BC2F185C98632FCB1
 GRANT INSERT, SELECT ON `nerdygadgets`.`coldroomtemperatures_archive` TO 'pi'@'%';
 
 GRANT INSERT (ColdRoomTemperatureID), UPDATE ON `nerdygadgets`.`coldroomtemperatures` TO 'pi'@'%';
+
+USE nerdygadgets; DROP TRIGGER InsertAddress;
