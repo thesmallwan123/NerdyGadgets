@@ -27,6 +27,8 @@ GRANT SELECT ON `nerdygadgets`.`discount` TO 'klant'@'%';
 
 GRANT SELECT, INSERT ON `nerdygadgets`.`account` TO 'klant'@'%';
 
+GRANT SELECT ON `nerdygadgets`.`coldroomtemperatures` TO 'klant'@'%';
+
 
 -- Pi
 CREATE USER IF NOT EXISTS 'user'@'localhost' IDENTIFIED BY 'temperatuursensor';
