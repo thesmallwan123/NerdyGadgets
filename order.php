@@ -38,7 +38,7 @@ $woonplaats = "";
         $account = $_SESSION["account"];
 
         $Query = "
-        SELECT firstname, infix, surname, email, street, streetnr, postalcode, city, gender
+        SELECT firstname, infix, surname, email, street, streetnumber, postalcode, city, gender
         FROM account
         WHERE email = ?";
         $Statement = mysqli_prepare($Connection, $Query);

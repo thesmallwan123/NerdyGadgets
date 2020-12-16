@@ -167,7 +167,7 @@ if ($R) {
             <?php if ($Result["Quantity"] < 1000) { ?>
             <div class="QuantityText"  <?php if($Result["Quantity"] < 100) {echo 'style="color: red;"';} ?> >Voorraad: <?php print $Result['Quantity']; ?></div>
             <?php } else { ?>
-            <div class="QuantityText">Op voorraad.</div>
+            <div class="QuantityText">Op voorraad</div>
             <?php } ?>
 
             <div id="StockItemHeaderLeft">
