@@ -871,6 +871,7 @@ span.price{
     border: 1px solid lightgray;
     border-radius: 10px;
     margin: 100px;
+    margin-top: 50px;
 }
 
 .signupWarningLabel {
@@ -982,4 +983,17 @@ p.boldText{
     border-color: transparent;
     width: 100%;
     color: white;
+}
+
+.tekstBovenCS {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.servicePageContainer {
+    margin-top: 30px;
+}
+
+.orderRow input {
+    text-align: center;
 }
