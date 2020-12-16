@@ -21,7 +21,7 @@ GRANT INSERT ON `nerdygadgets`.`privateorderlines` TO 'klant'@'%';
 
 GRANT SELECT ON `nerdygadgets`.`stockitemstockgroups` TO 'klant'@'%';
 
-GRANT SELECT (ColorID, StockItemName, InternalComments, Barcode, Brand, SupplierID, IsChillerStock, StockItemID, MarketingComments, QuantityPerOuter, Tags, Size, UnitPrice, OuterPackageID, LastEditedBy, TaxRate, TypicalWeightPerUnit, RecommendedRetailPrice, LeadTimeDays, CustomFields, SearchDetails, UnitPackageID) ON `nerdygadgets`.`stockitems` TO 'klant'@'%';
+GRANT SELECT ON `nerdygadgets`.`stockitems` TO 'klant'@'%';
 
 GRANT SELECT ON `nerdygadgets`.`discount` TO 'klant'@'%';
 
