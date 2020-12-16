@@ -160,7 +160,7 @@ if (isset($_POST['inloggenKlaar'])) {
                 </div>
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <input type="submit" name="inloggenKlaar" value="Inloggen" class="loginSignupDone">
+                    <input type="submit" name="inloggenKlaar button" value="Inloggen" class="loginSignupDone">
                 </div>
             <div class="col-1"></div>
         </form>

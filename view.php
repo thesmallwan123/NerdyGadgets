@@ -184,14 +184,14 @@ if ($R) {
                             ?>
                                 <!-- If it is enable the add to cart button -->
                                 <form method="post">
-                                    <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="addToCartButton">
+                                    <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="addToCartButton button">
                                 </form>
                             <?php
                             } else {
                             ?>
                                 <!-- If it isn't disable the add to cart button -->
                                 <form method="post">
-                                    <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="disabledAddToCartButton" disabled>
+                                    <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="disabledAddToCartButton button" disabled>
                                 </form>
 
                             <?php

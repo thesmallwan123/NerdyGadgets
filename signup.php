@@ -222,7 +222,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
         <div class="row">
             <div class="col-1"></div>
             <div class="col-4">
-                <a href="./loginMainpage">
+                <a href="./loginMainpage" class="button">
                     <div class="backToLoginChoice">
                         Terug
                     </div>
@@ -230,7 +230,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
             </div>
             <div class="col-2"></div>
             <div class="col-4">
-                <input type="submit" name="aanmeldenKlaar" value="Aanmelden" class="loginSignupDone">
+                <input type="submit" name="aanmeldenKlaar" value="Aanmelden" class="loginSignupDone button">
             </div>
             <div class="col-1"></div>
     </form>
