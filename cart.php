@@ -262,10 +262,20 @@ function deleteItem($ID, $cartItems)
 
                         <div class="col-3"><?php print($amount); ?></div>
                         <!-- Increase item -->
-                        <div class="col-3">
-                            <a href="cart.php?id=<?php echo $artikelID ?>&function=increaseItem">
-                                <i class="fas fa-plus"></i></a>
-                        </div>
+                        <?php 
+                            if ($amount >= $artikel[0]["QuantityOnHand"]) {
+                        ?>
+                                <div class="col-3"></div>
+                        <?php
+                            } else {
+                        ?>
+                                <div class="col-3">
+                                    <a href="cart.php?id=<?php echo $artikelID ?>&function=increaseItem">
+                                        <i class="fas fa-plus"></i></a>
+                                </div>
+                        <?php
+                            }
+                        ?>
                     </div>
                 </div>
             </div>
