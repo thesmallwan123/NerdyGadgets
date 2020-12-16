@@ -312,10 +312,10 @@ function deleteItem($ID, $cartItems)
                 </div>
                 <!-- Checkmark korting -->
                 <div class="coupon kortingsCoupon">
-                    <input type="text" name="kortingsCode" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
+                    <input type="text" name="kortingsCode button" value="<?php print($kortingsCode); ?>" placeholder="Kortingscode">
                 </div>
                 <div class="coupon validateCoupon">
-                    <input type="submit" name="acceptCoupon" value="Valideer">
+                    <input type="submit" name="acceptCoupon button" value="Valideer">
                 </div>
 
             </form>   

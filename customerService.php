@@ -66,7 +66,7 @@ if (isset($_POST["sendMailCustomerService"])) {
             </div>
         </div>
         <div class="backToShop">
-            <input type="submit" name="sendMailCustomerService" value="Verstuur" class="backToShopButton">
+            <input type="submit" name="sendMailCustomerService" value="Verstuur" class="backToShopButton button">
         </div>
     </form>
 </div>
