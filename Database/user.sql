@@ -25,7 +25,7 @@ GRANT SELECT (ColorID, StockItemName, InternalComments, Barcode, Brand, Supplier
 
 GRANT SELECT ON `nerdygadgets`.`discount` TO 'klant'@'%';
 
-GRANT SELECT (Surname, AccountID, City, Email, StreetNumber, Infix, PostalCode, Street, Gender, Firstname), INSERT ON `nerdygadgets`.`account` TO 'klant'@'%';
+GRANT SELECT, INSERT ON `nerdygadgets`.`account` TO 'klant'@'%';
 
 
 -- Pi
