@@ -1006,16 +1006,19 @@ p.boldText{
     border: 2px solid white;
     vertical-align: middle;
 }
-.botton::hover{
-    background-color: inherit;
-    rgba(0, 0, 0, 0.7);
-}
 
 .buttonRed{
     background-color: red;
     border: 2px solid black;
 }
+.buttonRed:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
 .buttonGreen{
     background-color: green;
     border: 2px solid black;
+}
+.buttonGreen:hover{
+    background-color: rgb(0, 128, 0, 0.7);
 }
