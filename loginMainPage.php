@@ -78,7 +78,7 @@ if (isset($_POST['uitloggen'])) {
         <div class="col-4"></div>
         <div class="col-3">
             <form method="POST" action=".\">
-                <input type="submit" name="annuleren" value="Annuleren" class="cancelMainLogin">
+                <input type="submit" name="annuleren" value="Annuleren" class="cancelMainLogin button buttonRed">
             </form>
         </div>
         <div class="col-5"></div>

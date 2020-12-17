@@ -140,15 +140,15 @@ if (isset($_POST['inloggenKlaar'])) {
             <div class="row">
                 <div class="col-1"></div>
                 <div class="col-4">
-                    <a href="./loginMainpage">
-                        <div class="backToLoginChoice">
+                    <a href="./loginMainpage" class="">
+                        <div class="backToLoginChoice button buttonRed">
                             Terug
                         </div>
                     </a>
                 </div>
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <input type="submit" name="inloggenKlaar" value="Inloggen" class="loginSignupDone">
+                    <input type="submit" name="inloggenKlaar" value="Inloggen" class="loginSignupDone button buttonGreen">
                 </div>
             <div class="col-1"></div>
         </form>
