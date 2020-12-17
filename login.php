@@ -44,7 +44,7 @@ if (isset($_POST['inloggenKlaar'])) {
     SELECT Email
     FROM account
     WHERE Email = ?";
-    $Statement = mysqli_prepare($Connection2, $Query);
+    $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "s", $email);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
@@ -55,7 +55,7 @@ if (isset($_POST['inloggenKlaar'])) {
         SELECT Password
         FROM account
         WHERE Email = ?";
-        $Statement = mysqli_prepare($Connection2, $Query);
+        $Statement = mysqli_prepare($Connection, $Query);
         mysqli_stmt_bind_param($Statement, "s", $email);
         mysqli_stmt_execute($Statement);
         $ReturnableResult = mysqli_stmt_get_result($Statement);
@@ -148,7 +148,7 @@ if (isset($_POST['inloggenKlaar'])) {
                 </div>
                 <div class="col-2"></div>
                 <div class="col-4">
-                    <input type="submit" name="inloggenKlaar button" value="Inloggen" class="loginSignupDone">
+                    <input type="submit" name="inloggenKlaar" value="Inloggen" class="loginSignupDone">
                 </div>
             <div class="col-1"></div>
         </form>

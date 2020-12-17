@@ -35,7 +35,7 @@ if(isset($_POST["terugNaarIndex"])) {
 
     <div class="backToShop">
         <form method="post">
-            <input type="submit" name="terugNaarIndex button" value="Ga terug naar de website" class="backToShopButton">
+            <input type="submit" name="terugNaarIndex" value="Ga terug naar de website" class="backToShopButton">
         </form>
     </div>
 

@@ -330,7 +330,7 @@ ul#ul-class-price li {
 }
 #StockGroup3 {
     width: 15%;
-    height: 41.5%;
+    height: 250px;
 }
 #StockGroup4 {
     width: 30%;
@@ -338,12 +338,12 @@ ul#ul-class-price li {
 }
 #StockGroup5 {
     width: 25%;
-    height: 53.5%;
+    height: 320px;
     margin-top: 1.5%;
 }
 #StockGroup6 {
     width: 20%;
-    height: 53.5%;
+    height: 320px;
     margin-left: 1.5%;
     margin-top: 1.5%;
 }
@@ -352,19 +352,10 @@ ul#ul-class-price li {
     left:0;
     right: 0;
     font-size: 25px;
-}
-#StockGroup2 h1 {
     bottom: 0;
+    text-align: center;
 }
-#StockGroup1 h1 {
-    bottom: 0;
-}
-#StockGroup5 h1 {
-    bottom: 0;
-}
-#StockGroup6 h1 {
-    bottom: 0;
-}
+
 #wrap a {
     text-decoration: none;
     color: white;
