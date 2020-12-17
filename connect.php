@@ -9,16 +9,7 @@ try {
 }
 
 
-try {
-    $Connection2 = mysqli_connect("localhost", "root", "", "nerdygadgetstest");
-    mysqli_set_charset($Connection2, 'latin1');
-    $Database2Available = true;
-} catch (mysqli_sql_exception $e) {
-    $Database2Available = false;
-}
-
-
-if (!$DatabaseAvailable OR !$Database2Available) {
+if (!$DatabaseAvailable) {
     ?><h2>Website wordt op dit moment onderhouden.</h2><?php
     die();
 }
