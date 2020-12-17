@@ -34,7 +34,7 @@ if (isset($_POST['kortingsCode'])) {
             SELECT discountQuantity
             FROM discount
             WHERE discountName = ?";
-    $Statement = mysqli_prepare($Connection, $Query);
+    $Statement = mysqli_prepare($Connection2, $Query);
     mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
@@ -53,7 +53,7 @@ if (isset($_POST['kortingsCode'])) {
             SELECT discounts
             FROM discount
             WHERE discounts = ?";
-    $Statement = mysqli_prepare($Connection, $Query);
+    $Statement = mysqli_prepare($Connection2, $Query);
     mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);

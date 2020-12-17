@@ -11,10 +11,10 @@ try {
 
 try {
     $Connection2 = mysqli_connect("localhost", "root", "", "nerdygadgetstest");
-    mysqli_set_charset($Connection, 'latin1');
+    mysqli_set_charset($Connection2, 'latin1');
     $Database2Available = true;
 } catch (mysqli_sql_exception $e) {
-    $DatabaseAvailable = false;
+    $Database2Available = false;
 }
 
 

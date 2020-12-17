@@ -14,7 +14,7 @@ if (isset($_SESSION['account'])) {
     SELECT firstname, infix, surname, email
     FROM account
     WHERE email = ?";
-    $Statement = mysqli_prepare($Connection, $Query);
+    $Statement = mysqli_prepare($Connection2, $Query);
     mysqli_stmt_bind_param($Statement, "s", $account);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);

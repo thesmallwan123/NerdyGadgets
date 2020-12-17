@@ -44,7 +44,7 @@ if (isset($_POST['inloggenKlaar'])) {
     SELECT Email
     FROM account
     WHERE Email = ?";
-    $Statement = mysqli_prepare($Connection, $Query);
+    $Statement = mysqli_prepare($Connection2, $Query);
     mysqli_stmt_bind_param($Statement, "s", $email);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
@@ -55,7 +55,7 @@ if (isset($_POST['inloggenKlaar'])) {
         SELECT Password
         FROM account
         WHERE Email = ?";
-        $Statement = mysqli_prepare($Connection, $Query);
+        $Statement = mysqli_prepare($Connection2, $Query);
         mysqli_stmt_bind_param($Statement, "s", $email);
         mysqli_stmt_execute($Statement);
         $ReturnableResult = mysqli_stmt_get_result($Statement);
