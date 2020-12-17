@@ -164,7 +164,7 @@ function deleteItem($ID, $cartItems)
             // Bereken prijs inclusief verzending
             function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
             {
-                if ($kortingGeldig == TRUE) {
+                if ($kortingGeldig == TRUE OR isset($_SESSION['account'])) {
                     if ($totaalPrijsExVerzKorting < 30) {
                         $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
                         $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
@@ -280,7 +280,11 @@ function deleteItem($ID, $cartItems)
         }
 
         if (isset($_SESSION['account'])) {
-            $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
+            if ($kortingGeldig) {
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
+            } else {
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $accountKorting;
+            }
         }
 
         ?>
