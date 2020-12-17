@@ -53,6 +53,7 @@ function berichtKlant($klantVNaam, $klantTussen, $klantANaam, $klantMail, $klant
     $email->Subject = "NerdyGadgets - Bericht van klant";
     $email->Body = $mailMessage;
     $email->addAddress('customerservice.nerdygadgets@gmail.com');
+    $email->addReplyTo($klantMail);
     $email->isHTML(true);
     
 
