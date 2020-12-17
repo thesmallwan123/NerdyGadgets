@@ -25,9 +25,8 @@ if(isset($_POST["terugNaarIndex"])) {
 ?>
     <div class="confirmationTextHeader">
         <h1>Succes!</h1>
-
     </div>
-    <div class="confirmationTextP">
+    <div class="confirmationText">
         <p> De bedragen komen overeen met elkaar.</p>
         <p> Uw bestelling is succesvol afgerond.</p>
         <p> Op <?php print($deliveryDate); ?> wordt uw bestelling bezorgd.</p>

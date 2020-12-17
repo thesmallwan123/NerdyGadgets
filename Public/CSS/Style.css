@@ -556,6 +556,19 @@ ul#ul-class-price li {
     color: rgb(156, 156, 156);
 }
 
+/* confirmation text*/
+.confirmationText{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 0px;
+    color: white;
+    font-family: pt-sans, sans-serif;
+}
+
+.confirmationTextP{
+    padding-top: 150px;
+}
+
 /* confirmation text header*/
 .confirmationTextHeader{
     text-align: center;
@@ -565,14 +578,6 @@ ul#ul-class-price li {
     font-family: pt-sans, sans-serif;
 }
 
-/* confirmation text p*/
-.confirmationTextP{
-    text-align: center;
-    font-size: 20px;
-    color: white;
-    font-family: pt-sans, sans-serif;
-    padding-top: 200px;
-}
 
 /* back to shop */
 .backToShop{

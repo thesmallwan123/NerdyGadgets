@@ -29,7 +29,7 @@ $comment = NULL;
 $lastEditedBy = NULL;
 
 // variabele korting
-$korting = NULL;
+$korting = 1.00;
 if (isset($_SESSION['korting'])) {
     $kortingsCode = $_SESSION['korting'];
 
