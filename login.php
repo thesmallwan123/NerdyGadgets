@@ -41,9 +41,9 @@ if (isset($_POST['inloggenKlaar'])) {
 
     // Kijk of de email bestaat
     $Query = "
-    SELECT email
+    SELECT Email
     FROM account
-    WHERE email = ?";
+    WHERE Email = ?";
     $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "s", $email);
     mysqli_stmt_execute($Statement);
@@ -52,14 +52,14 @@ if (isset($_POST['inloggenKlaar'])) {
     if (mysqli_num_rows($ReturnableResult) == 1) {
         // Vraag het wachtwoord op uit de database
         $Query = "
-        SELECT password
+        SELECT Password
         FROM account
-        WHERE email = ?";
+        WHERE Email = ?";
         $Statement = mysqli_prepare($Connection, $Query);
         mysqli_stmt_bind_param($Statement, "s", $email);
         mysqli_stmt_execute($Statement);
         $ReturnableResult = mysqli_stmt_get_result($Statement);
-        $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['password'];
+        $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['Password'];
 
         // Controleer of het wachtwoord overeenkomt met de hash in de database
         if (password_verify($wachtwoord, $Result)) {
@@ -96,13 +96,7 @@ if (isset($_POST['inloggenKlaar'])) {
             <div class="row loginSignupRows">
                 <div class="col-1"></div>
                 <div class="col-10">
-                        <?php 
-                    if ($mailBestaatNogNiet) { 
-                        ?> 
                         <label for="email" class="signupWarningLabel">Dit e-mailadres heeft nog geen account bij ons!</label>
-                        <?php 
-                    } 
-                        ?>
                 </div>
                 <div class="col-1"></div>
             </div>
@@ -125,14 +119,8 @@ if (isset($_POST['inloggenKlaar'])) {
 
             <div class="row loginSignupRows">
                 <div class="col-1"></div>
-                <div class="col-10">
-                        <?php 
-                    if ($wachtwoordKloptNiet) { 
-                        ?> 
+                <div class="col-10"> 
                         <label for="email" class="signupWarningLabel">Het wachtwoord hoort niet bij het opgegeven e-mailadres!</label>
-                        <?php 
-                    } 
-                        ?>
                 </div>
                 <div class="col-1"></div>
             </div>

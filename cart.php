@@ -7,6 +7,7 @@ include("connect.php");
 $totaalPrijsIncVerz = 0;
 $totaalPrijsExVerz = 0;
 $totaalPrijsRow = 0;
+$accountKorting = 0.97;
 $prijsRegel = array();
 $taxArr = array();
 $taxTotaal = 0;
@@ -164,7 +165,7 @@ function deleteItem($ID, $cartItems)
             // Bereken prijs inclusief verzending
             function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
             {
-                if ($kortingGeldig == TRUE) {
+                if ($kortingGeldig == TRUE OR isset($_SESSION['account'])) {
                     if ($totaalPrijsExVerzKorting < 30) {
                         $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
                         $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
@@ -207,20 +208,6 @@ function deleteItem($ID, $cartItems)
             array_push($prijsRegel, $totaalPrijsRow);
             $taxRow = calcTaxRow($artikel[0]["taxRate"], $totaalPrijsRow);
             array_push($taxArr, $taxRow);
-            // Meegeven aantal per artikelid voor database
-//            if (!$_SESSION['orderInfo']){
-//                $orderInfo = array();
-//            }
-//            else{
-//                $orderInfo = $_SESSION['orderInfo'];
-//            }
-//            if (!array_key_exists($artikelID, $winkelwagenartikelen)){
-//                unset($orderInfo[$artikelID]);
-//            }
-//            else{
-//            $orderInfo[$artikelID] = $amount;
-//            $_SESSION['orderInfo'] = $orderInfo;
-//            }
     ?>
             <!-- Producten -->
             <div class="cartRow">
@@ -293,10 +280,20 @@ function deleteItem($ID, $cartItems)
             $totaalPrijsExVerzKorting = ($totaalPrijsExVerz * $korting);
         }
 
-//        var_dump($_SESSION['cart']);
+        if (isset($_SESSION['account'])) {
+            if ($kortingGeldig) {
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
+            } else {
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $accountKorting;
+            }
+        }
+
         ?>
 
         <!-- Kortingscoupon -->
+        <div class="row">
+                <p class="klantKorting">Klanten met een account krijgen een vaste korting van 3%</p>
+        </div>
         <div class="row">
             <form method="POST" class="kortingRow">
                 
@@ -366,7 +363,7 @@ function deleteItem($ID, $cartItems)
 
         <!-- Verzending -->
         <div class="datumVerzending">
-            <?php print("Uw bestelling zal op " . date("d/m/Y", time() + 86400) . " worden geleverd."); ?>
+            <?php print("Uw bestelling zal op " . date("d/m/Y", time() + 86400) . " worden geleverd"); ?>
         </div>
 
         <!-- Bestel & terugknop -->
