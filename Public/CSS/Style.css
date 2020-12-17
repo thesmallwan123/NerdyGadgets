@@ -667,7 +667,7 @@ span.price{
 
 /*back to cart button */
 .toCartButton, .toPaymentButton{
-    background-color: inherit;
+    background-color: initial;
     border: 0px;
     text-align: center;
     height: 100%;
@@ -748,19 +748,7 @@ span.price{
     margin-top: 10px;
 }
 
-.toCartButton:hover{
-    background-color: inherit;
-    color: white;
-}
-
 .toCartButton{
-    text-align: center;
-    background-color: inherit;
-    border: 0px;
-    height: 100%;
-    width: 100%;
-    color: white;
-    margin: auto;
     line-height: 100%;
 }
 
@@ -1011,7 +999,14 @@ p.boldText{
     background-color: red;
     border: 2px solid black;
 }
+.buttonRed:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
 .buttonGreen{
     background-color: green;
     border: 2px solid black;
+}
+.buttonGreen:hover{
+    background-color: rgb(0, 128, 0, 0.7);
 }
