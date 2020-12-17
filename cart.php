@@ -7,7 +7,7 @@ include("connect.php");
 $totaalPrijsIncVerz = 0;
 $totaalPrijsExVerz = 0;
 $totaalPrijsRow = 0;
-$accountKorting = 0.97;
+$accountKorting = 0.95;
 $prijsRegel = array();
 $taxArr = array();
 $taxTotaal = 0;
@@ -15,9 +15,11 @@ $taxTotaal = 0;
 $kortingGeldig = FALSE;
 $kortingsCode = NULL;
 $codeComparison = NULL;
-$korting = 0.70;
+$korting = 1.00;
 $voordeel = 0;
 $totaalPrijsExVerzKorting = 0;
+
+$additiveDiscount = TRUE;
 
 // Haal sessie op
 if (isset($_SESSION["cart"]) && !empty($_SESSION["cart"])) {
@@ -31,36 +33,39 @@ if (isset($_POST['kortingsCode'])) {
     $kortingsCode = $_POST['kortingsCode'];
 
     $Query = "
-            SELECT discountQuantity
+            SELECT discountName, discountQuantity
             FROM discount
             WHERE discountName = ?";
-    $Statement = mysqli_prepare($Connection2, $Query);
+    $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
     mysqli_stmt_execute($Statement);
-    $ReturnableResult = mysqli_stmt_get_result($Statement);
-
-    if (mysqli_num_rows($ReturnableResult) == 1) {
+    $discountQuery = mysqli_stmt_get_result($Statement);
+    $discountQuery = mysqli_fetch_all($discountQuery, MYSQLI_ASSOC);
+    
+    if (isset($discountQuery[0]['discountName'])) {
         $kortingGeldig = TRUE;
+        $korting = $discountQuery[0]['discountQuantity'];
         $_SESSION['korting'] = $kortingsCode;
-    } else {
-        echo "<br><br><br><br><br><br><br><br><br><br>WELKOM";
     }
+}
 
-    // Anders check op bestaande sessie korting, check tegenover database
-} elseif (isset($_SESSION['korting'])) {
+// Anders check op bestaande sessie korting, check tegenover database
+elseif (isset($_SESSION['korting'])) {
     $kortingsCode = $_SESSION['korting'];
 
     $Query = "
-            SELECT discounts
+            SELECT discountName, discountQuantity
             FROM discount
-            WHERE discounts = ?";
-    $Statement = mysqli_prepare($Connection2, $Query);
+            WHERE discountName = ?";
+    $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
     mysqli_stmt_execute($Statement);
-    $ReturnableResult = mysqli_stmt_get_result($Statement);
+    $discountQuery = mysqli_stmt_get_result($Statement);
+    $discountQuery = mysqli_fetch_all($discountQuery, MYSQLI_ASSOC);
 
-    if (mysqli_num_rows($ReturnableResult) == 1) {
+    if (isset($discountQuery[0]['discountName'])) {
         $kortingGeldig = TRUE;
+        $korting = $discountQuery[0]['discountQuantity'];
         $_SESSION['korting'] = $kortingsCode;
     }
 }
@@ -82,16 +87,15 @@ if (isset($_GET["id"])) {
 }
 
 // Verwijderen artikel
-function deleteItem($ID, $cartItems)
-{
+function deleteItem($ID, $cartItems) {
     if (array_key_exists($ID, $cartItems)) {
         unset($cartItems[$ID]);
         $_SESSION['cart'] = $cartItems;
-?> <script>
-            window.location.replace('./cart.php')
+        ?> <script>
+        window.location.replace('./cart.php')
         </script> <?php
-                }
-            }
+    }
+}
 
             // Verminderen artikel
             function decreaseItem($ID, $cartItems)
@@ -100,8 +104,8 @@ function deleteItem($ID, $cartItems)
                     $cartItems[$ID] -= 1;
                     $_SESSION['cart'] = $cartItems;
                     ?> <script>
-            window.location.replace('./cart.php')
-        </script> <?php
+                    window.location.replace('./cart.php')
+                    </script> <?php
                 }
             }
 
@@ -225,7 +229,7 @@ function deleteItem($ID, $cartItems)
                 </div>
                 <div class="rowRight">
                     <!-- Price(incl BTW), Amount, Remove and add button -->
-                    <div class="productPrice">Totaal: <?php echo $totaalPrijsRow ?> (including BTW)</div>
+                    <div class="productPrice">Totaal: € <?php printf("%.2f", $totaalPrijsRow) ?> (including BTW)</div>
 
                     <div class="row aantalRow">
                         <div class="col-1">Aantal: </div>
@@ -275,30 +279,48 @@ function deleteItem($ID, $cartItems)
         $totaalPrijsExVerz = calcPriceTotal($prijsRegel, $totaalPrijsExVerz);
         $totaalPrijsTax = calcTax($taxArr, $taxTotaal);
 
-        // Bereken totaalprijs exc. verz. met korting wanneer geldig
-        if ($kortingGeldig) {
-            $voordeel = $totaalPrijsExVerz * (1 - $korting);
-            $totaalPrijsExVerzKorting = ($totaalPrijsExVerz * $korting);
-        }
-
-        if (isset($_SESSION['account'])) {
-            if ($kortingGeldig) {
-                $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
+        // KORTINGSBEREKENINGEN?!
+        if ($additiveDiscount) {
+            if(isset($_SESSION['account'])) {
+                $totaalKorting = 1 - ((1 - $korting) + (1 - $accountKorting));
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $totaalKorting;
             } else {
-                $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $accountKorting;
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $korting;
+            }
+        } else {
+            $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $korting;
+            if(isset($_SESSION['account'])) {
+                $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
             }
         }
+        $voordeel = $totaalPrijsExVerz - $totaalPrijsExVerzKorting
 
+        // // Bereken totaalprijs exc. verz. met korting wanneer geldig
+        // if ($kortingGeldig) {
+        //     $voordeel = $totaalPrijsExVerz * (1 - $korting);
+        //     $totaalPrijsExVerzKorting = ($totaalPrijsExVerz * $korting);
+        // }
+        // // Wanneer ingelogd, voeg korting toe aan vorige berekening
+        // if (isset($_SESSION['account'])) {
+        //     if ($kortingGeldig) {
+        //         $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
+        //         $voordeel = $totaalPrijsExVerz * (1 - $korting) - (1 - $accountKorting);
+        //     } else {
+        //         $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $accountKorting;
+        //         $voordeel = $totaalPrijsExVerz * (1 - $accountKorting);
+        //     }
+        // }
         ?>
 
         <!-- Kortingscoupon -->
-        <div class="row">
-            <p class="klantKorting">Klanten met een account krijgen een vaste korting van 3%</p>
-        </div>
+            <?php if (isset($_SESSION['account'])) { ?>
+            <p class="verzendKosten klantKorting">Als klant heeft u 5% bonus korting.</p>
+            <?php } else { ?>
+            <p class="verzendKosten klantKorting">Log in voor 5% korting!</p>
+            <?php } ?>
         <div class="row">
             <form method="POST" class="kortingRow">
-
-                <div class="">
+                <div>
                     <?php if ($kortingGeldig) { ?>
                         <div>
                             <i class="fas fa-check"></i>
@@ -322,7 +344,7 @@ function deleteItem($ID, $cartItems)
 
         <!-- Kosten weergeven -->
         <div class="verzendKosten">
-            Verzendkosten:
+            Verzendkosten: €
             <?php $totaalPrijsIncVerz = calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting);
             if ($totaalPrijsIncVerz < 30) {
                 echo "4.95";
@@ -334,20 +356,20 @@ function deleteItem($ID, $cartItems)
         </div>
 
         <div class="BTW">
-            BTW (al bij de prijs inbegrepen):
+            BTW (al bij de prijs inbegrepen): €
             <?php
-            echo $totaalPrijsTax;
+            printf("%.2f", $totaalPrijsTax);
             ?>
         </div>
 
         <!-- Korting weergeven -->
         <?php
-        if ($kortingGeldig == TRUE) {
+        if ($kortingGeldig == TRUE OR isset($_SESSION['account'])) {
         ?>
             <div class="costBreakdown korting">
-                Korting:
+                Korting: €
                 <?php
-                echo ROUND($voordeel, 2);
+                printf("%.2f", $voordeel);
                 ?>
                 <br>
             </div>
@@ -358,7 +380,7 @@ function deleteItem($ID, $cartItems)
         <br>
         <!-- Totaalprijs-->
         <div class="costBreakdown totalPrice">
-            Eindtotaal: <?php echo ROUND($totaalPrijsIncVerz, 2) ?><br>
+            Eindtotaal: € <?php printf("%.2f", $totaalPrijsIncVerz) ?><br>
             <small>Dit is inclusief BTW en Inclusief verzendkosten!</small><br>
         </div>
 

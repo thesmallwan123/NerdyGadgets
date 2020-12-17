@@ -683,11 +683,6 @@ span.price{
 .klantKorting {
     color: grey;
     font-style: italic;
-    margin-left: 74%;
-    margin-bottom: 2px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
 }
 
 .coupon {

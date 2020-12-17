@@ -29,7 +29,26 @@ $comment = NULL;
 $lastEditedBy = NULL;
 
 // variabele korting
-$korting = 0.70;
+$korting = NULL;
+if (isset($_SESSION['korting'])) {
+    $kortingsCode = $_SESSION['korting'];
+
+    $Query = "
+            SELECT discountName, discountQuantity
+            FROM discount
+            WHERE discountName = ?";
+    $Statement = mysqli_prepare($Connection, $Query);
+    mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
+    mysqli_stmt_execute($Statement);
+    $discountQuery = mysqli_stmt_get_result($Statement);
+    $discountQuery = mysqli_fetch_all($discountQuery, MYSQLI_ASSOC);
+
+    if (isset($discountQuery[0]['discountName'])) {
+        $kortingGeldig = TRUE;
+        $korting = $discountQuery[0]['discountQuantity'];
+        $_SESSION['korting'] = $kortingsCode;
+    }
+}
 
 //bestellingen in de database zetten.
 // invoeren van Orderdatum, verwachte leverdatum, comment, laatstgewijzigd door, laatstgewijzigd & korting
@@ -41,11 +60,11 @@ mysqli_stmt_bind_param($statement, 'sssisi', $date, $deliveryDate, $comment, $la
 mysqli_stmt_execute($statement);
 
 // bestellingen in tabel privateOrderLine zetten
-//ophalen van orderID
+// ophalen van orderID
 foreach ($cart as $stockitemID => $amount) {
     $QUERY = '
-SELECT MAX(orderID) AS orderID  
-FROM privateorder';
+            SELECT MAX(orderID) AS orderID  
+            FROM privateorder';
     $statement = mysqli_prepare($Connection, $QUERY);
     mysqli_stmt_execute($statement);
     $ReturnableResult = mysqli_stmt_get_result($statement);
@@ -54,9 +73,9 @@ FROM privateorder';
 
 // ophalen van de beschrijving, prijs per stuk en de BTW
     $QUERY = '
-SELECT SearchDetails, UnitPrice, TaxRate
-FROM stockitems
-WHERE StockItemID = ?';
+            SELECT SearchDetails, UnitPrice, TaxRate
+            FROM stockitems
+            WHERE StockItemID = ?';
     $statement = mysqli_prepare($Connection, $QUERY);
     mysqli_stmt_bind_param($statement,"i", $stockitemID);
     mysqli_stmt_execute($statement);
@@ -79,8 +98,8 @@ WHERE StockItemID = ?';
 //bestellingen in tabel privateCustomers zetten
 // ophalen van de laatst gemaakte OrderID
     $QUERY = '
-SELECT MAX(orderID) AS orderID  
-FROM privateorder';
+            SELECT MAX(orderID) AS orderID  
+            FROM privateorder';
     $statement = mysqli_prepare($Connection, $QUERY);
     mysqli_stmt_execute($statement);
     $ReturnableResult = mysqli_stmt_get_result($statement);
@@ -91,9 +110,9 @@ FROM privateorder';
 if (isset($_SESSION["account"])){
     $account = $_SESSION["account"];
     $QUERY = '
-SELECT AccountID
-FROM account
-WHERE Email = ?';
+            SELECT AccountID
+            FROM account
+            WHERE Email = ?';
     $statement = mysqli_prepare($Connection, $QUERY);
     mysqli_stmt_bind_param($statement, "s", $account);
     mysqli_stmt_execute($statement);
