@@ -93,7 +93,7 @@ $output = "
                                 INNER JOIN stockitemholdings sih ON si.StockItemID = sih.StockItemID
                                 WHERE si.StockItemID = ?';
 
-                            $Statement = mysqli_prepare($Connection2, $Query);
+                            $Statement = mysqli_prepare($Connection, $Query);
                             mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
                             mysqli_stmt_execute($Statement);
 
