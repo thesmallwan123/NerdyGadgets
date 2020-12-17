@@ -150,14 +150,14 @@ session_start();
 
             <div class="row orderRow">
                 <div class="col-1"></div>
-                <a href="cart.php" class="col-4 toCart button">
+                <a href="cart.php" class="col-4 toCart button buttonRed">
                     <div class="toCartButton">
                         Terug naar de winkelmand
                     </div>
                 </a>
                 <div class="col-2"></div>
-                <div class="col-4 toPayment">
-                    <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton button">
+                <div class="col-4 toPayment button buttonGreen">
+                    <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton">
                 </div>
                 <div class="col-1"></div>
             </div>
