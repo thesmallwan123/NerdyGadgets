@@ -30,9 +30,9 @@ if (isset($_POST['kortingsCode'])) {
     $kortingsCode = $_POST['kortingsCode'];
 
     $Query = "
-            SELECT discounts
+            SELECT discountQuantity
             FROM discount
-            WHERE discounts = ?";
+            WHERE discountName = ?";
     $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "s", $kortingsCode);
     mysqli_stmt_execute($Statement);
@@ -42,6 +42,7 @@ if (isset($_POST['kortingsCode'])) {
         $kortingGeldig = TRUE;
         $_SESSION['korting'] = $kortingsCode;
     }
+    else {echo "<br><br><br><br><br><br><br><br><br><br>WELKOM";}
 
     // Anders check op bestaande sessie korting, check tegenover database
 } elseif (isset($_SESSION['korting'])) {
