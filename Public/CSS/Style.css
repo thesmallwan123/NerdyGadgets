@@ -956,20 +956,13 @@ p.boldText{
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: #676EFF;
     color: white;
     text-align: center;
 }
 
-/* to customerservice */
-.toCustomerService{
-    width: 30%;
-    margin: auto;
-}
-
 /* to customer service button */
-.toCustomerServiceButton{
-    background-color: transparent;
+.toCustomerServiceButton {
+    background-color: #676EFF;
     border-color: transparent;
     width: 100%;
     color: white;
