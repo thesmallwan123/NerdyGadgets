@@ -60,7 +60,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
     SELECT email
     FROM account
     WHERE email = ?";
-    $Statement = mysqli_prepare($Connection2, $Query);
+    $Statement = mysqli_prepare($Connection, $Query);
     mysqli_stmt_bind_param($Statement, "s", $email);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
@@ -93,7 +93,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
             $Query = "
             INSERT INTO account (Email, Firstname, Infix, Surname, Gender, Street, StreetNumber, PostalCode, City, Password)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $Statement = mysqli_prepare($Connection2, $Query);
+            $Statement = mysqli_prepare($Connection, $Query);
             mysqli_stmt_bind_param($Statement, "ssssssssss", $email, $voornaam, $tussenvoegsel, $achternaam, $gender, $straat, $huisnummer, $postcode, $plaats, $wachtwoord);
             mysqli_stmt_execute($Statement);
             header("Location:./login?aanmeldenKlaar");
