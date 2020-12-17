@@ -354,6 +354,7 @@ ul#ul-class-price li {
     font-size: 25px;
     bottom: 0;
     text-align: center;
+    text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
 }
 
 #wrap a {
