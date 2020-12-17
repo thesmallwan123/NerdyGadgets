@@ -29,7 +29,7 @@ $korting = 0.70;
 $QUERY = '
 INSERT INTO privateorder (OrderDate, ExpectedDeliveryDate, Comment, LastEditedBy, LastEditWhen, Discount)
 VALUES (?, ?, ?, ?, ?, ?)';
-$statement = mysqli_prepare($Connection2, $QUERY);
+$statement = mysqli_prepare($Connection, $QUERY);
 mysqli_stmt_bind_param($statement, 'sssisi', $date, $deliveryDate, $comment, $lastEditedBy, $date, $korting);
 mysqli_stmt_execute($statement);
 
