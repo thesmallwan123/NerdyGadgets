@@ -260,7 +260,7 @@ if (isset($amount)) {
                         ?>
                         <div id="SelectedPage"><?php print $i; ?></div><?php
                     } else { ?>
-                        <button id="page_number" class="PageNumber button" value="<?php print($i - 1); ?>" type="submit" name="page_number"><?php print($i); ?></button>
+                        <button id="page_number" class="PageNumber" value="<?php print($i - 1); ?>" type="submit" name="page_number"><?php print($i); ?></button>
                     <?php }
                 }
             }

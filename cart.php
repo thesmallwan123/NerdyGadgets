@@ -42,8 +42,9 @@ if (isset($_POST['kortingsCode'])) {
     if (mysqli_num_rows($ReturnableResult) == 1) {
         $kortingGeldig = TRUE;
         $_SESSION['korting'] = $kortingsCode;
+    } else {
+        echo "<br><br><br><br><br><br><br><br><br><br>WELKOM";
     }
-    else {echo "<br><br><br><br><br><br><br><br><br><br>WELKOM";}
 
     // Anders check op bestaande sessie korting, check tegenover database
 } elseif (isset($_SESSION['korting'])) {
@@ -165,7 +166,7 @@ function deleteItem($ID, $cartItems)
             // Bereken prijs inclusief verzending
             function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
             {
-                if ($kortingGeldig == TRUE OR isset($_SESSION['account'])) {
+                if ($kortingGeldig == TRUE or isset($_SESSION['account'])) {
                     if ($totaalPrijsExVerzKorting < 30) {
                         $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
                         $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
@@ -250,19 +251,19 @@ function deleteItem($ID, $cartItems)
 
                         <div class="col-3"><?php print($amount); ?></div>
                         <!-- Increase item -->
-                        <?php 
-                            if ($amount >= $artikel[0]["QuantityOnHand"]) {
-                        ?>
-                                <div class="col-3"></div>
                         <?php
-                            } else {
+                        if ($amount >= $artikel[0]["QuantityOnHand"]) {
                         ?>
-                                <div class="col-3">
-                                    <a href="cart.php?id=<?php echo $artikelID ?>&function=increaseItem">
-                                        <i class="fas fa-plus"></i></a>
-                                </div>
+                            <div class="col-3"></div>
                         <?php
-                            }
+                        } else {
+                        ?>
+                            <div class="col-3">
+                                <a href="cart.php?id=<?php echo $artikelID ?>&function=increaseItem">
+                                    <i class="fas fa-plus"></i></a>
+                            </div>
+                        <?php
+                        }
                         ?>
                     </div>
                 </div>
@@ -292,20 +293,20 @@ function deleteItem($ID, $cartItems)
 
         <!-- Kortingscoupon -->
         <div class="row">
-                <p class="klantKorting">Klanten met een account krijgen een vaste korting van 3%</p>
+            <p class="klantKorting">Klanten met een account krijgen een vaste korting van 3%</p>
         </div>
         <div class="row">
             <form method="POST" class="kortingRow">
-                
+
                 <div class="">
                     <?php if ($kortingGeldig) { ?>
-                    <div>
-                        <i class="fas fa-check"></i>
-                    </div>
+                        <div>
+                            <i class="fas fa-check"></i>
+                        </div>
                     <?php } else { ?>
-                    <div>
-                        <i class="fas fa-times"></i>
-                    </div>
+                        <div>
+                            <i class="fas fa-times"></i>
+                        </div>
                     <?php } ?>
                 </div>
                 <!-- Checkmark korting -->
@@ -316,7 +317,7 @@ function deleteItem($ID, $cartItems)
                     <input type="submit" name="acceptCoupon" value="Valideer">
                 </div>
 
-            </form>   
+            </form>
         </div>
 
         <!-- Kosten weergeven -->
@@ -370,12 +371,12 @@ function deleteItem($ID, $cartItems)
         <div class="bestelRow">
             <div class="order">
                 <form action="./index.php" method="POST">
-                    <input type="submit" class="toStore" name="return" value=" < Ga terug">
+                    <input type="submit" class="toStore button buttonRed" name="return" value="Ga terug">
                 </form>
             </div>
             <div class="order">
                 <form action="./order.php" method="POST">
-                    <input type="submit" class="toOrder" name="bestel" value="Bestel">
+                    <input type="submit" class="toOrder button buttonGreen" name="bestel" value="Bestel">
                 </form>
             </div>
         </div>

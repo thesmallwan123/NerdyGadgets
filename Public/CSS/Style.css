@@ -999,3 +999,18 @@ p.boldText{
 .orderRow input {
     text-align: center;
 }
+
+
+.button{
+    background-color: inherit;
+    border: 2px solid white;
+    vertical-align: middle;
+}
+
+.buttonRed{
+    background-color: red;
+    border: 2px solid black;
+}
+.buttonGreen{
+    background-color: green;
+}

@@ -50,13 +50,13 @@ if (isset($_POST['uitloggen'])) {
             <div class="col-2"></div>
             <div class="col-3">
                 <form method="POST" action="./signup">
-                    <input type="submit" name="aanmelden" value="Aanmelden button" class="mainLoginButtons">
+                    <input type="submit" name="aanmelden" value="Aanmelden" class="mainLoginButtons">
                 </form>
             </div>
             <div class="col-2"></div>
             <div class="col-3">
                 <form method="POST" action="./login">
-                    <input type="submit" name="inloggen" value="Inloggen button" class="mainLoginButtons">
+                    <input type="submit" name="inloggen" value="Inloggen" class="mainLoginButtons">
                 </form>
             </div>
             <div class="col-2"></div>
@@ -66,7 +66,7 @@ if (isset($_POST['uitloggen'])) {
             <div class="col-4"></div>
             <div class="col-3">
                 <form method="POST">
-                    <input type="submit" name="uitloggen" value="Uitloggen button" class="logoutButton">
+                    <input type="submit" name="uitloggen" value="Uitloggen" class="logoutButton">
                 </form>
             </div>
             <div class="col-4"></div>
@@ -78,7 +78,7 @@ if (isset($_POST['uitloggen'])) {
         <div class="col-4"></div>
         <div class="col-3">
             <form method="POST" action=".\">
-                <input type="submit" name="annuleren" value="Annuleren button" class="cancelMainLogin">
+                <input type="submit" name="annuleren" value="Annuleren" class="cancelMainLogin">
             </form>
         </div>
         <div class="col-5"></div>
