@@ -69,7 +69,7 @@ WHERE StockItemID = ?';
     INSERT INTO privateorderlines (OrderID, StockItemID, Description, UnitPrice, TaxRate, PickedQuantity, LastEditedWhen)
     VALUES (?,?,?,?,?,?,?)';
     $statement = mysqli_prepare($Connection, $QUERY);
-    mysqli_stmt_bind_param($statement, "iiiiiis", $orderID, $stockitemID, $searchDetails, $unitPrice, $taxRate, $amount, $date);
+    mysqli_stmt_bind_param($statement, "iisiiis", $orderID, $stockitemID, $searchDetails, $unitPrice, $taxRate, $amount, $date);
     mysqli_stmt_execute($statement);
 }
 
@@ -86,23 +86,22 @@ FROM privateorder';
     $orderID =$result["orderID"];
 
 if (isset($_SESSION["account"])){
-    $email = $_SESSION["account"];
+    $account = $_SESSION["account"];
     $QUERY = '
 SELECT AccountID
 FROM account
 WHERE Email = ?';
     $statement = mysqli_prepare($Connection, $QUERY);
-    mysqli_stmt_bind_param($statement, "s", $email);
+    mysqli_stmt_bind_param($statement, "s", $account);
     mysqli_stmt_execute($statement);
     $ReturnableResult = mysqli_stmt_get_result($statement);
     $result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
-    $accountID =$result["accountID"];
+    $accountID =$result["AccountID"];
 }
 else {
     $accountID = NULL;
 }
-print $accountID;
-exit();
+
 $paymentInfo = $_SESSION["paymentInfo"];
 
 $straat = $paymentInfo[0];
