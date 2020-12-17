@@ -59,7 +59,7 @@ if(isset($_SESSION['paymentInfo'])) {
 }
 ?>
 
-
+<!--tekst die bovenaan de pagina staat-->
 <div id="Wrap">
     <div class="confirmationTextP">
 
@@ -69,11 +69,14 @@ if(isset($_SESSION['paymentInfo'])) {
         <p>Op uw ingevoerde adres:</p>
 
         <?php
+//        variabelen worden gedevinieerd
         print($straat . " ");
         print($huisnummer . " ");
         print($postcode . " ");
         print($woonplaats . " ");
         ?>
+
+<!--        invulbalk & controle of het gegeven bedrag overeenkomt met het ingevulde bedrag-->
         <br>
         <form method="post">
             <div class="bestelRow">
@@ -107,6 +110,7 @@ if(isset($_SESSION['paymentInfo'])) {
             <div>
             </div>
             <br>
+<!--            knop om te betalen-->
             <div class="toConfirmation">
                 <input type="submit" name="gaTerug" value="Betalen" class="toConfirmationButton button buttonGreen">
             </div>

@@ -32,7 +32,7 @@ $lastEditedBy = NULL;
 $korting = 0.70;
 
 //bestellingen in de database zetten.
-// bestellingen in tabel privateOrder zetten
+// invoeren van Orderdatum, verwachte leverdatum, comment, laatstgewijzigd door, laatstgewijzigd & korting
 $QUERY = '
 INSERT INTO privateorder (OrderDate, ExpectedDeliveryDate, Comment, LastEditedBy, LastEditWhen, Discount)
 VALUES (?, ?, ?, ?, ?, ?)';
@@ -41,6 +41,7 @@ mysqli_stmt_bind_param($statement, 'sssisi', $date, $deliveryDate, $comment, $la
 mysqli_stmt_execute($statement);
 
 // bestellingen in tabel privateOrderLine zetten
+//ophalen van orderID
 foreach ($cart as $stockitemID => $amount) {
     $QUERY = '
 SELECT MAX(orderID) AS orderID  
@@ -51,6 +52,7 @@ FROM privateorder';
     $result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
     $orderID =$result["orderID"];
 
+// ophalen van de beschrijving, prijs per stuk en de BTW
     $QUERY = '
 SELECT SearchDetails, UnitPrice, TaxRate
 FROM stockitems
@@ -64,7 +66,7 @@ WHERE StockItemID = ?';
     $unitPrice = $result["UnitPrice"];
     $taxRate = $result["TaxRate"];
 
-
+// invoeren van de OrderID, StockitemID, beschrijving, prijs per stuk, btw per stuk, kwantiteit & laatst gewijzigd in de tabel privateOrderLines
     $QUERY = '
     INSERT INTO privateorderlines (OrderID, StockItemID, Description, UnitPrice, TaxRate, PickedQuantity, LastEditedWhen)
     VALUES (?,?,?,?,?,?,?)';
@@ -75,7 +77,7 @@ WHERE StockItemID = ?';
 
 
 //bestellingen in tabel privateCustomers zetten
-
+// ophalen van de laatst gemaakte OrderID
     $QUERY = '
 SELECT MAX(orderID) AS orderID  
 FROM privateorder';
@@ -85,6 +87,7 @@ FROM privateorder';
     $result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
     $orderID =$result["orderID"];
 
+//ophalen van accountID uit de tabel account doormiddel van de geregistreerde email
 if (isset($_SESSION["account"])){
     $account = $_SESSION["account"];
     $QUERY = '
@@ -102,6 +105,7 @@ else {
     $accountID = NULL;
 }
 
+//sessie van de bestelinformatie ophalen en de variabelen daarvan definieeren
 $paymentInfo = $_SESSION["paymentInfo"];
 
 $straat = $paymentInfo[0];
@@ -114,6 +118,7 @@ $achternaam = $paymentInfo[6];
 $gender = $paymentInfo[7];
 $email = $paymentInfo[8];
 
+// invoeren van orderid, email, voornaam, tussenvoegsel, achternaam, gender, straat, huisnummer, postcode, huisnummer, woonplaats & accountid in de tabel privatecustomers.
 $QUERY = '
 INSERT INTO privatecustomers 
 VALUES (?,?,?,?,?,?,?,?,?,?,?)';
@@ -121,6 +126,6 @@ $statement = mysqli_prepare($Connection, $QUERY);
 mysqli_stmt_bind_param($statement, ("isssssssssi"), $orderID, $email, $voornaam, $tussenvoegsel, $achternaam, $gender, $straat, $huisnummer, $postcode, $woonplaats, $accountID);
 mysqli_stmt_execute($statement);
 
-
+//als alles is uitgevoerd van deze pagina wordt je doorgestuurd naar de confirmatie pagina.
 header("Location: ./confirmation.php");
 

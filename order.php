@@ -7,6 +7,7 @@ session_start();
 
 <html lang="en" style="background-color: rgb(35, 35, 47);">
 
+
 <head>
     <style>
         @font-face {
@@ -24,7 +25,7 @@ session_start();
 <body>
 
     <?php
-
+//variabelen worden gemaakt.
     $voornaam = "";
     $tussenvoegsel = "";
     $achternaam = "";
@@ -90,34 +91,35 @@ session_start();
     }
     ?>
 
-    <!--    <div class="orderRow">-->
-    <!--        <div class="col-75">-->
-    <!--        <div class="orderRow">-->
-
+<!--    //alle invoervelden zijn aangegeven met een input en het label is wat er in het veld moet komen te staan.-->
     <div class="container orderPageContainer">
         <h3>Bestel gegevens</h3>
-        <!-- <form method="post" action="pay.php"> -->
         <form method="post">
             <div class="row orderRow">
                 <div class="col-5">
+<!--                    //voornaam-->
                     <label for="voornaam"> Voornaam</label><br>
                     <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" placeholder="Voornaam" required>
                 </div>
                 <div class="col-2">
+<!--                    //tussenvoegsel-->
                     <label for="tussenvoegsel"> Tussenvoegsel</label>
                     <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($tussenvoegsel); ?>" placeholder="Tussenvoegsel">
                 </div>
                 <div class="col-5">
+<!--                    //achternaam-->
                     <label for="achternaam"> Achternaam </label>
                     <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" placeholder="Achternaam" required>
                 </div>
             </div>
             <div class="row orderRow">
                 <div class="col-10">
+<!--                    //email-->
                     <label for="email"> E-mail</label>
                     <input class="opmaakOrder" type="email" name="email" value="<?php print("$email"); ?>" placeholder="E-mailadres" required>
                 </div>
                 <div class="col-2">
+<!--                    //geslacht-->
                     <label for="gender"> Geslacht</label>
                     <select name="gender" class="opmaakOrder" required>
                         <option value="">--Selecteer--</option>
@@ -129,20 +131,24 @@ session_start();
             </div>
             <div class="row orderRow">
                 <div class="col-10">
+<!--                    //straat-->
                     <label for="address">Straat</label>
                     <input class="opmaakOrder" type="text" id="straat" name="straat" value="<?php print($straat); ?>" placeholder="Straat" required>
                 </div>
                 <div class="col-2">
+<!--                    //huisnummer-->
                     <label for="address">Huisnummer</label>
                     <input class="opmaakOrder" type="text" id="huisnummer" name="huisnummer" value="<?php print($huisnummer); ?>" placeholder="Huisnummer" required>
                 </div>
             </div>
             <div class="row orderRow">
                 <div class="col-2">
+<!--                    //postcode-->
                     <label for="postalcode">Postcode</label>
                     <input class="opmaakOrder" type="text" id="postcode" name="postcode" value="<?php print($postcode); ?>" placeholder="Postcode" required>
                 </div>
                 <div class="col-10">
+<!--                    //woonplaats-->
                     <label for="city"> Woonplaats</label>
                     <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" value="<?php print($woonplaats); ?>" placeholder="Woonplaats" required>
                 </div>
@@ -150,11 +156,13 @@ session_start();
 
             <div class="row orderRow">
                 <div class="col-1"></div>
+<!--                //terug naar winkelmand knop-->
                 <a href="cart.php" class="col-4 toCart button buttonRed">
                     <div class="toCartButton">
                         Terug naar de winkelmand
                     </div>
                 </a>
+<!--                door naar betalen knop-->
                 <div class="col-2"></div>
                 <div class="col-4 toPayment button buttonGreen">
                     <input type="submit" name="submit" value="Door naar betalen" class="toPaymentButton">
