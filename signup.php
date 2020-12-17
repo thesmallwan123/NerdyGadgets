@@ -181,20 +181,25 @@ if (isset($_POST['aanmeldenKlaar'])) {
             <div class="col-1"></div>
         </div>
 
-        <div class="row loginSignupRows">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <?php if ($wachtwoordKloptNiet) { ?>
-                <label for="wachtwoord" class="signupWarningLabel">De wachtwoorden komen niet overeen!</label>
-            </div>
-            <div class="col-1"></div>
-        </div>
-    <?php } ?>
+        <?php 
+            if ($wachtwoordKloptNiet) { 
+        ?>
 
         <div class="row loginSignupRows">
             <div class="col-1"></div>
             <div class="col-10">
-                <?php if ($wachtwoordIsNietSterk) { ?>
+                
+                <label for="wachtwoord" class="signupWarningLabel">De wachtwoorden komen niet overeen!</label>
+            </div>
+            <div class="col-1"></div>
+        </div>
+    <?php 
+        }
+        if ($wachtwoordIsNietSterk) {    
+    ?>
+        <div class="row loginSignupRows">
+            <div class="col-1"></div>
+            <div class="col-10">
                 <label for="wachtwoord" class="signupWarningLabel">Het gekozen wachtwoord voldoet niet aan de eisen!</label>
             </div>
             <div class="col-1"></div>
@@ -207,7 +212,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
                 <input type="password" name="wachtwoord" placeholder="Wachtwoord" required>
             </div>
             <div class="col-5">
-                <input type="password" name="wachtwoordConfirmatie" placeholder="Wachtwoord (herhalen)" required>
+                <input type="password"name="wachtwoordConfirmatie" placeholder="Wachtwoord (herhalen)" required>
             </div>
             <div class="col-1"></div>
         </div>
@@ -215,7 +220,7 @@ if (isset($_POST['aanmeldenKlaar'])) {
         <div class='row loginSignupRows'>
             <div class="col-1"></div>
             <div class="col-11">
-                <label for="legenda" class="loginSignupRows"> Het wachtwoord moet minimaal 8 tekens bevatten. <br> Het wachtwoord moet minmaal 1 hoofdletter en 1 numeriek getal bevatten.</label>
+                <label for="legenda" class="loginSignupRows"> Het wachtwoord moet minimaal 8 tekens bevatten. <!--<br> Het wachtwoord moet minmaal 1 hoofdletter en 1 numeriek getal bevatten.--></label>
             </div>
         </div>
 
