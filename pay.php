@@ -108,7 +108,7 @@ if(isset($_SESSION['paymentInfo'])) {
             </div>
             <br>
             <div class="toConfirmation">
-                <input type="submit" name="gaTerug" value="Betalen" class="toConfirmationButton button">
+                <input type="submit" name="gaTerug" value="Betalen" class="toConfirmationButton button buttonGreen">
             </div>
         </form>
 
