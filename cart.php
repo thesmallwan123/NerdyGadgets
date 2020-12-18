@@ -41,7 +41,7 @@ if (isset($_POST['kortingsCode'])) {
     mysqli_stmt_execute($Statement);
     $discountQuery = mysqli_stmt_get_result($Statement);
     $discountQuery = mysqli_fetch_all($discountQuery, MYSQLI_ASSOC);
-
+    
     if (isset($discountQuery[0]['discountName'])) {
         $kortingGeldig = TRUE;
         $korting = $discountQuery[0]['discountQuantity'];
@@ -87,16 +87,15 @@ if (isset($_GET["id"])) {
 }
 
 // Verwijderen artikel
-function deleteItem($ID, $cartItems)
-{
+function deleteItem($ID, $cartItems) {
     if (array_key_exists($ID, $cartItems)) {
         unset($cartItems[$ID]);
         $_SESSION['cart'] = $cartItems;
-?> <script>
-            window.location.replace('./cart.php')
+        ?> <script>
+        window.location.replace('./cart.php')
         </script> <?php
-                }
-            }
+    }
+}
 
             // Verminderen artikel
             function decreaseItem($ID, $cartItems)
@@ -105,8 +104,8 @@ function deleteItem($ID, $cartItems)
                     $cartItems[$ID] -= 1;
                     $_SESSION['cart'] = $cartItems;
                     ?> <script>
-            window.location.replace('./cart.php')
-        </script> <?php
+                    window.location.replace('./cart.php')
+                    </script> <?php
                 }
             }
 
@@ -141,20 +140,6 @@ function deleteItem($ID, $cartItems)
                 $result = mysqli_stmt_get_result($Statement);
                 $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
-                if ($result[0]["ImagePath"] == NULL) {
-                    $Query = "SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = ? LIMIT 1";
-
-                    $Statement = mysqli_prepare($Connection, $Query);
-                    mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
-                    mysqli_stmt_execute($Statement);
-
-                    $result2 = mysqli_stmt_get_result($Statement);
-                    $result2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
-
-                    $result[0]["ImagePath"] = "Public/StockGroupIMG/" . $result2[0]["ImagePath"];
-                } else {
-                    $result[0]["ImagePath"] = "Public/StockItemIMG/" . $result[0]["ImagePath"];
-                }
                 return $result;
             }
 
@@ -233,7 +218,7 @@ function deleteItem($ID, $cartItems)
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
-                    <img class="productImage" src="<?php echo $artikel[0]['ImagePath']; ?>">
+                    <img class="productImage" src="Public/StockItemIMG/<?php echo $artikel[0]['ImagePath']; ?>">
                     <div class="productID">ID: <?php echo $artikel[0]["StockItemID"]; ?></div>
                 </div>
                 <div class="rowMiddle">
@@ -255,10 +240,7 @@ function deleteItem($ID, $cartItems)
                         <!-- Delete item -->
                         <div class="col-3">
                             <a href="cart.php?id=<?php echo $artikelID ?>&function=deleteItem">
-                                <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                                    <path fill="currentColor" d="M32 464a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128H32zm272-256a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zm-96 0a16 16 0 0 1 32 0v224a16 16 0 0 1-32 0zM432 32H312l-9.4-18.7A24 24 0 0 0 281.1 0H166.8a23.72 23.72 0 0 0-21.4 13.3L136 32H16A16 16 0 0 0 0 48v32a16 16 0 0 0 16 16h416a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16z"></path>
-                                </svg>
-                            </a>
+                                <i class="far fa-trash-alt"></i></a>
                         </div>
 
                         <!-- Disable minus button when amount <= 1 -->
@@ -299,7 +281,7 @@ function deleteItem($ID, $cartItems)
 
         // KORTINGSBEREKENINGEN?!
         if ($additiveDiscount) {
-            if (isset($_SESSION['account'])) {
+            if(isset($_SESSION['account'])) {
                 $totaalKorting = 1 - ((1 - $korting) + (1 - $accountKorting));
                 $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $totaalKorting;
             } else {
@@ -307,7 +289,7 @@ function deleteItem($ID, $cartItems)
             }
         } else {
             $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $korting;
-            if (isset($_SESSION['account'])) {
+            if(isset($_SESSION['account'])) {
                 $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
             }
         }
@@ -331,11 +313,11 @@ function deleteItem($ID, $cartItems)
         ?>
 
         <!-- Kortingscoupon -->
-        <?php if (isset($_SESSION['account'])) { ?>
+            <?php if (isset($_SESSION['account'])) { ?>
             <p class="verzendKosten klantKorting">Als klant heeft u 5% bonus korting.</p>
-        <?php } else { ?>
+            <?php } else { ?>
             <p class="verzendKosten klantKorting">Log in voor 5% korting!</p>
-        <?php } ?>
+            <?php } ?>
         <div class="row">
             <form method="POST" class="kortingRow">
                 <div>
@@ -382,7 +364,7 @@ function deleteItem($ID, $cartItems)
 
         <!-- Korting weergeven -->
         <?php
-        if ($kortingGeldig == TRUE or isset($_SESSION['account'])) {
+        if ($kortingGeldig == TRUE OR isset($_SESSION['account'])) {
         ?>
             <div class="costBreakdown korting">
                 Korting: €
