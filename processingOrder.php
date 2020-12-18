@@ -57,7 +57,7 @@ $QUERY = '
 INSERT INTO privateorder (OrderDate, ExpectedDeliveryDate, Comment, LastEditedBy, LastEditWhen, DiscountName, TotalPrice)
 VALUES (?, ?, ?, ?, ?, ?, ?)';
 $statement = mysqli_prepare($Connection, $QUERY);
-mysqli_stmt_bind_param($statement, 'sssissi', $date, $deliveryDate, $comment, $lastEditedBy, $date, $kortingNaam, $totaalprijs);
+mysqli_stmt_bind_param($statement, 'sssissd', $date, $deliveryDate, $comment, $lastEditedBy, $date, $kortingNaam, $totaalprijs);
 mysqli_stmt_execute($statement);
 
 // bestellingen in tabel privateOrderLine zetten
@@ -91,7 +91,7 @@ foreach ($cart as $stockitemID => $amount) {
     INSERT INTO privateorderlines (OrderID, StockItemID, Description, SellPrice, TaxRate, PickedQuantity, LastEditedWhen)
     VALUES (?,?,?,?,?,?,?)';
     $statement = mysqli_prepare($Connection, $QUERY);
-    mysqli_stmt_bind_param($statement, "iisiiis", $orderID, $stockitemID, $searchDetails, $sellPrice, $taxRate, $amount, $date);
+    mysqli_stmt_bind_param($statement, "iisdiis", $orderID, $stockitemID, $searchDetails, $sellPrice, $taxRate, $amount, $date);
     mysqli_stmt_execute($statement);
 }
 
