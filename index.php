@@ -14,9 +14,9 @@ if (isset($_SESSION['account'])) {
     $ReturnableResult = mysqli_stmt_get_result($Statement);
     $voornaam = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['firstname'];
 
-    ?>
+?>
     <h1 class="welkomstBericht">Welkom <?php print($voornaam); ?></h1>
-    <?php
+<?php
 }
 ?>
 
@@ -28,11 +28,11 @@ if (isset($_SESSION['account'])) {
                 <li class="HomePagePrice">€30.95</li>
             </ul>
 
+        </a>
     </div>
-    </a>
     <div class="HomePageStockItemPicture"></div>
 </div>
+
 <?php
 include_once("./footer.php");
 ?>
-
