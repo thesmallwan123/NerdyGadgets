@@ -213,7 +213,6 @@ function deleteItem($ID, $cartItems) {
                 }
                 return ROUND($taxTotaal, 2);
             }
-
                     ?>
 
 <!-- Body cart -->
