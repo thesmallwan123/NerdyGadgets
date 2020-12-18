@@ -33,6 +33,6 @@ if (isset($_SESSION['account'])) {
     <div class="HomePageStockItemPicture"></div>
 </div>
 <?php
-include __DIR__ . "/footer.php";
+include_once("./footer.php");
 ?>
 

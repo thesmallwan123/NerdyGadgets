@@ -432,6 +432,7 @@ ul#ul-class-price li {
 }
 .IndexStyle {
     margin: 0 auto;
+    margin-top: -50px;
     width: 100%;
 }
 .FilterTopMargin {
@@ -952,9 +953,10 @@ p.boldText{
 
 /* footer */
 .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
+    position: relative;
+    /* left: 0;
+    bottom: 0; */
+    margin-top: 20px;
     width: 100%;
     color: white;
     text-align: center;
