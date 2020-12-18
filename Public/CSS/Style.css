@@ -953,10 +953,8 @@ p.boldText{
 
 /* footer */
 .footer {
-    position: relative;
-    /* left: 0;
-    bottom: 0; */
-    margin-top: 20px;
+    position: fixed;
+    bottom: 0px;
     width: 100%;
     color: white;
     text-align: center;
