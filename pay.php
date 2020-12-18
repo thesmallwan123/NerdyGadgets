@@ -63,7 +63,7 @@ if(isset($_SESSION['paymentInfo'])) {
 <div id="Wrap">
     <div class="confirmationText confirmationTextP">
 
-        <p>U moet €<?php print($totaalprijs); ?> betalen.</p>
+        <p>U moet €<?php printf("%.2f", $totaalprijs); ?> betalen.</p>
         <p>Dit bedrag is inclusief BTW</p>
         <p>Uw bestelling wordt op <?php print($deliveryDate); ?> geleverd. </p>
         <p>Op uw ingevoerde adres:</p>
