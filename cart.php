@@ -140,6 +140,20 @@ function deleteItem($ID, $cartItems) {
                 $result = mysqli_stmt_get_result($Statement);
                 $result = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+                if ($result[0]["ImagePath"] == NULL) {
+                    $Query = "SELECT ImagePath FROM stockgroups JOIN stockitemstockgroups USING(StockGroupID) WHERE StockItemID = ? LIMIT 1";
+
+                    $Statement = mysqli_prepare($Connection, $Query);
+                    mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
+                    mysqli_stmt_execute($Statement);
+
+                    $result2 = mysqli_stmt_get_result($Statement);
+                    $result2 = mysqli_fetch_all($result2, MYSQLI_ASSOC);
+
+                    $result[0]["ImagePath"] = "Public/StockGroupIMG/".$result2[0]["ImagePath"];
+                } else {
+                    $result[0]["ImagePath"] = "Public/StockItemIMG/".$result[0]["ImagePath"];
+                }
                 return $result;
             }
 
@@ -199,7 +213,6 @@ function deleteItem($ID, $cartItems) {
                 }
                 return ROUND($taxTotaal, 2);
             }
-
                     ?>
 
 <!-- Body cart -->
@@ -218,7 +231,7 @@ function deleteItem($ID, $cartItems) {
             <div class="cartRow">
                 <div class="rowLeft">
                     <!-- ID and Image -->
-                    <img class="productImage" src="Public/StockItemIMG/<?php echo $artikel[0]['ImagePath']; ?>">
+                    <img class="productImage" src="<?php echo $artikel[0]['ImagePath']; ?>">
                     <div class="productID">ID: <?php echo $artikel[0]["StockItemID"]; ?></div>
                 </div>
                 <div class="rowMiddle">
