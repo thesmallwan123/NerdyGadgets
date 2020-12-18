@@ -1,11 +1,17 @@
 html {
     background-color: rgb(35, 35, 47) !important;
+    min-height: 100Vh;
+}
+
+.Background{
+    min-height: calc(100Vh);
 }
 
 body {
     overflow-x:hidden;
     color: #FFF !important;
     background-color: rgb(35, 35, 47) !important;
+    min-height: 100Vh;
 }
 @font-face {
     font-family: MmrText;
@@ -952,13 +958,13 @@ p.boldText{
 }
 
 /* footer */
-.footer {
-    position: fixed;
-    bottom: 0px;
+/* .footer {
+    /* position: relative;
+    height: 20px;
     width: 100%;
     color: white;
     text-align: center;
-}
+} */
 
 /* to customer service button */
 .toCustomerServiceButton {

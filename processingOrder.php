@@ -30,6 +30,7 @@ $lastEditedBy = NULL;
 
 // variabele korting
 $korting = 1.00;
+$kortingNaam = "";
 if (isset($_SESSION['korting'])) {
     $kortingsCode = $_SESSION['korting'];
 
@@ -48,13 +49,15 @@ if (isset($_SESSION['korting'])) {
     }
 }
 
+$totaalprijs = $_SESSION["totaalPrijs"];
+
 //bestellingen in de database zetten.
 // invoeren van Orderdatum, verwachte leverdatum, comment, laatstgewijzigd door, laatstgewijzigd & korting
 $QUERY = '
-INSERT INTO privateorder (OrderDate, ExpectedDeliveryDate, Comment, LastEditedBy, LastEditWhen, Discount)
-VALUES (?, ?, ?, ?, ?, ?)';
+INSERT INTO privateorder (OrderDate, ExpectedDeliveryDate, Comment, LastEditedBy, LastEditWhen, DiscountName, TotalPrice)
+VALUES (?, ?, ?, ?, ?, ?, ?)';
 $statement = mysqli_prepare($Connection, $QUERY);
-mysqli_stmt_bind_param($statement, 'sssisi', $date, $deliveryDate, $comment, $lastEditedBy, $date, $korting);
+mysqli_stmt_bind_param($statement, 'sssissi', $date, $deliveryDate, $comment, $lastEditedBy, $date, $kortingNaam, $totaalprijs);
 mysqli_stmt_execute($statement);
 
 // bestellingen in tabel privateOrderLine zetten
@@ -71,7 +74,7 @@ foreach ($cart as $stockitemID => $amount) {
 
 // ophalen van de beschrijving, prijs per stuk en de BTW
     $QUERY = '
-            SELECT SearchDetails, UnitPrice, TaxRate
+            SELECT SearchDetails, (RecommendedRetailPrice*(1+(TaxRate/100))) AS SellPrice, TaxRate
             FROM stockitems
             WHERE StockItemID = ?';
     $statement = mysqli_prepare($Connection, $QUERY);
@@ -80,15 +83,15 @@ foreach ($cart as $stockitemID => $amount) {
     $ReturnableResult = mysqli_stmt_get_result($statement);
     $result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
     $searchDetails = $result["SearchDetails"];
-    $unitPrice = $result["UnitPrice"];
+    $sellPrice = $result["SellPrice"];
     $taxRate = $result["TaxRate"];
 
 // invoeren van de OrderID, StockitemID, beschrijving, prijs per stuk, btw per stuk, kwantiteit & laatst gewijzigd in de tabel privateOrderLines
     $QUERY = '
-    INSERT INTO privateorderlines (OrderID, StockItemID, Description, UnitPrice, TaxRate, PickedQuantity, LastEditedWhen)
+    INSERT INTO privateorderlines (OrderID, StockItemID, Description, SellPrice, TaxRate, PickedQuantity, LastEditedWhen)
     VALUES (?,?,?,?,?,?,?)';
     $statement = mysqli_prepare($Connection, $QUERY);
-    mysqli_stmt_bind_param($statement, "iisiiis", $orderID, $stockitemID, $searchDetails, $unitPrice, $taxRate, $amount, $date);
+    mysqli_stmt_bind_param($statement, "iisiiis", $orderID, $stockitemID, $searchDetails, $sellPrice, $taxRate, $amount, $date);
     mysqli_stmt_execute($statement);
 }
 
