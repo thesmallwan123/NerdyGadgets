@@ -44,9 +44,7 @@ if (isset($_SESSION['korting'])) {
     $discountQuery = mysqli_fetch_all($discountQuery, MYSQLI_ASSOC);
 
     if (isset($discountQuery[0]['discountName'])) {
-        $kortingGeldig = TRUE;
-        $korting = $discountQuery[0]['discountQuantity'];
-        $_SESSION['korting'] = $kortingsCode;
+        $kortingNaam = $discountQuery[0]['discountName'];
     }
 }
 
