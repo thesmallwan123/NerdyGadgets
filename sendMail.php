@@ -15,8 +15,8 @@ $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
 
 // Verstuur een bericht naar de klantenservice
-function berichtKlant($klantVNaam, $klantTussen, $klantANaam, $klantMail, $klantBericht){
-    $mailMessage = "
+function berichtKlant($customerFirstName, $customerInsertion, $customerLastName, $customerEmail, $customerMessage){
+    $emailMessage = "
         <html>
             <head>
             <style>
@@ -28,8 +28,8 @@ function berichtKlant($klantVNaam, $klantTussen, $klantANaam, $klantMail, $klant
             <body>
                 <h1>Vraag van klant</h1><br>
                 <p>Beste Servicedeskmedewerker,</p>
-                <p>".$klantVNaam." ".$klantTussen." ".$klantANaam." bericht het volgende</p>
-                <p>".$klantBericht."</p>
+                <p>".$customerFirstName." ".$customerInsertion." ".$customerLastName." bericht het volgende</p>
+                <p>".$customerMessage."</p>
             </body>
         </html>
     ";
@@ -49,11 +49,11 @@ function berichtKlant($klantVNaam, $klantTussen, $klantANaam, $klantMail, $klant
 
 
     // Message
-    $email->SetFrom($klantMail);
+    $email->SetFrom($customerEmail);
     $email->Subject = "NerdyGadgets - Bericht van klant";
-    $email->Body = $mailMessage;
+    $email->Body = $emailMessage;
     $email->addAddress('customerservice.nerdygadgets@gmail.com');
-    $email->addReplyTo($klantMail);
+    $email->addReplyTo($customerEmail);
     $email->isHTML(true);
     
 
@@ -69,7 +69,7 @@ function berichtKlant($klantVNaam, $klantTussen, $klantANaam, $klantMail, $klant
 }
 
 // Verstuur factuur naar de klant
-function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fileLocation){
+function verstuurFactuur($customerFirstName, $customerInsertion, $customerLastName, $customerEmail, $fileLocation){
     // Check if file exists
     $file = fopen($fileLocation, "r");
     if($file){
@@ -88,7 +88,7 @@ function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fi
                 </style>
                 </head>
                 <body>
-                    <p class='intro'>Beste ".$klantVNaam." " .$klantTussen. " ".$klantANaam. "</p>
+                    <p class='intro'>Beste ".$customerFirstName." " .$customerInsertion. " ".$customerLastName. "</p>
                     <p>Uw bestelling is bij ons doorgekomen!</p>
                     <p>Wij willen u bij deze het factuur van uw bestelling meegeven.</p>
                     <p>Nogmaals dank voor uw bestelling</p>
@@ -115,7 +115,7 @@ function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fi
         $email->SetFrom('customerservice.nerdygadgets@gmail.com');
         $email->Subject = "NerdyGadgets - Factuur";
         $email->Body = $mailMessage;
-        $email->addAddress($klantMail);
+        $email->addAddress($customerEmail);
         $email->isHTML(true);
         $email->addAttachment($fileLocation);
 
@@ -133,7 +133,7 @@ function verstuurFactuur($klantVNaam, $klantTussen, $klantANaam, $klantMail, $fi
 }
 
 
-function verstuurFactuurNerdy($voornaam, $tussenvoegsel, $achternaam, $klantMail, $fileLocation){
+function verstuurFactuurNerdy($firstName, $insertion, $lastName, $customerEmail, $fileLocation){
     $file = fopen($fileLocation, "r");
     if($file){
         fclose($file);
@@ -145,12 +145,12 @@ function verstuurFactuurNerdy($voornaam, $tussenvoegsel, $achternaam, $klantMail
                 </style>
                 </head>
                 <body>
-                    ".$voornaam." ".$tussenvoegsel." ".$achternaam." heeft een bestelling geplaatst. 
+                    ".$firstName." ".$insertion." ".$lastName." heeft een bestelling geplaatst. 
                     <br>
                     Gelieve hier naar te kijken.
                     <br>
                     Mochten er problemen zijn, gelieve de klant te mailen op dit email-adres: <br>
-                    ".$klantMail."
+                    ".$customerEmail."
                 </body>
             </html>
         ";
@@ -173,7 +173,7 @@ function verstuurFactuurNerdy($voornaam, $tussenvoegsel, $achternaam, $klantMail
         $email->Subject = "NerdyGadgets - Factuur";
         $email->Body = $mailMessage;
         $email->addAddress('customerservice.nerdygadgets@gmail.com');
-        $email->addReplyTo($klantMail);
+        $email->addReplyTo($customerEmail);
         $email->isHTML(true);
         $email->addAttachment($fileLocation);
 

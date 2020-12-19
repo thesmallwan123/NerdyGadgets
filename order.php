@@ -26,15 +26,15 @@ session_start();
 
     <?php
 //variabelen worden gemaakt.
-    $voornaam = "";
-    $tussenvoegsel = "";
-    $achternaam = "";
+    $firstName = "";
+    $insertion = "";
+    $lastName = "";
     $gender = "";
     $email = "";
-    $straat = "";
-    $huisnummer = "";
-    $postcode = "";
-    $woonplaats = "";
+    $address = "";
+    $houseNumber = "";
+    $postalCode = "";
+    $city = "";
 
     // checken session account & variabelen definiëren wanneer aanwezig.
     if (isset($_SESSION['account'])) {
@@ -50,39 +50,39 @@ session_start();
         $ReturnableResult = mysqli_stmt_get_result($Statement);
         $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
 
-        $voornaam = $Result['firstname'];
-        $tussenvoegsel = $Result['infix'];
-        $achternaam = $Result['surname'];
+        $firstName = $Result['firstname'];
+        $insertion = $Result['infix'];
+        $lastName = $Result['surname'];
         $email = $Result['email'];
-        $straat = $Result['street'];
-        $huisnummer = $Result['streetnumber'];
-        $postcode = $Result['postalcode'];
-        $woonplaats = $Result['city'];
+        $address = $Result['street'];
+        $houseNumber = $Result['streetnumber'];
+        $postalCode = $Result['postalcode'];
+        $city = $Result['city'];
         $gender = $Result['gender'];
     }
     // checken POST en variabelen definiëren gebaseerd op ingevuld formulier. Sessie paymentInfo aanmaken.
     if (isset($_POST['submit'])) {
-        $straat = $_POST['straat'];
-        $huisnummer = $_POST['huisnummer'];
-        $postcode = $_POST['postcode'];
-        $woonplaats = $_POST['woonplaats'];
+        $address = $_POST['straat'];
+        $houseNumber = $_POST['huisnummer'];
+        $postalCode = $_POST['postcode'];
+        $city = $_POST['woonplaats'];
 
-        $voornaam = $_POST["voornaam"];
-        $tussenvoegsel = $_POST["tussenvoegsel"];
-        $achternaam = $_POST["achternaam"];
+        $firstName = $_POST["voornaam"];
+        $insertion = $_POST["tussenvoegsel"];
+        $lastName = $_POST["achternaam"];
         $gender = $_POST["gender"];
         $email = $_POST["email"];
 
 
         $paymentInfo = array();
-        $paymentInfo[0] = $straat;
-        $paymentInfo[1] = $huisnummer;
-        $paymentInfo[2] = $postcode;
-        $paymentInfo[3] = $woonplaats;
+        $paymentInfo[0] = $address;
+        $paymentInfo[1] = $houseNumber;
+        $paymentInfo[2] = $postalCode;
+        $paymentInfo[3] = $city;
 
-        $paymentInfo[4] = $voornaam;
-        $paymentInfo[5] = $tussenvoegsel;
-        $paymentInfo[6] = $achternaam;
+        $paymentInfo[4] = $firstName;
+        $paymentInfo[5] = $insertion;
+        $paymentInfo[6] = $lastName;
         $paymentInfo[7] = $gender;
         $paymentInfo[8] = $email;
 
@@ -99,17 +99,17 @@ session_start();
                 <div class="col-5">
 <!--                    //voornaam-->
                     <label for="voornaam"> Voornaam</label><br>
-                    <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" placeholder="Voornaam" required>
+                    <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($firstName); ?>" placeholder="Voornaam" required>
                 </div>
                 <div class="col-2">
 <!--                    //tussenvoegsel-->
                     <label for="tussenvoegsel"> Tussenvoegsel</label>
-                    <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($tussenvoegsel); ?>" placeholder="Tussenvoegsel">
+                    <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($insertion); ?>" placeholder="Tussenvoegsel">
                 </div>
                 <div class="col-5">
 <!--                    //achternaam-->
                     <label for="achternaam"> Achternaam </label>
-                    <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" placeholder="Achternaam" required>
+                    <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($lastName); ?>" placeholder="Achternaam" required>
                 </div>
             </div>
             <div class="row orderRow">
@@ -133,24 +133,24 @@ session_start();
                 <div class="col-10">
 <!--                    //straat-->
                     <label for="address">Straat</label>
-                    <input class="opmaakOrder" type="text" id="straat" name="straat" value="<?php print($straat); ?>" placeholder="Straat" required>
+                    <input class="opmaakOrder" type="text" id="straat" name="straat" value="<?php print($address); ?>" placeholder="Straat" required>
                 </div>
                 <div class="col-2">
 <!--                    //huisnummer-->
                     <label for="address">Huisnummer</label>
-                    <input class="opmaakOrder" type="text" id="huisnummer" name="huisnummer" value="<?php print($huisnummer); ?>" placeholder="Huisnummer" required>
+                    <input class="opmaakOrder" type="text" id="huisnummer" name="huisnummer" value="<?php print($houseNumber); ?>" placeholder="Huisnummer" required>
                 </div>
             </div>
             <div class="row orderRow">
                 <div class="col-2">
 <!--                    //postcode-->
                     <label for="postalcode">Postcode</label>
-                    <input class="opmaakOrder" type="text" id="postcode" name="postcode" value="<?php print($postcode); ?>" placeholder="Postcode" required>
+                    <input class="opmaakOrder" type="text" id="postcode" name="postcode" value="<?php print($postalCode); ?>" placeholder="Postcode" required>
                 </div>
                 <div class="col-10">
 <!--                    //woonplaats-->
                     <label for="city"> Woonplaats</label>
-                    <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" value="<?php print($woonplaats); ?>" placeholder="Woonplaats" required>
+                    <input class="opmaakOrder" type="text" id="woonplaats" name="woonplaats" value="<?php print($city); ?>" placeholder="Woonplaats" required>
                 </div>
             </div>
 

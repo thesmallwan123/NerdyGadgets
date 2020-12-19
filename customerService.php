@@ -2,9 +2,9 @@
 include __DIR__ . "/header.php";
 //include("./sendMail.php");
 
-$voornaam = "";
-$tussenvoegsel = "";
-$achternaam = "";
+$firstName = "";
+$insertion = "";
+$lastName = "";
 $email = "";
 
 if (isset($_SESSION['account'])) {
@@ -20,9 +20,9 @@ if (isset($_SESSION['account'])) {
     $ReturnableResult = mysqli_stmt_get_result($Statement);
     $Result = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0];
 
-    $voornaam = $Result['firstname'];
-    $tussenvoegsel = $Result['infix'];
-    $achternaam = $Result['surname'];
+    $firstName = $Result['firstname'];
+    $insertion = $Result['infix'];
+    $lastName = $Result['surname'];
     $email = $Result['email'];
 }
 
@@ -42,15 +42,15 @@ if (isset($_POST["sendMailCustomerService"])) {
         <div class="row orderRow">
             <div class="col-5">
                 <label for="voornaam"> Voornaam</label><br>
-                <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($voornaam); ?>" placeholder="Voornaam" required>
+                <input class="opmaakOrder" type="text" id="voornaam" name="voornaam" value="<?php print($firstName); ?>" placeholder="Voornaam" required>
             </div>
             <div class="col-2">
                 <label for="tussenvoegsel"> Tussenvoegsel</label>
-                <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($tussenvoegsel); ?>" placeholder="Tussenvoegsel">
+                <input class="opmaakOrder" type="text" id="tussenvoegsel" name="tussenvoegsel" value="<?php print($insertion); ?>" placeholder="Tussenvoegsel">
             </div>
             <div class="col-5">
                 <label for="achternaam"> Achternaam </label>
-                <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($achternaam); ?>" placeholder="Achternaam" required>
+                <input class="opmaakOrder" type="text" id="achternaam" name="achternaam" value="<?php print($lastName); ?>" placeholder="Achternaam" required>
             </div>
         </div>
         <div class="row orderRow">

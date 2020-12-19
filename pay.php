@@ -23,20 +23,20 @@ session_start();
 
 <?php
 
-$prijsKloptNiet = FALSE;
+$priceDoesNotMatch = FALSE;
 
 /*calculating delivery time*/
 $deliveryDate = date("d/m/Y", time() + 86400);
 
 /*calculating total price*/
-$totaalprijs = $_SESSION["totaalPrijs"];
-$_SESSION["totaalPrijs"] = $totaalprijs;
+$totalPrice = $_SESSION["totaalPrijs"];
+$_SESSION["totaalPrijs"] = $totalPrice;
 // $totaalprijs = 1;
 
 // Checking if the value from last page is the same as the total price
 if (isset($_POST["bevestiging"])) {
-    if ($totaalprijs != $_POST["bevestiging"]) {
-        $prijsKloptNiet = TRUE;
+    if ($totalPrice != $_POST["bevestiging"]) {
+        $priceDoesNotMatch = TRUE;
     } else {
         // $Query = "
         //         SELECT discounts
@@ -52,10 +52,10 @@ if (isset($_POST["bevestiging"])) {
 // Betalingsinfo ophalen uit de sessie
 if(isset($_SESSION['paymentInfo'])) {
     $paymentInfo = $_SESSION['paymentInfo'];
-    $straat = $paymentInfo[0];
-    $huisnummer = $paymentInfo[1];
-    $postcode = $paymentInfo[2];
-    $woonplaats = $paymentInfo[3];
+    $address = $paymentInfo[0];
+    $houseNumber = $paymentInfo[1];
+    $postalCode = $paymentInfo[2];
+    $city = $paymentInfo[3];
 }
 ?>
 
@@ -63,17 +63,17 @@ if(isset($_SESSION['paymentInfo'])) {
 <div id="Wrap">
     <div class="confirmationText confirmationTextP">
 
-        <p>U moet €<?php printf("%.2f", $totaalprijs); ?> betalen.</p>
+        <p>U moet €<?php printf("%.2f", $totalPrice); ?> betalen.</p>
         <p>Dit bedrag is inclusief BTW</p>
         <p>Uw bestelling wordt op <?php print($deliveryDate); ?> geleverd. </p>
         <p>Op uw ingevoerde adres:</p>
 
         <?php
 //        variabelen worden gedevinieerd
-        print($straat . " ");
-        print($huisnummer . " ");
-        print($postcode . " ");
-        print($woonplaats . " ");
+        print($address . " ");
+        print($houseNumber . " ");
+        print($postalCode . " ");
+        print($city . " ");
         ?>
 
 <!--        invulbalk & controle of het gegeven bedrag overeenkomt met het ingevulde bedrag-->
@@ -82,13 +82,13 @@ if(isset($_SESSION['paymentInfo'])) {
             <div class="bestelRow">
                 <div class="col-12"> <label for="bevestiging">Bevestig de totale prijs om te betalen</label><br>
                 <?php
-                    if ($prijsKloptNiet) {
+                    if ($priceDoesNotMatch) {
                     ?>
                     <div class="row loginSignupRows">
                         <div class="col-1"></div>
                         <div class="col-10">
                                 <?php 
-                            if ($prijsKloptNiet) { 
+                            if ($priceDoesNotMatch) {
                                 ?> 
                                 <label for="email" class="signupWarningLabel">Het betaalde bedrag komt niet overeen met de prijs.</label>
                                 <?php 
