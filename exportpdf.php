@@ -13,10 +13,10 @@ require_once 'dompdf/lib/html5lib/Parser.php';
 use Dompdf\Dompdf;
 
 // Klantgegevens
-$voornaam = $_SESSION["paymentInfo"][4];
-$tussenvoegsel = $_SESSION["paymentInfo"][5];
-$achternaam = $_SESSION["paymentInfo"][6];
-$geslacht = $_SESSION["paymentInfo"][7];
+$firstName = $_SESSION["paymentInfo"][4];
+$insertion = $_SESSION["paymentInfo"][5];
+$lastName = $_SESSION["paymentInfo"][6];
+$gender = $_SESSION["paymentInfo"][7];
 $email = $_SESSION["paymentInfo"][8];
 
 $Dompdf = new Dompdf();
@@ -56,11 +56,11 @@ $output = "
                     </div>
                     <div class='infoBottom information box'>
                         <b>Klantgegevens:</b><br>
-                        Naam: " . $voornaam." ";
-                        if(isset($tussenvoegsel)) {
-                            $output.= $tussenvoegsel." ";
+                        Naam: " . $firstName." ";
+                        if(isset($insertion)) {
+                            $output.= $insertion." ";
                         }
-                        $output .= $achternaam . "
+                        $output .= $lastName . "
                         
                         <br>
                         Email: " . $email . "
@@ -85,7 +85,7 @@ $output = "
                         <td>Amount</td>
                         <td>Price</td>
                     </tr>";
-                        foreach ($cart as $artikelID => $amount) {
+                            foreach ($cart as $productID => $amount) {
                             $Query = '
                                 SELECT si.StockItemID, StockItemName, ROUND((RecommendedRetailPrice*(1+(TaxRate/100))), 2) AS RecommendedRetailPrice
                                 FROM stockitems si
@@ -94,7 +94,7 @@ $output = "
                                 WHERE si.StockItemID = ?';
 
                             $Statement = mysqli_prepare($Connection, $Query);
-                            mysqli_stmt_bind_param($Statement, 'i', $artikelID); // i = integer; s = string;
+                            mysqli_stmt_bind_param($Statement, 'i', $productID); // i = integer; s = string;
                             mysqli_stmt_execute($Statement);
 
                             $result = mysqli_stmt_get_result($Statement);
@@ -144,7 +144,7 @@ fwrite($myFile, $pdf);
 
 // Verstuur mail
 include("./sendMail.php");
-if (verstuurFactuur($voornaam, $tussenvoegsel, $achternaam, $email, $fileLocation) == TRUE && verstuurFactuurNerdy($voornaam, $tussenvoegsel, $achternaam, $email, $fileLocation) == TRUE) {
+if (verstuurFactuur($firstName, $insertion, $lastName, $email, $fileLocation) == TRUE && verstuurFactuurNerdy($firstName, $insertion, $lastName, $email, $fileLocation) == TRUE) {
     // Verwijder file
     fclose($myFile);
     unlink($fileLocation);

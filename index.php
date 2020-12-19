@@ -12,10 +12,10 @@ if (isset($_SESSION['account'])) {
     mysqli_stmt_bind_param($Statement, "s", $account);
     mysqli_stmt_execute($Statement);
     $ReturnableResult = mysqli_stmt_get_result($Statement);
-    $voornaam = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['firstname'];
+    $firstName = mysqli_fetch_all($ReturnableResult, MYSQLI_ASSOC)[0]['firstname'];
 
 ?>
-    <h1 class="welkomstBericht">Welkom <?php print($voornaam); ?></h1>
+    <h1 class="welkomstBericht">Welkom <?php print($firstName); ?></h1>
 <?php
 }
 ?>
