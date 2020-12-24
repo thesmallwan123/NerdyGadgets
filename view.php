@@ -2,18 +2,18 @@
 
 include __DIR__ . "/header.php";
 
-//check if cart exists
+//checken of winklemand bestaat
 if (isset($_SESSION['cart'])) {
     $cartItems = $_SESSION['cart'];
 } else {
     $cartItems = array();
 }
 
-//Add product to cart
+//Product toevoegen aan winkelmand
 if (isset($_POST['submit'])) {
     $ID = $_GET["id"];
 
-    //If product doesnt exist in cart, add it
+    //Als product niet in de winkelmand zit voeg het toe
     if (!array_key_exists($ID, $cartItems)) {
         $cartItems[$ID] = 1;
 ?>
@@ -77,7 +77,7 @@ $returnedTemperature = mysqli_fetch_all($returnedTemperature, MYSQLI_ASSOC);
 
 $chilledStockTemperature = $returnedTemperature[0]['Temperature'];
 
-//Get Images
+//Foto's verkrijgen
 $Query = "
                 SELECT ImagePath
                 FROM stockitemimages 
@@ -124,7 +124,7 @@ if ($R) {
                                 } ?>
                             </ul>
 
-                            <!-- The slideshow -->
+                            <!--  slideshow -->
                             <div class="carousel-inner">
                                 <?php for ($i = 0; $i < count($Images); $i++) {
                                 ?>
@@ -134,7 +134,7 @@ if ($R) {
                                 <?php } ?>
                             </div>
 
-                            <!-- Left and right controls -->
+                            <!-- links en rechts pijltjes -->
                             <a class="carousel-control-prev" href="#ImageCarousel" data-slide="prev">
                                 <span class="carousel-control-prev-icon"></span>
                             </a>
@@ -175,21 +175,21 @@ if ($R) {
                     <div class="CenterPriceLeftChild">
                         <p class="StockItemPriceText"><b><?php print sprintf("€ %.2f", $Result['SellPrice']); ?></b></p>
                         <h6> Inclusief BTW </h6>
-                        <!-- Add product to the cart -->
+                        <!-- product toevoegen aan winkelmand -->
                         <div class="addToCart">
                             <?php
-                            //Look if the Quantity > 0
+                            //kijken of aantal >0
                             $Quantity = $Result['Quantity'];
                             if ($Quantity > 0) {
                             ?>
-                                <!-- If it is enable the add to cart button -->
+                                <!-- als aantal>0 voeg toe aan winkelmand -->
                                 <form method="post">
                                     <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="addToCartButton button">
                                 </form>
                             <?php
                             } else {
                             ?>
-                                <!-- If it isn't disable the add to cart button -->
+                                <!-- als aantal niet >0, schakel toevoeg knop uit -->
                                 <form method="post">
                                     <input type="submit" name="submit" value="Toevoegen aan winkelwagen" class="disabledAddToCartButton button" disabled>
                                 </form>

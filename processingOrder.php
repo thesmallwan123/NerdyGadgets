@@ -17,7 +17,7 @@ WHERE StockItemID = ? ';
 }
 
 
-/* calculating delivery date with the date of today + 1 day*/
+//bereken van bezorgdag 
 $deliveryDate = date("y/m/d", time() + 86400);
 
 //datum van vandaag

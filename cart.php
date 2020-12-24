@@ -158,60 +158,60 @@ function deleteItem($ID, $cartItems) {
             }
 
             // Bereken prijs per artikel
-            function calcPriceRow($totaalPrijsRow, $prijs, $aantal)
+            function calcPriceRow($totalPriceRow, $price, $quantity)
             {
-                $totaalPrijsRow = $prijs * $aantal;
-                return $totaalPrijsRow;
+                $totalPriceRow = $price * $quantity;
+                return $totalPriceRow;
             }
 
             // Bereken BTW per artikel 
-            function calcTaxRow($taxArtikel, $totaalPrijsRow)
+            function calcTaxRow($taxArtikel, $totalPriceRow)
             {
                 $taxArtikel = $taxArtikel / 100;
-                $taxRow = $totaalPrijsRow * $taxArtikel;
+                $taxRow = $totalPriceRow * $taxArtikel;
                 return $taxRow;
             }
 
             // Bereken totaalprijs exclusief verzending
-            function calcPriceTotal($prijsRegel, $totaalPrijsExVerz)
+            function calcPriceTotal($priceRow, $totalPriceWithoutShipping)
             {
-                foreach ($prijsRegel as $id => $prijs) {
-                    $totaalPrijsExVerz += $prijs;
+                foreach ($priceRow as $id => $price) {
+                    $totalPriceWithoutShipping += $price;
                 }
-                return $totaalPrijsExVerz;
+                return $totalPriceWithoutShipping;
             }
 
             // Bereken prijs inclusief verzending
-            function calcIncVerz($totaalPrijsExVerz, $kortingGeldig, $totaalPrijsExVerzKorting)
+            function calcIncVerz($totalPriceWithoutShipping, $discountIsValid, $totalPriceWithoutShippingDiscount)
             {
-                if ($kortingGeldig == TRUE or isset($_SESSION['account'])) {
-                    if ($totaalPrijsExVerzKorting < 30) {
-                        $totaalPrijsIncVerz = $totaalPrijsExVerzKorting + 4.95;
-                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
-                        return ROUND($totaalPrijsIncVerz, 2);
+                if ($discountIsValid == TRUE or isset($_SESSION['account'])) {
+                    if ($totalPriceWithoutShippingDiscount < 30) {
+                        $totalPriceIncShippingCost = $totalPriceWithoutShippingDiscount + 4.95;
+                        $_SESSION["totaalPrijs"] = ROUND($totalPriceIncShippingCost, 2);
+                        return ROUND($totalPriceIncShippingCost, 2);
                     } else {
-                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerzKorting, 2);
-                        return ROUND($totaalPrijsExVerzKorting, 2);
+                        $_SESSION["totaalPrijs"] = ROUND($totalPriceWithoutShippingDiscount, 2);
+                        return ROUND($totalPriceWithoutShippingDiscount, 2);
                     }
-                } elseif ($kortingGeldig == FALSE) {
-                    if ($totaalPrijsExVerz < 30) {
-                        $totaalPrijsIncVerz = $totaalPrijsExVerz + 4.95;
-                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsIncVerz, 2);
-                        return ROUND($totaalPrijsIncVerz, 2);
+                } elseif ($discountIsValid == FALSE) {
+                    if ($totalPriceExcShippingCost < 30) {
+                        $totalPriceIncShippingCost = $totalPriceExcShippingCost + 4.95;
+                        $_SESSION["totaalPrijs"] = ROUND($totalPriceIncShippingCost, 2);
+                        return ROUND($totalPriceIncShippingCost, 2);
                     } else {
-                        $_SESSION["totaalPrijs"] = ROUND($totaalPrijsExVerz, 2);
-                        return ROUND($totaalPrijsExVerz, 2);
+                        $_SESSION["totaalPrijs"] = ROUND($totalPriceExcShippingCost, 2);
+                        return ROUND($totalPriceExcShippingCost, 2);
                     }
                 }
             }
 
             // Bereken Eindbedrag BTW
-            function calcTax($taxArr, $taxTotaal)
+            function calcTax($taxArr, $taxTotal)
             {
                 foreach ($taxArr as $id => $taxRow) {
-                    $taxTotaal = $taxTotaal + $taxRow;
+                    $taxTotal = $taxTotal + $taxRow;
                 }
-                return ROUND($taxTotaal, 2);
+                return ROUND($taxTotal, 2);
             }
                     ?>
 
@@ -230,33 +230,33 @@ function deleteItem($ID, $cartItems) {
             <!-- Producten -->
             <div class="cartRow">
                 <div class="rowLeft">
-                    <!-- ID and Image -->
+                    <!-- ID & Foto -->
                     <img class="productImage" src="<?php echo $product[0]['ImagePath']; ?>">
                     <div class="productID">ID: <?php echo $product[0]["StockItemID"]; ?></div>
                 </div>
                 <div class="rowMiddle">
-                    <!-- Name, Description and Supply -->
+                    <!-- Naam, Beschrijving and voorraad -->
                     <div class="productName">Name: <?php echo $product[0]["StockItemName"] ?></div>
                     <div class="productSearchDetails">Details: <?php echo $product[0]["SearchDetails"] ?></div>
                     <div class="productQuantity">In Store: <?php echo $product[0]["QuantityOnHand"] ?></div>
                 </div>
                 <div class="rowRight">
-                    <!-- Price(incl BTW), Amount, Remove and add button -->
+                    <!-- prijs(incl BTW), aantal, min en plus button -->
                     <div class="productPrice">Totaal: € <?php printf("%.2f", $totalPriceRow) ?> (including BTW)</div>
 
                     <div class="row aantalRow">
                         <div class="col-1">Aantal: </div>
                     </div>
 
-                    <!-- Edit cart -->
+                    <!-- Wijzig winkelmand -->
                     <div class="row knoppenRow">
-                        <!-- Delete item -->
+                        <!-- verwijder item -->
                         <div class="col-3">
                             <a href="cart.php?id=<?php echo $productID ?>&function=deleteItem">
                                 <i class="far fa-trash-alt"></i></a>
                         </div>
 
-                        <!-- Disable minus button when amount <= 1 -->
+                        <!-- schakel min knop uit wannneer <= 1 -->
                         <?php if ($amount <= 1) { ?>
                             <div class="col-3"></div>
                         <?php } else { ?>
@@ -267,7 +267,7 @@ function deleteItem($ID, $cartItems) {
                         <?php } ?>
 
                         <div class="col-3"><?php print($amount); ?></div>
-                        <!-- Increase item -->
+                        <!-- Vermeerder item -->
                         <?php
                         if ($amount >= $product[0]["QuantityOnHand"]) {
                         ?>
@@ -308,21 +308,6 @@ function deleteItem($ID, $cartItems) {
         }
         $benefit = $totalPriceExcShippingCost - $totalPriceExcShippingCostDiscount
 
-        // // Bereken totaalprijs exc. verz. met korting wanneer geldig
-        // if ($kortingGeldig) {
-        //     $voordeel = $totaalPrijsExVerz * (1 - $korting);
-        //     $totaalPrijsExVerzKorting = ($totaalPrijsExVerz * $korting);
-        // }
-        // // Wanneer ingelogd, voeg korting toe aan vorige berekening
-        // if (isset($_SESSION['account'])) {
-        //     if ($kortingGeldig) {
-        //         $totaalPrijsExVerzKorting = $totaalPrijsExVerzKorting * $accountKorting;
-        //         $voordeel = $totaalPrijsExVerz * (1 - $korting) - (1 - $accountKorting);
-        //     } else {
-        //         $totaalPrijsExVerzKorting = $totaalPrijsExVerz * $accountKorting;
-        //         $voordeel = $totaalPrijsExVerz * (1 - $accountKorting);
-        //     }
-        // }
         ?>
 
         <!-- Kortingscoupon -->

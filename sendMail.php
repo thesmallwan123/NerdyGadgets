@@ -1,10 +1,10 @@
 <?php
-// Include phpMailer
+// includeren van phpMailer
 require 'PHPMailer/PHPMailer-master/src/Exception.php';
 require 'PHPMailer/PHPMailer-master/src/PHPMailer.php';
 require 'PHPMailer/PHPMailer-master/src/SMTP.php';
 
-// Use phpMailer
+// gebruiken van phpMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
@@ -48,7 +48,7 @@ function berichtKlant($customerFirstName, $customerInsertion, $customerLastName,
 
 
 
-    // Message
+    // Bericht
     $email->SetFrom($customerEmail);
     $email->Subject = "NerdyGadgets - Bericht van klant";
     $email->Body = $emailMessage;
@@ -70,13 +70,13 @@ function berichtKlant($customerFirstName, $customerInsertion, $customerLastName,
 
 // Verstuur factuur naar de klant
 function verstuurFactuur($customerFirstName, $customerInsertion, $customerLastName, $customerEmail, $fileLocation){
-    // Check if file exists
+    // Checken of bestand bestaat
     $file = fopen($fileLocation, "r");
     if($file){
         fclose($file);
 
 
-        // Message is written in HTML due to headers of Mail. Inline CSS is granted
+        // Bericht is geschreven in HTML door de headers. Inline CSS is verleend
         $mailMessage = "
             <html>
                 <head>
@@ -137,7 +137,7 @@ function verstuurFactuurNerdy($firstName, $insertion, $lastName, $customerEmail,
     $file = fopen($fileLocation, "r");
     if($file){
         fclose($file);
-        // Message is written in HTML due to headers of Mail. Inline CSS is granted
+        //  Bericht is geschreven in HTML door de headers. Inline CSS is verleend
         $mailMessage = "
             <html>
                 <head>

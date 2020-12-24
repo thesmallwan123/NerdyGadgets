@@ -5,6 +5,7 @@ session_start();
 
 <!DOCTYPE html>
 
+<!-- style bijvoegen -->
 <html lang="en" style="background-color: rgb(35, 35, 47);">
 <head>
     <style>
@@ -22,11 +23,13 @@ session_start();
 <body>
 
 <?php
+// uitlogknop
 if (isset($_POST['uitloggen'])) {
     unset($_SESSION['account']);
 }
 ?>
 
+<!-- aangeven of de klant is ingelogd of nog in wilt loggen of aanmelden -->
 <div class="container loginMainPageContainer">
     <div class="row vraag">
         <div class="col-12">

@@ -25,26 +25,19 @@ session_start();
 
 $priceDoesNotMatch = FALSE;
 
-/*calculating delivery time*/
+/*berekenen bezorg datum*/
 $deliveryDate = date("d/m/Y", time() + 86400);
 
-/*calculating total price*/
+//berekenen van totale prijs
 $totalPrice = $_SESSION["totaalPrijs"];
 $_SESSION["totaalPrijs"] = $totalPrice;
-// $totaalprijs = 1;
+
 
 // Checking if the value from last page is the same as the total price
 if (isset($_POST["bevestiging"])) {
     if ($totalPrice != $_POST["bevestiging"]) {
         $priceDoesNotMatch = TRUE;
     } else {
-        // $Query = "
-        //         SELECT discounts
-        //         FROM discount
-        //         WHERE discounts = ?";
-        // $Statement = mysqli_prepare($Connection, $Query);
-        // mysqli_stmt_bind_param($Statement, "i", [[artikelID]]);
-
         header("Location: ./exportpdf.php");
     }
 }

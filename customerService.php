@@ -2,11 +2,13 @@
 include __DIR__ . "/header.php";
 //include("./sendMail.php");
 
+// variabelen aangeven 
 $firstName = "";
 $insertion = "";
 $lastName = "";
 $email = "";
 
+// Query voor het automatisch invullen van de voornaam, tussenvoegsel, achternaam en email.
 if (isset($_SESSION['account'])) {
     $account = $_SESSION["account"];
 
@@ -26,6 +28,7 @@ if (isset($_SESSION['account'])) {
     $email = $Result['email'];
 }
 
+// controleren of alles is ingevuld als op de verzendknop is gedrukt & de mail word verzonden als er op de knop gedrukt is
 if (isset($_POST["sendMailCustomerService"])) {
     include("./sendMail.php");
     if (berichtKlant($_POST["voornaam"], $_POST["tussenvoegsel"], $_POST["achternaam"], $_POST["email"], $_POST["bericht"]) === TRUE) {
@@ -33,6 +36,7 @@ if (isset($_POST["sendMailCustomerService"])) {
 }
 
 ?>
+
 <div class="tekstBovenCS">
     <h1>Neem contact met ons op door het volgende formulier in te vullen</h1>
 </div>

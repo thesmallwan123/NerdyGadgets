@@ -4,7 +4,7 @@
 include_once('connect.php');
 session_start();
 
-// Include autoloader
+// bijvoegen autoloader
 require_once 'dompdf/autoload.inc.php';
 require_once 'dompdf/lib/php-font-lib/src/FontLib/Autoloader.php';
 require_once 'dompdf/lib/php-svg-lib/src/autoload.php';
@@ -29,7 +29,7 @@ $totalprice = $_SESSION["totaalPrijs"];
 $cart = $_SESSION["cart"];
 
 
-//initialize dompdf class
+//initialiseren dompdf class
 $output = "
     <!doctype html>
     <html>
@@ -129,13 +129,13 @@ $output .= "<link type = 'text/css' href = './Public/CSS/dompdf.css'>";
 
 $Dompdf->loadHtml($output);
 
-//set page size and orientation
+// afmetingen van de pagina
 $Dompdf->setPaper('A4', 'Portrait');
 
-//Render the HTML as PDF
+//HTML renderen als PDF
 $Dompdf->render();
 
-// Set output
+// Output instellen
 $pdf = $Dompdf->output();
 
 // Sla de file op

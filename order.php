@@ -7,7 +7,7 @@ session_start();
 
 <html lang="en" style="background-color: rgb(35, 35, 47);">
 
-
+<!-- style meegeven -->
 <head>
     <style>
         @font-face {
