@@ -1,0 +1,1011 @@
+html {
+    background-color: rgb(35, 35, 47) !important;
+    min-height: 100Vh;
+}
+
+.Background{
+    min-height: calc(100Vh);
+}
+
+body {
+    overflow-x:hidden;
+    color: #FFF !important;
+    background-color: rgb(35, 35, 47) !important;
+    min-height: 100Vh;
+}
+@font-face {
+    font-family: MmrText;
+    src: url(/Public/fonts/mmrtext.ttf);
+}
+
+select {
+    margin: 50px;
+    width: 100%;
+    padding: 5px 35px 5px 5px;
+    font-size: 16px;
+    border: 1px solid #CCC;
+    height: 50px;
+}
+
+#FilterOptions select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none; 
+    background: url(../Img/mouse-hover-icon-22.jpg) 96% / 30px no-repeat #EEE;
+}
+
+a {
+    text-decoration: none;
+    position: relative;
+    color:#000000;
+}
+a:hover {
+     text-decoration: none !important;
+ }
+a span {
+    display: none;
+    position: absolute;
+    color: #676EFF;
+    background: #676EFF;
+    padding: 5px;
+}
+a:hover span {
+    display: inline-block; text-align: center;
+    width: 250px;
+    min-height: 30px;
+    margin-top: 25px;
+    font-family: pt-sans, sans-serif;
+    color: #000;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+input {
+    font-family: pt-sans, sans-serif;
+    height: 50px;
+    font-size: 20px;
+    width: 100%;
+    padding: 0 10px;
+}
+table tr th,
+table tr td {
+    padding: 10px;
+}
+ul#ul-class-navigation {
+    right: 10px;
+    line-height: 200px;
+    position: absolute;
+}
+ul#ul-class-navigation li {
+    color: white;
+    display: inline;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+    text-decoration: none;
+    text-decoration-color: currentcolor;
+    margin: 5px;
+}
+#Header {
+    position: fixed;
+    top:0;
+    background-color: rgb(35, 35, 47);
+    width: 100%;
+    height: 200px;
+    z-index: 1;
+    border-bottom: 1px solid rgb(36, 41, 143);
+}
+#FilterFrame {
+    position: fixed;
+    width: 19%;
+    background-color: rgba(35, 40, 47, 0.8);
+    float: left;
+    top:216px;
+    border: 1px solid #fff;
+    margin-left: 5px;
+    margin-top: 10px;
+    padding: 20px;
+}
+#ResultsArea.Browse  {
+    width: 78%;
+    margin-left: 21%;
+    float: left;
+    position: sticky;
+    margin-bottom: 50px;
+}
+#ProductFrame {
+    width: 100%;
+    height: 250px;
+    margin-top: 15px;
+    position: relative;
+    padding: 1px;
+    border-bottom: 1px solid #fff;
+}
+.ImgFrame {
+    width: 230px;
+    height: 230px;
+    background-color: rgb(36, 41, 143);
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-right: 10px
+}
+.ImgFrame img {
+    width: 230px;
+    height: 230px;
+}
+#StockItemFrameRight {
+    float: right;
+    text-align: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 0;
+    top: 0;
+}
+.ItemName {
+    position: relative;
+    top: 10px;
+    font-family: pt-sans, sans-serif;
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.ItemQuantity {
+    position: absolute;
+    left: 250px;
+    bottom: 2.5px;
+    color: white;
+    font-size: 15px;
+}
+#VideoFrame {
+    width: 100%;
+    height: 350px;
+    background-color: #d6d6d6;
+    margin-bottom: 10px;
+}
+#ArticleHeader {
+    width: 100%;
+    height: 300px;
+    position: relative
+}
+#ImageFrame {
+    width: 300px;
+    height: 300px;
+    background-color: rgb(36, 41, 143);
+    float: left;
+    margin-right: 10px;
+}
+.QuantityText {
+    /* position: absolute; */
+    left: 310px;
+    bottom: 0;
+}
+#StockItemHeaderLeft {
+    float: right;
+    text-align: right;
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 300px;
+}
+
+.StockItemNameViewSize {
+    font-size: 35px !important;
+}
+.CenterPriceLeft {
+    position: absolute;
+    height: 100%;
+    right: 0;
+    width: 200px;
+}
+.CenterPriceLeftChild {
+    position: relative;
+    top: 40%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    right: 14px;
+}
+#StockItemDescription {
+    background-color: rgba(35, 40, 47, 0.8);
+    width: 49%;
+    float: left;
+    padding: 10px;
+    margin-top:10px;
+    border: 1px solid;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+}
+#StockItemSpecifications {
+    background-color: rgba(35, 40, 47, 0.8);
+    width: 49%;
+    float: left;
+    padding: 10px;
+    margin-left: 1%;
+    margin-top:10px;
+    border: 1px solid;
+    font-family: pt-sans, sans-serif;
+    font-size: 20px;
+}
+.Labels {
+    margin-bottom: 0;
+    padding: 10px;
+    font-size: 20px;
+    margin-right: 5px;
+}
+#LogoA {
+    height: 200px;
+    width: 100%;
+    position: absolute;
+}
+#LogoImage {
+    background-image: url("../ProductIMGHighRes/NerdyGadgetsLogo.png");
+    width: 250px;
+    height: 90px;
+    margin: 55px 55px 55px 10%;
+}
+ul#ul-class li {
+    display: inline;
+    color: white;
+    margin-right: 1em;
+    font-size: 18px;
+    text-decoration: none;
+    line-height: 200px;
+}
+ul#ul-class-price li {
+    display: inline;
+}
+.TextPrice {
+    margin-top: 7%;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.HrefDecoration {
+    color: white !important;
+}
+.HrefDecoration:hover, .HrefDecoration:active {
+    text-decoration: none;
+    color: #ccc;
+}
+.TextMain {
+    color: #fff;
+    font-family: vortice-concept, sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left: 10%;
+}
+.HomePagePrice {
+    color: #676EFF;
+    font-family: vortice-concept, sans-serif;
+    font-size: 50px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left: 7%;
+}
+.HomePageStockItemPicture {
+    background-image: url("../ProductIMGHighRes/580b57fbd9996e24bc43bf55.png");
+    background-size: 100% 100%;
+    width: 477px;
+    height: 477px;
+    background-repeat: no-repeat;
+    margin-left: 55%;
+    margin-top: -13%;
+}
+#wrap {
+    width: 100%;
+    height: 600px;
+    margin-top: 0%;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.StockGroups {
+    position: relative;
+    border: 1px solid slategrey;
+    background-repeat: no-repeat;
+    background-size: cover;
+    float: left;
+    margin-left: 1.5%;
+    font-family: vortice-concept, sans-serif;
+    color: white;
+    font-size: 25px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+#StockGroup1 {
+    width: 18%;
+    height: 600px;
+    margin-left: 5%;
+}
+#StockGroup2 {
+    width: 18%;
+    height: 600px;
+    background-size: cover;
+}
+#StockGroup3 {
+    width: 15%;
+    height: 250px;
+}
+#StockGroup4 {
+    width: 30%;
+    height: 250px;
+}
+#StockGroup5 {
+    width: 25%;
+    height: 320px;
+    margin-top: 1.5%;
+}
+#StockGroup6 {
+    width: 20%;
+    height: 320px;
+    margin-left: 1.5%;
+    margin-top: 1.5%;
+}
+.StockGroups h1 {
+    position: absolute;
+    left:0;
+    right: 0;
+    font-size: 25px;
+    bottom: 0;
+    text-align: center;
+    text-shadow: 2px 0 0 #000, 0 -2px 0 #000, 0 2px 0 #000, -2px 0 0 #000;
+}
+
+#wrap a {
+    text-decoration: none;
+    color: white;
+}
+#wrap a:hover {
+    color: #ccc;
+    opacity: 0.9;
+}
+.StockItemPriceText {
+    font-family: vortice-concept, sans-serif;
+    color: #676EFF;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 25px;
+}
+.StockItemPriceText:hover {
+    text-decoration: none;
+}
+.StockItemID {
+    font-family: vortice-concept, sans-serif;
+    color: #676EFF;
+    font-size: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-top: 15px;
+}
+.StockItemName {
+    font-family: pt-sans, sans-serif;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.StockItemComments {
+    font-family: pt-sans, sans-serif;
+    color: #fff;
+    font-size: 14px;
+    font-weight: bold;
+}
+#CenteredContent {
+    margin: 0 auto;
+    width: 70%;
+    padding-top: 10px;
+    margin-bottom: 400px;
+}
+.carousel-inner img {
+    width: 100%;
+    height: 100%;
+}
+#ImageCarousel {
+    width: 300px;
+    height: 300px;
+}
+.carousel-control-next-icon:hover,
+.carousel-control-prev-icon:hover {
+    width: 20px;
+    height: 20px;
+}
+.ListItem:hover {
+    text-decoration: none;
+}
+#NoSearchResults {
+    text-align: center;
+    height: 100%;
+    margin: 20px;
+    position: relative;
+}
+#ProductNotFound {
+    text-align: center;
+    position: relative;
+
+}
+.IndexStyle {
+    margin: 0 auto;
+    margin-top: -50px;
+    width: 100%;
+}
+.FilterTopMargin {
+    margin-top: 20px;
+}
+#ProductFrame h6 {
+    color: white;
+}
+#CategoriesBar {
+    position: absolute;
+    left: 280px;
+}
+#PageSelector {
+    text-align: center;
+    margin: 20px;
+}
+#SelectedPage {
+    font-size: 18px;
+    display: inline;
+    font-weight: bold;
+    background-color: rgb(98, 158, 255);
+    padding: 15px 22px;
+    border-radius: 50px;
+}
+.PageNumber {
+    padding: 7px 15px;
+    border-radius: 39px;
+    background: rgb(36, 41, 143);
+    border: 1px rgb(98, 158, 255) solid;
+    color: #fff;
+}
+
+/* Go to cart */
+.goToCart {
+    margin-right: 10px;
+}
+
+/* cart */
+.cartRow{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 90%;
+    /* margin-top: 0px; */
+    margin-bottom: 20px;
+    margin-left: 5%;
+    border: 1px solid white;
+}
+/* left of cart (ID and IMG) */
+.rowLeft{
+    width: 150px;
+    margin-right:40px;
+    text-align: center;
+}
+.productImage{
+    width: 150px;
+    min-height: 90px;
+    border: 1px solid white;
+}
+
+/* Middle of Cart (name, Description, Supply) */
+.rowMiddle{
+    min-width: 500px;
+    max-width: 50%;
+    text-align: left;
+}
+.productName, .productSearchDetails, .productQuantity {
+    margin-top: 4%;
+}
+
+/* Right of Cart (Price(incl. BTW), Amount, Remove and Add Buttons) */
+.rowRight{
+    min-height: 100%;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Bottom of cart (total) */
+.costBreakdown,
+.verzendKosten,
+.BTW,
+.datumVerzending {
+    width: 90%;
+    margin-left: 5%;
+    text-align: right;
+}
+
+.korting {
+    color: greenyellow;
+}
+
+.totalPrice {
+    font-weight: bold;
+}
+
+/* Add to cart button */
+.addToCart {
+    position: absolute;
+    right: 0px;
+    top: 140px;
+}
+
+/* Add to button style*/
+.addToCartButton {
+    background-color: rgb(35, 35, 47);
+    border: 2px solid white;
+    width: 100%;
+    color: white;
+}
+
+.addToCartButton:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+/* When Quantity = 0*/
+.disabledAddToCartButton {
+    background-color: rgb(35, 35, 47);
+    border: 2px solid rgb(61, 61, 61);
+    width: 100%;
+    color: rgb(156, 156, 156);
+}
+
+/* confirmation text*/
+.confirmationText{
+    text-align: center;
+    font-size: 20px;
+    margin-top: 0px;
+    color: white;
+    font-family: pt-sans, sans-serif;
+}
+
+.confirmationTextP{
+    padding-top: 150px;
+}
+
+/* confirmation text header*/
+.confirmationTextHeader{
+    text-align: center;
+    font-size: 60px;
+    margin-top: 200px;
+    color: white;
+    font-family: pt-sans, sans-serif;
+}
+
+
+/* back to shop */
+.backToShop{
+    width: 30%;
+    margin: auto;
+}
+
+/* back to shop button */
+.backToShopButton{
+    background-color: green;
+    border: 2px solid white;
+    width: 100%;
+    color: white;
+}
+
+/* row order page*/
+.orderRow{
+    display: -ms-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0 -16px;
+}
+
+/* container*/
+.container {
+    padding: 5px 20px 15px 20px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin-top: 50px;
+}
+
+.orderPageContainer {
+    margin-top: 100px;
+}
+
+/* input type text*/
+#email{
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid#ccc;
+    border-radius: 100px;
+}
+.opmaakOrder{
+    border: 1px solid#ccc;
+    border-radius: 100px;
+    width: 100%;
+}
+
+#bericht {
+    padding-left: 10px;
+    border-radius: 30px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    padding-right: 10px;
+}
+
+/*label*/
+label{
+    margin-bottom: 10px;
+    display: block;
+}
+
+/*span price*/
+span.price{
+    float: right;
+    color: grey;
+}
+
+
+/*button to payment button */
+.toPayment {
+    display: inline-block;
+    background-color: green;
+    border: 2px solid black;
+    width: 300px;
+    height: 50px;
+    color: white;
+}
+
+/*back to cart*/
+.toCart {
+    background-color: red;
+    width: 100%;
+    height: 50px;
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    padding-top: 14px;
+}
+
+/*back to cart button */
+.toCartButton, .toPaymentButton{
+    background-color: initial;
+    border: 0px;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    color: white;
+    margin: auto;
+    align-items: center;
+}
+
+
+/*CART*/
+
+.klantKorting {
+    color: grey;
+    font-style: italic;
+}
+
+.coupon {
+    width: 125px;
+    height: 50px;
+}
+
+.kortingsCoupon {
+    margin-left: 13px;
+}
+
+.validateCoupon {
+    margin-left: 5px;
+    margin-right: 13px;
+}
+
+.validCoupon {
+    background-color: green;
+    color: white;
+}
+
+/*button to Order*/
+.toOrder {
+    display: inline-block;
+    background-color: green;
+    border: 2px solid black;
+    margin-left: 20px;
+    width: 150px;
+    height: 50px;
+    color: white;
+}
+/*button to Store*/
+.toStore {
+    background-color: red;
+    width: 150px;
+    height: 50px;
+    border: 2px solid black;
+    text-align: center;
+    margin: auto;
+    color: white;
+}
+
+
+/* .row */
+.bestelRow{
+    margin-top: 10px;
+}
+.kortingRow, .bestelRow {
+    width: 90%;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.orderRow {
+    margin-top: 10px;
+}
+
+.toCartButton{
+    line-height: 100%;
+}
+
+.test123{
+    /*height: 100%;*/
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    display: flex;
+}
+
+/*  to payment */
+.toConfirmation{
+    width: 30%;
+    margin: auto;
+}
+
+/* to payment button */
+.toConfirmationButton{
+    background-color: green;
+    border: 2px solid white;
+    width: 30%;
+    color: white;
+    align-items: center;
+}
+
+.aantalRow{
+    margin-bottom: 10px;
+}
+
+.productPrice{
+    margin-bottom: 35px;
+}
+
+.returnRow{
+    margin-top: -50px;
+    margin-bottom: 60px;
+    margin-left: 10px;
+}
+.returnButton {
+    display: inline-block;
+    background-color: red;
+    border: 2px solid black;
+    height: 50px;
+    color: white;
+}
+.winkelmandLeeg{
+    width: 100%;
+}
+.terugText{
+    padding-left: 30px;
+}
+
+/* login main page */
+.loginMainPageContainer {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 340px;
+}
+
+.loginMainPageContainer h1 {
+    text-align: center;
+}
+
+/* Login buttons on login main page */
+.mainLoginButtons {
+    margin-top: 50px;
+    background-color: rgb(35, 35, 47);
+    border: 2px solid white;
+    width: 100%;
+    color: white;
+}
+
+.mainLoginButtons:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+.logoutButton {
+    margin-top: 50px;
+    background-color: rgb(35, 35, 47);
+    border: 2px solid white;
+    width: 100%;
+    color: white;
+    margin-left: 50px;
+}
+
+.logoutButton:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    cursor: pointer;
+}
+
+.cancelMainLogin {
+    margin-left: 50px;
+    margin-top: 50px;
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+}
+
+.cancelMainLogin:hover {
+    cursor: pointer;
+    background-color: rgb(211, 0, 0);
+}
+
+/* Sign up page */
+.signUpPageContainer {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 100px;
+    margin-top: 50px;
+}
+
+.signupWarningLabel {
+    color: rgb(253, 86, 86);
+    font-weight: bolder;
+}
+
+/* Login Page */
+.loginPageContainer {
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    margin: 140px;
+}
+
+/* Login page & signup page */
+.loginSignupRows {
+    margin: 20px;
+}
+
+.loginSignupRows input, .loginSignupRows select {
+    border: 1px solid white;
+    border-radius: 100px;
+    text-align: center;
+    background-image: none;
+}
+
+.loginSignupRows label {
+    margin: 0px;
+}
+
+.tekstBoven {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.tekstInContainer h2 {
+    text-align: center;
+    margin-bottom: 50px;
+    margin-top: 10px;
+}
+
+.loginSignupDone {
+    margin-top: 50px;
+    background-color: green;
+    color: white;
+    border: 2px solid black;
+}
+
+.loginSignupDone:hover {
+    cursor: pointer;
+    background-color: rgb(0, 102, 0);
+}
+
+.backToLoginChoice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    width: 100%;
+    height: 50px;
+    border: 2px solid black;
+    text-align: center;
+    color: white;
+    margin-top: 48px;
+}
+
+.backToLoginChoice:hover {
+    cursor: pointer;
+    background-color: rgb(211, 0, 0);
+}
+
+/* Index welkomstbericht */
+.welkomstBericht {
+    text-align: center;
+}
+
+/*  */
+.opmaakPayForm{
+    border: 1px solid#ccc;
+    border-radius: 100px;
+    width: 25%;
+}
+
+p.boldText{
+    font-weight: bold;
+}
+
+/* footer */
+/* .footer {
+    /* position: relative;
+    height: 20px;
+    width: 100%;
+    color: white;
+    text-align: center;
+} */
+
+/* to customer service button */
+.toCustomerServiceButton {
+    background-color: #676EFF;
+    border-color: transparent;
+    width: 100%;
+    color: white;
+}
+
+.tekstBovenCS {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.servicePageContainer {
+    margin-top: 30px;
+}
+
+.orderRow input {
+    text-align: center;
+}
+
+
+.button{
+    background-color: inherit;
+    border: 2px solid white;
+    vertical-align: middle;
+}
+
+.buttonRed{
+    background-color: red;
+    border: 2px solid black;
+}
+.buttonRed:hover {
+    background-color: rgba(255, 0, 0, 0.7);
+}
+
+.buttonGreen{
+    background-color: green;
+    border: 2px solid black;
+}
+.buttonGreen:hover{
+    background-color: rgb(0, 128, 0, 0.7);
+}
