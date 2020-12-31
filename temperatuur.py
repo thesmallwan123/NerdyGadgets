@@ -11,9 +11,9 @@ sense = SenseHat()
 
 # Connecten met database, host is de computer van Jan Willem
 mydb = mysql.connector.connect(
-    host="192.168.178.146",
-    user="root",
-    password="",
+    host="192.168.178.146", # Om te testen voer eigen IP-adres in
+    user="pi",
+    password="temperatuursensor",
     port="3306",
     database="nerdygadgets"
 )
