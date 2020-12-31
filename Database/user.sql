@@ -11,7 +11,7 @@ CREATE USER
 IF NOT EXISTS 'user'@'localhost' IDENTIFIED BY 'klantgebruiker';
 GRANT USAGE ON *.* TO 'klant'@'%' IDENTIFIED BY PASSWORD '*19DA82EA8AA9D99C4A5D093BBE3D2320A92CF37D';
 
-GRANT INSERT ON `nerdygadgets`.`privateorder` TO 'klant'@'%';
+GRANT SELECT, INSERT ON `nerdygadgets`.`privateorder` TO 'klant'@'%';
 
 GRANT SELECT, UPDATE (LastEditedWhen, QuantityOnHand, LastEditedBy) ON `nerdygadgets`.`stockitemholdings` TO 'klant'@'%';
 
