@@ -9,7 +9,7 @@ Pull: 	git pull https://github.com/thesmallwan123/NerdyGadgets.git
 Toevoegen van nieuwe bestanden: 	git add --all
 
 Commit:	
-	All:	git commit -a -m "TEXT"
+	All:	git commit -a -m "documenten toegevoegd aan git"
 	1 file:	git commit -f "FILE LOCATION" -m "TEXT"
 
 Push:	git push https://github.com/thesmallwan123/NerdyGadgets.git master
